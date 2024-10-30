@@ -11,6 +11,8 @@ export const usePosStore = defineStore("pos", {
     nextIdSup: 1,
     users: [],
     nextIdUser: 1,
+    products: [],
+    nextIdProd: 1,
     // userName: "",
     // searchQuery: "",
   }),
@@ -101,12 +103,24 @@ export const usePosStore = defineStore("pos", {
         this.users= [];
       }
     },
+    async loadDataFromProductApi() {
+      try {
+        const resp = await axios.get("http://localhost:3005/api/products");
+        this.products = resp.data;
+      } catch (error) {
+        this.products= [];
+      }
+    },
     async addSupplier(supplier) {
       return await axios.post("http://localhost:3005/api/suppliers", supplier );
 
     },
     async addUser(user) {
       return await axios.post("http://localhost:3005/api/users", user );
+
+    },
+    async addProduct(product) {
+      return await axios.post("http://localhost:3005/api/products", product );
 
     },
     
@@ -131,6 +145,14 @@ export const usePosStore = defineStore("pos", {
         await this.loadDataFromUserApi();
       } catch (error) {
         toast.error("Cannot delete this user because it's used anywhere!")
+      }
+    },
+    async destroyProduct(id) {
+      try {
+        await axios.delete(`http://localhost:3005/api/products/${id}`);
+        await this.loadDataFromProductApi();
+      } catch (error) {
+        toast.error("Cannot delete this product because it's used anywhere!")
       }
     },
     // async updateCategory(updatedCategory) {
@@ -166,6 +188,21 @@ export const usePosStore = defineStore("pos", {
         if (index !== -1) {
           const result = await axios.put(`http://localhost:3005/api/users/${updateUser.id}`, updateUser);
           await this.loadDataFromUserApi();
+          console.log(result);
+          
+        }
+        
+      } catch (error) {
+        throw error
+      }
+    },
+    async updateProduct(updateProduct) {
+      try {
+        const index = this.products.findIndex((product) => product.id === updateProduct.id);
+
+        if (index !== -1) {
+          const result = await axios.put(`http://localhost:3005/api/products/${updateProduct.id}`, updateProduct);
+          await this.loadDataFromProductApi();
           console.log(result);
           
         }

@@ -4,13 +4,11 @@
         <h2 class="mb-4 text-center">Connexion</h2>
         
         <form @submit.prevent="handleLogin">
-          <!-- Champ Email avec icône -->
           <div class="input-group mb-3">
             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
             <input v-model="email" type="email" class="form-control" placeholder="Email" required />
           </div>
           
-          <!-- Champ Mot de passe avec icône -->
           <div class="input-group mb-3">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
             <input 
@@ -22,7 +20,6 @@
             />
           </div>
   
-          <!-- Texte cliquable pour afficher le mot de passe -->
           <small @click="togglePasswordVisibility" style="cursor: pointer; color: blue; display: block; text-align: right;">
             {{ showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe" }}
           </small>

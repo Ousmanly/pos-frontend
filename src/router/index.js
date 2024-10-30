@@ -9,6 +9,9 @@ import ModifySuppliers from '@/components/suppliers/ModifySuppliers.vue'
 import UserView from '@/views/UserView.vue'
 import AddUser from '@/components/users/AddUser.vue'
 import ModifyUsers from '@/components/users/ModifyUsers.vue'
+import ProductView from '@/views/ProductView.vue'
+import AddProduct from '@/components/products/AddProduct.vue'
+import ModifyProduct from '@/components/products/ModifyProduct.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,6 +49,21 @@ const router = createRouter({
         {
           path: "/modifie-user/:id",
           component: ModifyUsers,
+          props: true,
+        },
+        {
+          path: '/listproduct',
+          name: 'listproduct',
+          component: ProductView
+        },
+        {
+          path: '/addproduct',
+          name: 'addproduct',
+          component: AddProduct
+        },
+        {
+          path: "/modifie-product/:id",
+          component: ModifyProduct,
           props: true,
         },
       ]

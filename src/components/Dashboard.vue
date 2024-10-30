@@ -28,7 +28,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/products" class="nav-link text-black">
+            <router-link to="/listproduct" class="nav-link text-black">
               <i class="fas fa-box me-2"></i>
               <span v-if="!isCollapsed">Products</span>
             </router-link>

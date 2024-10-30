@@ -101,6 +101,8 @@ import { onMounted, ref } from "vue";
 import { useToast } from 'vue-toastification';
 const toast = useToast()
 const store = usePosStore();
+console.log(store.users);
+
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
 
