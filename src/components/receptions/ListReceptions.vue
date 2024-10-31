@@ -3,20 +3,20 @@
     <div class="page-background container bg-color">
       <RouterLink
         class="list text-decoration-none text-white fw-bold"
-        to="/adduser"
+        to="/addreception"
       >
         <button
           class="clr btn text-white mb-4 fw-bold"
           v-if="affichebtn"
           @click="maskBtn"
         >
-          Add user
+          Add Receptions
         </button>
       </RouterLink>
     
       <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success">Users</h2>
+        <h2 class="m-0 font-weight-bold text-success">Receptions</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -24,37 +24,33 @@
                 <thead>
                     <tr>
                       <th>Id</th>
-                      <th>Name</th>
-                      <th>Role</th>
-                      <th>Email</th>
+                      <th>Created at</th>
+                      <th>Recepted at</th>
+                      <th>Supplier Name</th>
+                      <th>Supplier Phone</th>
+                      <th>Create By</th>
                       <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="user in store.users" :key="user.id">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>{{ user.email }}</td>
+                  <tr v-for="reception in store.receptions" :key="reception.id">
+                    <td>{{ reception.id }}</td>
+                    <td>{{ new Date(reception.created_at).toLocaleDateString() }}</td>
+                    <td>{{new Date(reception.recepted_at).toLocaleDateString() }}</td>
+                    <td>{{ reception.supplier_name }}</td>
+                    <td>{{ reception.supplier_phone }}</td>
+                    <td>{{ reception.user_name }}</td>
 
                     <td class="text-center">
-                      <button class="btn btn-sm" @click="openModal(user)">
+                      <button class="btn btn-sm" @click="openModal(reception)">
                         <i
                           class="fa-solid fa-eye"
                           style="color: #26a49c; font-size: 19px"
                         ></i>
                       </button>
-                      <RouterLink :to="{ path: `/modifie-user/${user.id}` }">
-                      <button class="btn btn-sm">
-                        <i
-                          class="fa-solid fa-pen-to-square"
-                          style="color: #ffb200; font-size: 19px"
-                        ></i>
-                      </button>
-                      </RouterLink>
                       <button
                         class="btn btn-sm"
-                        @click="destroyUser(user.id)"
+                        @click="destroyReception(reception.id)"
                       >
                         <i
                           class="fa-solid fa-trash"
@@ -73,19 +69,15 @@
     <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h5 class="font-wb-md mt-3">Supplier details</h5>
+          <h5 class="font-wb-md mt-3">Details reception</h5>
         </div>
         <div class="modal-body">
           
-          <p>
-            <strong>Name: </strong> {{ selectedUser.name }}
-          </p>
-          <p>
-            <strong>Role: </strong> {{ selectedUser.role }}
-          </p>
-          <p>
-            <strong>Email: </strong> {{ selectedUser.email }}
-          </p>
+          <div v-for="detail in selectedReception.reception_details" :key="detail">
+            <p><strong>Product: </strong> {{ detail.product_name }}</p>
+            <p><strong>Price: </strong> {{ detail.price }}</p>
+            <p><strong>Quantity: </strong> {{ detail.quantity }}</p>
+          </div>
         </div>
         <button class="btn btn-danger text-white font-wb" @click="closeModal">
           Close
@@ -101,7 +93,6 @@ import { onMounted, ref } from "vue";
 import { useToast } from 'vue-toastification';
 const toast = useToast()
 const store = usePosStore();
-
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
 
@@ -114,9 +105,9 @@ const maskBtn = () => {
   affichebtn = false;
 };
 const isModalVisible = ref(false);
-const selectedUser = ref(null);
-const openModal = (user) => {
-  selectedUser.value = user;
+const selectedReception = ref(null);
+const openModal = (reception) => {
+  selectedReception.value = reception;
   isModalVisible.value = true;
 };
 
@@ -125,13 +116,13 @@ const closeModal = () => {
 };
 
 onMounted(async () => {
-  await store.loadDataFromUserApi();
+  await store.loadDataFromReceptionApi();
 });
-  const destroyUser = (id) => {
-    const confirmation = confirm("Are you sure to delete this user?");
+  const destroyReception = (id) => {
+    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
     if (confirmation ) {
-      toast.success("User has been deleted")
-      store.destroyUser(id);
+      toast.success("Suppression reussi")
+      store.destroyReception(id);
     }
   };
 </script>

@@ -108,11 +108,11 @@
           </tr>
           <tr>
             <th>Create at</th>
-            <td>{{ selectedProduct.created_at }}</td>
+            <td>{{ new Date(selectedProduct.created_at).toLocaleDateString() }}</td>
           </tr>
           <tr>
             <th>Update at</th>
-            <td>{{ selectedProduct.updated_at }}</td>
+            <td>{{ new Date(selectedProduct.updated_at).toLocaleDateString() }}</td>
           </tr>
           <tr>
             <th>Code bare</th>

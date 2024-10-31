@@ -12,6 +12,8 @@ import ModifyUsers from '@/components/users/ModifyUsers.vue'
 import ProductView from '@/views/ProductView.vue'
 import AddProduct from '@/components/products/AddProduct.vue'
 import ModifyProduct from '@/components/products/ModifyProduct.vue'
+import ReceptionView from '@/views/ReceptionView.vue'
+import AddReception from '@/components/receptions/AddReception.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -65,6 +67,16 @@ const router = createRouter({
           path: "/modifie-product/:id",
           component: ModifyProduct,
           props: true,
+        },
+        {
+          path: '/listreception',
+          name: 'listreception',
+          component: ReceptionView
+        },
+        {
+          path: '/addreception',
+          name: 'addreception',
+          component: AddReception
         },
       ]
     },

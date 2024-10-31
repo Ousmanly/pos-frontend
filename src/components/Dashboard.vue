@@ -34,7 +34,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/receptions" class="nav-link text-black">
+            <router-link to="/listreception" class="nav-link text-black">
               <i class="fas fa-archive me-2"></i>
               <span v-if="!isCollapsed">Receptions</span>
             </router-link>

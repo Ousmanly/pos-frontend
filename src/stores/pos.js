@@ -13,6 +13,8 @@ export const usePosStore = defineStore("pos", {
     nextIdUser: 1,
     products: [],
     nextIdProd: 1,
+    receptions: [],
+    nextIdRecep: 1,
     // userName: "",
     // searchQuery: "",
   }),
@@ -64,10 +66,13 @@ export const usePosStore = defineStore("pos", {
     //     recette.title.toLowerCase().includes(this.searchQuery.toLowerCase())
     //   );
     // },
-    // getCategoryName(categoryId) {
-    //   const category = this.categories.find(cat => cat.id === categoryId);
-    //   return category.name;
-    //   // return category ? category.name : 'Aucune catégorie';
+    // getSupplierName(supplierId) {
+    //   const supplier = this.suppliers.find(cat => cat.id === supplierId);
+    //   return supplier.name;
+    // },
+    // getProductName(productId) {
+    //   const product = this.products.find(prod => prod.id === productId);
+    //   return product.name;
     // },
 
     // async loadDataFromApi() {
@@ -111,6 +116,15 @@ export const usePosStore = defineStore("pos", {
         this.products= [];
       }
     },
+    async loadDataFromReceptionApi() {
+      try {
+        const resp = await axios.get("http://localhost:3005/api/receptions");
+        this.receptions = resp.data;
+     
+      } catch (error) {
+        this.receptions= [];
+      }
+    },
     async addSupplier(supplier) {
       return await axios.post("http://localhost:3005/api/suppliers", supplier );
 
@@ -121,6 +135,10 @@ export const usePosStore = defineStore("pos", {
     },
     async addProduct(product) {
       return await axios.post("http://localhost:3005/api/products", product );
+
+    },
+    async addReception(receptions) {
+      return await axios.post("http://localhost:3005/api/receptions", receptions );
 
     },
     
@@ -152,7 +170,15 @@ export const usePosStore = defineStore("pos", {
         await axios.delete(`http://localhost:3005/api/products/${id}`);
         await this.loadDataFromProductApi();
       } catch (error) {
-        toast.error("Cannot delete this product because it's used anywhere!")
+        toast.error("Cannot delete this product!")
+      }
+    },
+    async destroyReception(id) {
+      try {
+        await axios.delete(`http://localhost:3005/api/receptions/${id}`);
+        await this.loadDataFromReceptionApi();
+      } catch (error) {
+        toast.error("Cannot delete this reception!")
       }
     },
     // async updateCategory(updatedCategory) {
