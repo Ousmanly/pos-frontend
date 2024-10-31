@@ -17,6 +17,8 @@ export const usePosStore = defineStore("pos", {
     nextIdRecep: 1,
     mouvements: [],
     nextIdmvt: 1,
+    sales: [],
+    nextIdsale: 1,
     // userName: "",
     // searchQuery: "",
   }),
@@ -136,6 +138,16 @@ export const usePosStore = defineStore("pos", {
         this.mouvements= [];
       }
     },
+    async loadDataFromSaleApi() {
+      try {
+        const resp = await axios.get("http://localhost:3005/api/sales");
+        this.sales = resp.data.data;
+        console.log("Données des ventes : ", this.sales);
+     
+      } catch (error) {
+        this.sales= [];
+      }
+    },
     async addSupplier(supplier) {
       return await axios.post("http://localhost:3005/api/suppliers", supplier );
 
@@ -150,6 +162,10 @@ export const usePosStore = defineStore("pos", {
     },
     async addReception(receptions) {
       return await axios.post("http://localhost:3005/api/receptions", receptions );
+
+    },
+    async addSale(sales) {
+      return await axios.post("http://localhost:3005/api/sales", sales );
 
     },
     
@@ -188,6 +204,14 @@ export const usePosStore = defineStore("pos", {
       try {
         await axios.delete(`http://localhost:3005/api/receptions/${id}`);
         await this.loadDataFromReceptionApi();
+      } catch (error) {
+        toast.error("Cannot delete this reception!")
+      }
+    },
+    async destroySale(id) {
+      try {
+        await axios.delete(`http://localhost:3005/api/sales/${id}`);
+        await this.loadDataFromSaleApi();
       } catch (error) {
         toast.error("Cannot delete this reception!")
       }

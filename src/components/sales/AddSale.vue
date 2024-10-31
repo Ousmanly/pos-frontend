@@ -4,34 +4,39 @@
         <button @click="changeLanguage('en')" class="btn btn-info me-2">{{ $t('buttons.english') }}</button>
         <button @click="changeLanguage('fr')" class="btn btn-info">{{ $t('buttons.french') }}</button>
       </div> -->
-      <form @submit.prevent="addReception" class="formulaire form shadow p-3 bg-body rounded">
+      <form @submit.prevent="addSale" class="formulaire form shadow p-3 bg-body rounded">
       <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
-          <label for="recepted" class="form-label">Recepted at:</label>
-          <input type="date" class="form-control" v-model="recepted_at" id="recepted" required />
+          <label for="sale" class="form-label">Sale at:</label>
+          <input type="date" class="form-control" v-model="sale_at" id="sale" required />
         </div>
         <div class="mb-3 flex-fill">
-          <label for="supplier" class="form-label">Supplier Name:</label>
-          <select class="form-select" v-model="selectedSupplier" id="supplier" required>
-            <option value="" disabled selected>Select a supplier</option>
-            <option v-for="supplier in suppliers" :key="supplier.id" :value="supplier.id">
-              {{ supplier.name }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group d-flex gap-3">
-        <div class="mb-3 flex-fill">
-          <label for="product" class="form-label">Product Name:</label>
+          <label for="product" class="form-label">Product:</label>
           <select class="form-select" v-model="selectedProduct" id="product" required>
             <option v-for="product in products" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
           </select>
         </div>
+      </div>
+      <div class="form-group d-flex gap-3">
+        <div class="mb-3 flex-fill">
+          <label for="customer" class="form-label">Customer Name:</label>
+          <input type="text" class="form-control" v-model="customer" id="customer" required />
+        </div>
+        <div class="mb-3 flex-fill">
+          <label for="phone" class="form-label">Phone:</label>
+          <input type="text" class="form-control" v-model="phone" id="phone" />
+        </div>
+      </div>
+      <div class="form-group d-flex gap-3">
+        <div class="mb-3 flex-fill">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" v-model="email" id="email" />
+        </div>
         <div class="mb-3 flex-fill">
           <label for="price" class="form-label">Price:</label>
-          <input type="number" min="0" class="form-control" v-model="price" id="price" required />
+          <input type="number" min="0" class="form-control" v-model="price" id="price" />
         </div>
       </div>
       <div class="form-group mb-4">
@@ -40,7 +45,7 @@
       </div>
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-dark me-2">Add</button>
-        <RouterLink to="/listreception">
+        <RouterLink to="/listsale">
           <button type="button" class="btn btn-danger">Cancel</button>
         </RouterLink>
       </div>
@@ -62,44 +67,52 @@
     const store = usePosStore();
 
     onMounted(async () => {
-    await store.loadDataFromSuplierApi();
     await store.loadDataFromProductApi();
   });
-
-const suppliers = computed(() => store.suppliers);
+;
 const products = computed(() => store.products);
 
 
-    const recepted_at = ref("");
-    const selectedSupplier = ref("");
+    const sale_at = ref("");
+    const customer = ref("");
+    const phone = ref("")
+    const email = ref("")
     const selectedProduct = ref("");
   const price = ref();
   const quantity = ref(0);
 
-const addReception = async () => {
+const addSale = async () => {
   try {
-    const newReception = {
-      id_supplier: selectedSupplier.value,
-      recepted_at: recepted_at.value,
-      receptionDetails: [
+    const newSale = {
+      sale_at: sale_at.value,
+      name: customer.value,
+      phone: phone.value,
+      email: email.value,
+      saleDetails: [
         {
+          
           id_product: selectedProduct.value,
           price: price.value,
-          quantity: quantity.value
+          sale_quantity: quantity.value
         }
       ]
+
     }
-    await store.addReception(newReception);
-    recepted_at.value = "";
-    selectedSupplier.value = "";
+
+    
+    await store.addSale(newSale);
+    sale_at.value = "";
+    customer.value = "",
+    phone.value = "",
+    email.value = "",
     selectedProduct.value = "";
     price.value = "";
     quantity.value = 0;
-
-    toast.success("Reception has been added successfully");
-    router.push("/listreception");
+    
+    toast.success("Sale has been added successfully");
+    router.push("/listsale");
   } catch (error) {
-    toast.error("Failed to create a reception");
+    toast.error("Failed to create a sale");
   }
 };
 
@@ -119,11 +132,17 @@ const addReception = async () => {
     background-color: #24272a;
   }
   .formulaire {
-    width: 50%;
+    /* width: 50%;
+    border-radius: 10px;
+    padding: 20px; */
     margin: auto;
     margin-top: 16vh;
   }
-  .formulaire {
+  .container {
+  max-width: 600px;
+  margin: auto;
+}
+.formulaire {
   padding: 20px;
   border-radius: 10px;
 }

@@ -40,7 +40,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/sales" class="nav-link text-black">
+            <router-link to="/listsale" class="nav-link text-black">
               <i class="fas fa-shopping-cart me-2"></i>
               <span v-if="!isCollapsed">Sales</span>
             </router-link>
