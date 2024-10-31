@@ -1,22 +1,10 @@
 <template>
   <div>
     <div class="page-background container bg-color">
-      <RouterLink
-        class="list text-decoration-none text-white fw-bold"
-        to="/adduser"
-      >
-        <button
-          class="clr btn text-white mb-4 fw-bold"
-          v-if="affichebtn"
-          @click="maskBtn"
-        >
-          Add user
-        </button>
-      </RouterLink>
     
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4 clr">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success">Users</h2>
+        <h2 class="m-0 font-weight-bold text-success">Mouvements</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -24,27 +12,27 @@
                 <thead>
                     <tr>
                       <th>Id</th>
-                      <th>Name</th>
-                      <th>Role</th>
-                      <th>Email</th>
-                      <th class="text-center">Actions</th>
+                      <th>quantity</th>
+                      <th>Product</th>
+                      <th>Provoked By</th>
+                      <th>Date of mouvement</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="user in store.users" :key="user.id">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>{{ user.email }}</td>
-
-                    <td class="text-center">
-                      <button class="btn btn-sm" @click="openModal(user)">
+                  <tr v-for="mouvement in store.mouvements" :key="mouvement.id">
+                    <td>{{ mouvement.id }}</td>
+                    <td>{{ mouvement.quantity }}</td>
+                    <td>{{ mouvement.product_name }}</td>
+                    <td>{{ mouvement.user_name }}</td>
+                    <td>{{ new Date(mouvement.mouvement_at).toLocaleDateString() }}</td>
+                    <!-- <td class="text-center">
+                      <button class="btn btn-sm" @click="openModal(supplier)">
                         <i
                           class="fa-solid fa-eye"
                           style="color: #26a49c; font-size: 19px"
                         ></i>
                       </button>
-                      <RouterLink :to="{ path: `/modifie-user/${user.id}` }">
+                      <RouterLink :to="{ path: `/modifie-supplier/${supplier.id}` }">
                       <button class="btn btn-sm">
                         <i
                           class="fa-solid fa-pen-to-square"
@@ -54,14 +42,14 @@
                       </RouterLink>
                       <button
                         class="btn btn-sm"
-                        @click="destroyUser(user.id)"
+                        @click="destroySupplier(supplier.id)"
                       >
                         <i
                           class="fa-solid fa-trash"
                           style="color: #e30d0d; font-size: 19px"
                         ></i>
                       </button>
-                    </td>
+                    </td> -->
                  </tr>
                     
                 </tbody>
@@ -78,13 +66,10 @@
         <div class="modal-body">
           
           <p>
-            <strong>Name: </strong> {{ selectedUser.name }}
+            <strong>Name: </strong> {{ selectedSupplier.name }}
           </p>
           <p>
-            <strong>Role: </strong> {{ selectedUser.role }}
-          </p>
-          <p>
-            <strong>Email: </strong> {{ selectedUser.email }}
+            <strong>Phone: </strong> {{ selectedSupplier.phone }}
           </p>
         </div>
         <button class="btn btn-danger text-white font-wb" @click="closeModal">
@@ -101,7 +86,6 @@ import { onMounted, ref } from "vue";
 import { useToast } from 'vue-toastification';
 const toast = useToast()
 const store = usePosStore();
-
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
 
@@ -114,9 +98,9 @@ const maskBtn = () => {
   affichebtn = false;
 };
 const isModalVisible = ref(false);
-const selectedUser = ref(null);
-const openModal = (user) => {
-  selectedUser.value = user;
+const selectedSupplier = ref(null);
+const openModal = (supplier) => {
+  selectedSupplier.value = supplier;
   isModalVisible.value = true;
 };
 
@@ -125,53 +109,21 @@ const closeModal = () => {
 };
 
 onMounted(async () => {
-  await store.loadDataFromUserApi();
+  await store.loadDataFromMouvementApi();
 });
-  const destroyUser = (id) => {
-    const confirmation = confirm("Are you sure to delete this user?");
+  const destroySupplier = (id) => {
+    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
     if (confirmation ) {
-      store.destroyUser(id);
+      toast.success("Suppression reussi")
+      store.deleteSupplier(id);
     }
   };
 </script>
      
   <style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  padding-top: 5px;
-  border-radius: 8px;
-  max-width: 300px;
-  position: relative;
-}
-.font-wb-md{
-  margin: auto;
-}
-.font-wb, .font-wb-md{
-  font-weight: bold;
-}
-
-.modal-body {
-  padding: 20px;
-}
 .clr {
-  margin-top: 80px;
-  background-color: #242d32;
-}
-.clr:hover {
-  background-color: #24272a;
+  margin-top: 100px;
 }
 .page-background {
   min-height: 90vh;

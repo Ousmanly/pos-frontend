@@ -14,6 +14,7 @@ import AddProduct from '@/components/products/AddProduct.vue'
 import ModifyProduct from '@/components/products/ModifyProduct.vue'
 import ReceptionView from '@/views/ReceptionView.vue'
 import AddReception from '@/components/receptions/AddReception.vue'
+import MouvementView from '@/views/MouvementView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,6 +78,11 @@ const router = createRouter({
           path: '/addreception',
           name: 'addreception',
           component: AddReception
+        },
+        {
+          path: '/mouvements',
+          name: 'mouvements',
+          component: MouvementView
         },
       ]
     },

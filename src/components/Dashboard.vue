@@ -46,7 +46,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/movements" class="nav-link text-black">
+            <router-link to="/mouvements" class="nav-link text-black">
               <i class="fas fa-exchange-alt me-2"></i>
               <span v-if="!isCollapsed">Movements</span>
             </router-link>

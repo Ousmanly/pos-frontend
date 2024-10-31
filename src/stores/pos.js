@@ -15,6 +15,8 @@ export const usePosStore = defineStore("pos", {
     nextIdProd: 1,
     receptions: [],
     nextIdRecep: 1,
+    mouvements: [],
+    nextIdmvt: 1,
     // userName: "",
     // searchQuery: "",
   }),
@@ -123,6 +125,15 @@ export const usePosStore = defineStore("pos", {
      
       } catch (error) {
         this.receptions= [];
+      }
+    },
+    async loadDataFromMouvementApi() {
+      try {
+        const resp = await axios.get("http://localhost:3005/api/mouvements");
+        this.mouvements = resp.data;
+     
+      } catch (error) {
+        this.mouvements= [];
       }
     },
     async addSupplier(supplier) {
