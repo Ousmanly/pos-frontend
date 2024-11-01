@@ -101,27 +101,27 @@ export const usePosStore = defineStore("pos", {
     async updateUserStatus(userId, status) {
       try {
         await axios.put(`http://localhost:3005/api/users/${userId}/status`, { status });
-        toast.success("User status updated successfully");
+        // toast.success("User status updated successfully");
       } catch (error) {
-        console.error("Failed to update user status:", error);
+        // console.error("Failed to update user status:", error);
         throw error;
       }
     },  
     async updateSupplierStatus(supplierId, status) {
       try {
         await axios.put(`http://localhost:3005/api/suppliers/${supplierId}/status`, { status });
-        toast.success("Supplier status updated successfully");
+        // toast.success("Supplier status updated successfully");
       } catch (error) {
-        console.error("Failed to update user status:", error);
+        // console.error("Failed to update user status:", error);
         throw error;
       }
     },  
     async updateProductStatus(productId, status) {
       try {
         await axios.put(`http://localhost:3005/api/products/${productId}/status`, { status });
-        toast.success("Product status updated successfully");
+        // toast.success("Product status updated successfully");
       } catch (error) {
-        console.error("Failed to product user status:", error);
+        // console.error("Failed to product user status:", error);
         throw error;
       }
     },  
@@ -218,14 +218,16 @@ export const usePosStore = defineStore("pos", {
       try {
         await axios.delete(`http://localhost:3005/api/suppliers/${id}`);
         await this.loadDataFromSuplierApi();
+        toast.success("Supplier has been deleted")
       } catch (error) {
-        throw error
+        toast.error("Can't delete this supplier because it is attached somewhere")
       }
     },
     async destroyUser(id) {
       try {
         await axios.delete(`http://localhost:3005/api/users/${id}`);
         await this.loadDataFromUserApi();
+        toast.success("User has been deleted")
       } catch (error) {
         toast.error("Cannot delete this user because it's used anywhere!")
       }
@@ -234,24 +236,27 @@ export const usePosStore = defineStore("pos", {
       try {
         await axios.delete(`http://localhost:3005/api/products/${id}`);
         await this.loadDataFromProductApi();
+        toast.success("Product has been deleted")
       } catch (error) {
-        toast.error("Cannot delete this product!")
+        toast.error("Can't delete this product because it is attached somewhere")
       }
     },
     async destroyReception(id) {
       try {
         await axios.delete(`http://localhost:3005/api/receptions/${id}`);
         await this.loadDataFromReceptionApi();
+        toast.success("Reception has been deleted")
       } catch (error) {
-        toast.error("Cannot delete this reception!")
+        toast.error("Can't delete this reception because it is attached somewhere")
       }
     },
     async destroySale(id) {
       try {
         await axios.delete(`http://localhost:3005/api/sales/${id}`);
         await this.loadDataFromSaleApi();
+        toast.success("Sale has been deleted")
       } catch (error) {
-        toast.error("Cannot delete this reception!")
+        toast.error("Can't delete this reception because it is attached somewhere")
       }
     },
     // async updateCategory(updatedCategory) {

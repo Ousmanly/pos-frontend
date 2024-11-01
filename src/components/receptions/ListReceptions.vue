@@ -121,7 +121,6 @@ onMounted(async () => {
   const destroyReception = (id) => {
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
     if (confirmation ) {
-      toast.success("Suppression reussi")
       store.destroyReception(id);
     }
   };

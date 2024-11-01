@@ -13,7 +13,7 @@
         <div class="mb-3 flex-fill">
           <label for="product" class="form-label">Product:</label>
           <select class="form-select" v-model="selectedProduct" id="product" required>
-            <option v-for="product in products" :key="product.id" :value="product.id">
+            <option v-for="product in activeProducts" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
           </select>
@@ -70,7 +70,9 @@
     await store.loadDataFromProductApi();
   });
 ;
-const products = computed(() => store.products);
+// const products = computed(() => store.products);
+const activeProducts = computed(() => store.products.filter(product => product.status));
+
 
 
     const sale_at = ref("");

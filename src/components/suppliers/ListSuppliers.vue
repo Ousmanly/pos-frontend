@@ -133,17 +133,14 @@ onMounted(async () => {
   const destroySupplier = (id) => {
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
     if (confirmation ) {
-      toast.success("Suppression reussi")
       store.deleteSupplier(id);
     }
   };
   const toggleStatus = async (supplier) => {
   try {
     supplier.status = !supplier.status;
-    await store.updateSupplierStatus(supplier.id, supplier.status); // Met à jour dans la base de données
-    // toast.success(`Status updated to ${user.status ? "Active" : "Inactive"}`);
+    await store.updateSupplierStatus(supplier.id, supplier.status); 
   } catch (error) {
-    // toast.error("Failed to update status");
     console.error(error);
   }
 };

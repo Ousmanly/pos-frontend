@@ -124,7 +124,6 @@ onMounted(async () => {
   const destroySale = (id) => {
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
     if (confirmation ) {
-      toast.success("Suppression reussi")
       store.destroySale(id);
     }
   };

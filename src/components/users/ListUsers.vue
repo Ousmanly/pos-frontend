@@ -144,10 +144,8 @@ onMounted(async () => {
   const toggleStatus = async (user) => {
   try {
     user.status = !user.status;
-    await store.updateUserStatus(user.id, user.status); // Met à jour dans la base de données
-    // toast.success(`Status updated to ${user.status ? "Active" : "Inactive"}`);
+    await store.updateUserStatus(user.id, user.status); 
   } catch (error) {
-    // toast.error("Failed to update status");
     console.error(error);
   }
 };
