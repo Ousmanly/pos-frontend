@@ -19,6 +19,7 @@
             id="name"
             required
           />
+          <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email :</label>
@@ -28,7 +29,8 @@
             v-model="email"
             id="email"
             required
-          />        
+          />     
+          <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>   
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password :</label>
@@ -38,7 +40,8 @@
             v-model="password"
             id="password"
             required
-          />        
+          />  
+          <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>  
         </div>
         <div class="mb-3">
         <label for="type" class="form-label">Role :</label>
@@ -63,7 +66,7 @@
   <script setup>
     import { useRouter } from "vue-router";
     import { getCurrentInstance } from 'vue';
-  
+    
     const router = useRouter();
     import { ref, reactive } from "vue";
     import { usePosStore } from "@/stores/pos";
@@ -74,38 +77,37 @@
     const role = ref("");
     const email = ref("");
     const password = ref("");
-    const addUser = async () => {
-    try {
-        const newUser = {
-            name: name.value,
-            email: email.value, 
-            password: password.value, 
-            role: role.value, 
-        };
-        await store.addUser(newUser);
-        name.value = "";
-        email.value = "";
-        password.value = "";
-        role.value = "";
-        toast.success("User has been added success")
-        router.push("/listuser");
-    } catch (error) {
-        toast.error("faild to create a user")
+ 
+  const errors = reactive({
+  name: "",
+  email: "",
+  password: "",
+  role: ""
+});
 
-      // if (error.response && error.response.status === 422) {
-      //   const errors = error.response.data.errors;
-        
-      //   errors.forEach((err) => {
-      //     alert(err.msg); 
-      //   });
-      // } else {
-      //   alert("Une erreur inattendue est survenue.");
-      // }
-
-
-  
+const addUser = async () => {
+  try {
+    const newUser = {
+      name: name.value,
+      email: email.value, 
+      password: password.value, 
+      role: role.value, 
+    };
+    await store.addUser(newUser);
+    Object.keys(errors).forEach(key => errors[key] = "");
+    toast.success("User has been added successfully!");
+    router.push("/listuser");
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.errors) {
+      error.response.data.errors.forEach(err => {
+        errors[err.path] = err.msg; 
+      });
+    } else {
+      toast.error("An unexpected error occurred. Please try again.");
     }
-  };
+  }
+};
+
   const { proxy } = getCurrentInstance();
   
   const changeLanguage = (locale) => {

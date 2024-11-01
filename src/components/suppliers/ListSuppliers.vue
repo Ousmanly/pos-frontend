@@ -16,7 +16,7 @@
     
       <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success">Suppliers</h2>
+        <h2 class="m-0 font-weight-bold text-success-t bold">Suppliers</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -156,7 +156,7 @@ onMounted(async () => {
 .font-wb-md{
   margin: auto;
 }
-.font-wb, .font-wb-md{
+.font-wb, .font-wb-md, .bold{
   font-weight: bold;
 }
 
@@ -170,6 +170,9 @@ onMounted(async () => {
 .clr:hover {
   background-color: #24272a;
 }
+.text-success-t{
+    color: #26a49c;
+  }
 .page-background {
   min-height: 90vh;
   height: fit-content;

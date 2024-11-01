@@ -17,6 +17,7 @@ import AddReception from '@/components/receptions/AddReception.vue'
 import MouvementView from '@/views/MouvementView.vue'
 import SaleView from '@/views/SaleView.vue'
 import AddSale from '@/components/sales/AddSale.vue'
+import InventoryView from '@/views/InventoryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       name: 'dashboard',
       component: Dashboard,
       children: [
+        {
+          path: '/home',
+          name: 'home',
+          component: HomeView
+        },
         {
           path: '/listsupplier',
           name: 'listsupplier',
@@ -95,6 +101,11 @@ const router = createRouter({
           path: '/addsale',
           name: 'addsale',
           component: AddSale
+        },
+        {
+          path: '/listinventories',
+          name: 'listinventories',
+          component: InventoryView
         },
       ]
     },

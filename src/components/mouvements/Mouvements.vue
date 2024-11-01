@@ -4,7 +4,7 @@
     
       <div class="card shadow mb-4 clr">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success">Mouvements</h2>
+        <h2 class="m-0 font-weight-bold text-success-t bold">Mouvements</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -121,7 +121,9 @@ onMounted(async () => {
 </script>
      
   <style scoped>
-
+  .text-success-t{
+    color: #26a49c;
+  }
 .clr {
   margin-top: 100px;
 }
@@ -130,6 +132,9 @@ onMounted(async () => {
   height: fit-content;
   color: #333;
   padding: 20px;
+}
+.bold{
+  font-weight: bold;
 }
 </style>
   

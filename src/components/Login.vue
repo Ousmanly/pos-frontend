@@ -45,7 +45,7 @@
     const success = await store.login(email.value, password.value);
     if (success) {
         toast.success("connexion reussi")
-        router.push("/dashboard");
+        router.push("/home");
     } else {
         toast.error("connexion failed")
     }

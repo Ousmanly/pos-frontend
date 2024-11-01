@@ -2,15 +2,14 @@
     <div class="app-container">
       <nav :class="['sidebar', { 'collapsed': isCollapsed }]" class="bg-sidbar text-black p-3">
         <h4 class="text-center d-flex align-items-center ms-2">
-          <i class="fas fa-user me-2 user-icon"></i>
-        <span v-if="!isCollapsed">{{ store.userName || 'Admin' }}</span>
+          <img v-if="!isCollapsed" src="../assets/logo.png" alt="logo" width="91px" height="90px">
         <button @click="toggleSidebar" class="btn btn-link text-black">
           <i :class="isCollapsed ? 'fas fa-angle-right' : 'fas fa-angle-left'"></i>
         </button>
       </h4>
         <ul class="nav flex-column mt-4">
           <li class="nav-item">
-            <router-link to="/dashboard" class="nav-link text-black">
+            <router-link to="/home" class="nav-link text-black">
               <i class="fas fa-tachometer-alt me-2"></i>
               <span v-if="!isCollapsed">Dashboard</span>
             </router-link>
@@ -52,7 +51,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/inventories" class="nav-link text-black">
+            <router-link to="/listinventories" class="nav-link text-black">
               <i class="fas fa-th-list me-2"></i>
               <span v-if="!isCollapsed">Inventories</span>
             </router-link>
@@ -79,7 +78,7 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item ms-5 text-white">
-                    <img src="../assets/logo.png" alt="logo" width="90px" height="40px">
+                    <!-- <img src="../assets/logo.png" alt="logo" width="90px" height="40px"> -->
                   </li>
                 </ul>
                 <div class="d-flex text-white me-5">
@@ -92,7 +91,7 @@
             </div>
           </nav>
          </header>
-        
+         
           <RouterView />
           
       </div>
@@ -126,6 +125,9 @@ import { onMounted, ref } from 'vue';
   .bg-sidbar{
     box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.3);
 
+  }
+  .text-success-t{
+    color: #26a49c;
   }
   .user-icon {
     font-size: 24px;

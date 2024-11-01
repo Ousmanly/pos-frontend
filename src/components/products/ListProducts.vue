@@ -84,8 +84,8 @@
     </div> -->
     <div v-if="isModalVisible" class="modal-overlay d-flex align-items-center justify-content-center" @click="closeModal">
   <div class="modal-content card shadow-lg p-4 rounded" style="width: 450px;" @click.stop>
-    <div class="card-header bg-dark text-white text-center rounded-top">
-      <h5 class="font-weight-bold-p mt-2">{{ selectedProduct.name }}</h5>
+    <div class="card-header bg-dark text-white text-center rounded-top" style="height: 40px;">
+      <h5 class="font-weight-bold-p text-center">{{ selectedProduct.name }}</h5>
     </div>
     <div class="card-body">
       <table class="table table-bordered table-sm">

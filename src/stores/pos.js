@@ -19,6 +19,8 @@ export const usePosStore = defineStore("pos", {
     nextIdmvt: 1,
     sales: [],
     nextIdsale: 1,
+    inventories: [],
+    nextIdInvt: 1,
     // userName: "",
     // searchQuery: "",
   }),
@@ -146,6 +148,15 @@ export const usePosStore = defineStore("pos", {
      
       } catch (error) {
         this.sales= [];
+      }
+    },
+    async loadDataFromInventoryApi() {
+      try {
+        const resp = await axios.get("http://localhost:3005/api/inventories");
+        this.inventories = resp.data;
+     
+      } catch (error) {
+        this.inventories= [];
       }
     },
     async addSupplier(supplier) {

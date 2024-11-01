@@ -54,7 +54,8 @@
     const store = usePosStore();
     const name = ref("");
     const phone = ref("");
-    const errors = reactive({ name: '', phone: '' });
+    // const errors = reactive({ name: '', phone: '' });
+    
     const addSupplier = async () => {
         errors.name = '';
         errors.phone = '';

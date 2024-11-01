@@ -1,10 +1,10 @@
 <script setup>
+import Home from '@/components/Home.vue';
+
 // import TheWelcome from '../components/TheWelcome.vue'
+
 </script>
 
 <template>
-  <main>
-    <!-- <TheWelcome /> -->
-     <h1>home page</h1>
-  </main>
+  <Home/>
 </template>

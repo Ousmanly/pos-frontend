@@ -16,7 +16,7 @@
     
       <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success">Users</h2>
+        <h2 class="m-0 font-weight-bold text-success-t bold">Users</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -159,10 +159,12 @@ onMounted(async () => {
 .font-wb-md{
   margin: auto;
 }
-.font-wb, .font-wb-md{
+.font-wb, .font-wb-md, .bold{
   font-weight: bold;
 }
-
+.text-success-t{
+    color: #26a49c;
+  }
 .modal-body {
   padding: 20px;
 }

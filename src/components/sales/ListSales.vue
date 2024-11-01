@@ -16,7 +16,7 @@
     
       <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success">Sales</h2>
+        <h2 class="m-0 font-weight-bold text-success-t bold">Sales</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -151,10 +151,13 @@ onMounted(async () => {
   max-width: 300px;
   position: relative;
 }
+.text-success-t{
+    color: #26a49c;
+  }
 .font-wb-md{
   margin: auto;
 }
-.font-wb, .font-wb-md{
+.font-wb, .font-wb-md, .bold{
   font-weight: bold;
 }
 
