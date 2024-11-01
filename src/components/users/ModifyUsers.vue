@@ -13,6 +13,7 @@
             id="name"
             required
           />
+          <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email :</label>
@@ -22,7 +23,8 @@
             v-model="email"
             id="email"
             required
-          />        
+          />  
+          <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>      
         </div>
         <!-- <div class="mb-3">
           <label for="password" class="form-label">Password :</label>
@@ -56,7 +58,7 @@
 
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 
 
 const store = usePosStore();
@@ -68,6 +70,11 @@ const email = ref("");
 const role = ref("");
 const originalName = ref("");
 const id = Number(route.params.id);
+const errors = reactive({
+  name: "",
+  email: ""
+});
+
 import { getCurrentInstance } from 'vue';
 import { usePosStore } from "@/stores/pos";
 
@@ -100,18 +107,16 @@ const handleUpdateUser = async() => {
     role: role.value,
   };
   await store.updateUser(updatedUser);
+  Object.keys(errors).forEach(key => errors[key] = "");
   toast.success("User has been updated")
   router.push("/listuser");
   }catch (error) {
-    toast.error("Failed to update user")
-  if (error.response && error.response.status === 422) {
-      const errors = error.response.data.errors;
-      
-      errors.forEach((err) => {
-        alert(err.msg); 
+    if (error.response && error.response.data && error.response.data.errors) {
+      error.response.data.errors.forEach(err => {
+        errors[err.path] = err.msg; 
       });
     } else {
-      alert("Une erreur inattendue est survenue."+error.message);
+      toast.error("An unexpected error occurred. Please try again.");
     }
   }
 };

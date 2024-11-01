@@ -27,6 +27,7 @@
                       <th>Name</th>
                       <th>Phone</th>
                       <th>User</th>
+                      <th>Status</th>
                       <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -36,7 +37,13 @@
                     <td>{{ supplier.name }}</td>
                     <td>{{ supplier.phone }}</td>
                     <td>{{ supplier.user_name }}</td>
-
+                    <td class="text-center">
+                    <input
+                      type="checkbox"
+                      :checked="supplier.status"
+                      @change="toggleStatus(supplier)"
+                    />
+                  </td>
                     <td class="text-center">
                       <button class="btn btn-sm" @click="openModal(supplier)">
                         <i
@@ -130,6 +137,16 @@ onMounted(async () => {
       store.deleteSupplier(id);
     }
   };
+  const toggleStatus = async (supplier) => {
+  try {
+    supplier.status = !supplier.status;
+    await store.updateSupplierStatus(supplier.id, supplier.status); // Met à jour dans la base de données
+    // toast.success(`Status updated to ${user.status ? "Active" : "Inactive"}`);
+  } catch (error) {
+    // toast.error("Failed to update status");
+    console.error(error);
+  }
+};
 </script>
      
   <style scoped>

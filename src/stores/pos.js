@@ -97,7 +97,25 @@ export const usePosStore = defineStore("pos", {
     //     console.error('Erreur lors du chargement des recettes:', error);
     //     this.recettes = [];
     //   }
-    // },    
+    // },  
+    async updateUserStatus(userId, status) {
+      try {
+        await axios.put(`http://localhost:3005/api/users/${userId}/status`, { status });
+        toast.success("User status updated successfully");
+      } catch (error) {
+        console.error("Failed to update user status:", error);
+        throw error;
+      }
+    },  
+    async updateSupplierStatus(supplierId, status) {
+      try {
+        await axios.put(`http://localhost:3005/api/suppliers/${supplierId}/status`, { status });
+        toast.success("Supplier status updated successfully");
+      } catch (error) {
+        console.error("Failed to update user status:", error);
+        throw error;
+      }
+    },  
     async loadDataFromSuplierApi() {
       try {
         const resp = await axios.get("http://localhost:3005/api/suppliers");

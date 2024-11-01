@@ -111,13 +111,6 @@ const closeModal = () => {
 onMounted(async () => {
   await store.loadDataFromMouvementApi();
 });
-  const destroySupplier = (id) => {
-    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
-    if (confirmation ) {
-      toast.success("Suppression reussi")
-      store.deleteSupplier(id);
-    }
-  };
 </script>
      
   <style scoped>

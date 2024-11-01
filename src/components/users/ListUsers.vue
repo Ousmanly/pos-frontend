@@ -27,6 +27,7 @@
                       <th>Name</th>
                       <th>Role</th>
                       <th>Email</th>
+                      <th>Status</th>
                       <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -36,7 +37,13 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.role }}</td>
                     <td>{{ user.email }}</td>
-
+                    <td class="text-center">
+                    <input
+                      type="checkbox"
+                      :checked="user.status"
+                      @change="toggleStatus(user)"
+                    />
+                  </td>
                     <td class="text-center">
                       <button class="btn btn-sm" @click="openModal(user)">
                         <i
@@ -133,6 +140,17 @@ onMounted(async () => {
       store.destroyUser(id);
     }
   };
+
+  const toggleStatus = async (user) => {
+  try {
+    user.status = !user.status;
+    await store.updateUserStatus(user.id, user.status); // Met à jour dans la base de données
+    // toast.success(`Status updated to ${user.status ? "Active" : "Inactive"}`);
+  } catch (error) {
+    // toast.error("Failed to update status");
+    console.error(error);
+  }
+};
 </script>
      
   <style scoped>
