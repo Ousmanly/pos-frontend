@@ -116,6 +116,15 @@ export const usePosStore = defineStore("pos", {
         throw error;
       }
     },  
+    async updateProductStatus(productId, status) {
+      try {
+        await axios.put(`http://localhost:3005/api/products/${productId}/status`, { status });
+        toast.success("Product status updated successfully");
+      } catch (error) {
+        console.error("Failed to product user status:", error);
+        throw error;
+      }
+    },  
     async loadDataFromSuplierApi() {
       try {
         const resp = await axios.get("http://localhost:3005/api/suppliers");

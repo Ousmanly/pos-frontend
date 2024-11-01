@@ -14,7 +14,7 @@
           <label for="supplier" class="form-label">Supplier Name:</label>
           <select class="form-select" v-model="selectedSupplier" id="supplier" required>
             <option value="" disabled selected>Select a supplier</option>
-            <option v-for="supplier in suppliers" :key="supplier.id" :value="supplier.id">
+            <option v-for="supplier in activeSuppliers" :key="supplier.id" :value="supplier.id">
               {{ supplier.name }}
             </option>
           </select>
@@ -24,7 +24,7 @@
         <div class="mb-3 flex-fill">
           <label for="product" class="form-label">Product Name:</label>
           <select class="form-select" v-model="selectedProduct" id="product" required>
-            <option v-for="product in products" :key="product.id" :value="product.id">
+            <option v-for="product in activeProducts" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
           </select>
@@ -66,8 +66,11 @@
     await store.loadDataFromProductApi();
   });
 
-const suppliers = computed(() => store.suppliers);
-const products = computed(() => store.products);
+// const suppliers = computed(() => store.suppliers);
+const activeSuppliers = computed(() => store.suppliers.filter(supplier => supplier.status));
+const activeProducts = computed(() => store.products.filter(product => product.status));
+
+// const products = computed(() => store.products);
 
 
     const recepted_at = ref("");

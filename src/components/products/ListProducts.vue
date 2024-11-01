@@ -39,6 +39,11 @@
             <button class="btn btn-sm" @click="destroyProduct(product.id)">
               <i class="fa-solid fa-trash" style="color: #e30d0d; font-size: 19px"></i>
             </button>
+            <input
+              type="checkbox"
+              :checked="product.status"
+              @change="toggleStatus(product)"
+            />
           </div>
         </div>
       </div>
@@ -173,6 +178,16 @@ const destroyProduct = (id) => {
   }
 };
 
+const toggleStatus = async (product) => {
+  try {
+    product.status = !product.status;
+    await store.updateProductStatus(product.id, product.status); // Met à jour dans la base de données
+    // toast.success(`Status updated to ${user.status ? "Active" : "Inactive"}`);
+  } catch (error) {
+    // toast.error("Failed to update status");
+    console.error(error);
+  }
+};
 // const destroySupplier = (id) => {
 //     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
 //     if (confirmation ) {

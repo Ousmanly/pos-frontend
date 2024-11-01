@@ -24,6 +24,7 @@
           <label for="sale" class="form-label">Sale price :</label>
           <input
             type="number"
+            min="0"
             class="form-control"
             v-model="sale_price"
             id="sale"
