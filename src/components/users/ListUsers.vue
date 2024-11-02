@@ -10,92 +10,94 @@
           v-if="affichebtn"
           @click="maskBtn"
         >
-          Add user
+          {{ $t("user.add_user") }}
         </button>
       </RouterLink>
-    
+
       <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success-t bold">Users</h2>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Name</th>
-                      <th>Role</th>
-                      <th>Email</th>
-                      <th>Status</th>
-                      <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="user in store.users" :key="user.id">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>{{ user.email }}</td>
-                    <td class="text-center">
+        <div class="card-header py-3">
+          <h2 class="m-0 font-weight-bold text-success-t bold">
+            {{ $t("user.users") }}
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+              class="table table-bordered"
+              id="dataTable"
+              width="100%"
+              cellspacing="0"
+            >
+              <thead>
+                <tr>
+                  <th>{{ $t("user.id") }}</th>
+                  <th>{{ $t("user.name") }}</th>
+                  <th>{{ $t("user.role") }}</th>
+                  <th>{{ $t("user.email") }}</th>
+                  <th>{{ $t("user.status") }}</th>
+                  <th class="text-center">{{ $t("user.actions") }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="user in store.users" :key="user.id">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.role }}</td>
+                  <td>{{ user.email }}</td>
+                  <td class="text-center">
                     <input
                       type="checkbox"
                       :checked="user.status"
                       @change="toggleStatus(user)"
                     />
                   </td>
-                    <td class="text-center">
-                      <button class="btn btn-sm" @click="openModal(user)">
-                        <i
-                          class="fa-solid fa-eye"
-                          style="color: #26a49c; font-size: 19px"
-                        ></i>
-                      </button>
-                      <RouterLink :to="{ path: `/modifie-user/${user.id}` }">
+                  <td class="text-center">
+                    <button class="btn btn-sm" @click="openModal(user)">
+                      <i
+                        class="fa-solid fa-eye"
+                        style="color: #26a49c; font-size: 19px"
+                      ></i>
+                    </button>
+                    <RouterLink :to="{ path: `/modifie-user/${user.id}` }">
                       <button class="btn btn-sm">
                         <i
                           class="fa-solid fa-pen-to-square"
                           style="color: #ffb200; font-size: 19px"
                         ></i>
                       </button>
-                      </RouterLink>
-                      <button
-                        class="btn btn-sm"
-                        @click="destroyUser(user.id)"
-                      >
-                        <i
-                          class="fa-solid fa-trash"
-                          style="color: #e30d0d; font-size: 19px"
-                        ></i>
-                      </button>
-                    </td>
-                 </tr>
-                    
-                </tbody>
+                    </RouterLink>
+                    <button class="btn btn-sm" @click="destroyUser(user.id)">
+                      <i
+                        class="fa-solid fa-trash"
+                        style="color: #e30d0d; font-size: 19px"
+                      ></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
             </table>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
     </div>
     <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h5 class="font-wb-md mt-3">Supplier details</h5>
+          <h5 class="font-wb-md mt-3">{{ $t("user.user_details") }}</h5>
         </div>
         <div class="modal-body">
-          
           <p>
-            <strong>Name: </strong> {{ selectedUser.name }}
+            <strong>{{ $t("user.name") }}: </strong> {{ selectedUser.name }}
           </p>
           <p>
-            <strong>Role: </strong> {{ selectedUser.role }}
+            <strong>{{ $t("user.role") }}: </strong> {{ selectedUser.role }}
           </p>
           <p>
-            <strong>Email: </strong> {{ selectedUser.email }}
+            <strong>{{ $t("user.email") }}: </strong> {{ selectedUser.email }}
           </p>
         </div>
         <button class="btn btn-danger text-white font-wb" @click="closeModal">
-          Close
+          {{ $t("user.close") }}
         </button>
       </div>
     </div>
@@ -105,16 +107,9 @@
   <script setup>
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
-import { useToast } from 'vue-toastification';
-const toast = useToast()
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const store = usePosStore();
-
-import { getCurrentInstance } from "vue";
-const { proxy } = getCurrentInstance();
-
-//   const changeLanguage = (locale) => {
-//     proxy.$i18n.locale = locale;
-//   };
 
 let affichebtn = true;
 const maskBtn = () => {
@@ -134,17 +129,17 @@ const closeModal = () => {
 onMounted(async () => {
   await store.loadDataFromUserApi();
 });
-  const destroyUser = (id) => {
-    const confirmation = confirm("Are you sure to delete this user?");
-    if (confirmation ) {
-      store.destroyUser(id);
-    }
-  };
+const destroyUser = (id) => {
+  const confirmation = confirm("Are you sure to delete this user?");
+  if (confirmation) {
+    store.destroyUser(id);
+  }
+};
 
-  const toggleStatus = async (user) => {
+const toggleStatus = async (user) => {
   try {
     user.status = !user.status;
-    await store.updateUserStatus(user.id, user.status); 
+    await store.updateUserStatus(user.id, user.status);
   } catch (error) {
     console.error(error);
   }
@@ -172,15 +167,17 @@ onMounted(async () => {
   max-width: 300px;
   position: relative;
 }
-.font-wb-md{
+.font-wb-md {
   margin: auto;
 }
-.font-wb, .font-wb-md, .bold{
+.font-wb,
+.font-wb-md,
+.bold {
   font-weight: bold;
 }
-.text-success-t{
-    color: #26a49c;
-  }
+.text-success-t {
+  color: #26a49c;
+}
 .modal-body {
   padding: 20px;
 }

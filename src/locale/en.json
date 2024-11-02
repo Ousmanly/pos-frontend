@@ -1,0 +1,47 @@
+{
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "suppliers": "Suppliers",
+        "products": "Products",
+        "receptions": "Receptions",
+        "sales": "Sales",
+        "movements": "Movements",
+        "inventories": "Inventories"
+    },
+    "navbar": {
+        "admin": "Admin",
+        "user": "User"
+    },
+    "user": {
+        "add_user": "Add user",
+        "users": "Users",
+        "id": "Id",
+        "name": "Name",
+        "role": "Role",
+        "email": "Email",
+        "status": "Status",
+        "actions": "Actions",
+        "view": "View",
+        "edit": "Edit",
+        "delete": "Delete",
+        "confirm_delete": "Are you sure to delete this user?",
+        "user_details": "User details",
+        "close": "Close",
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "password": "Password",
+            "role": "Role",
+            "addButton": "Add",
+            "cancelButton": "Cancel",
+            "selectRole": "Select a role",
+            "userUpdated": "User has been updated successfully!",
+            "unexpectedError": "An unexpected error occurred. Please try again."
+        },
+        "messages": {
+            "userAdded": "User has been added successfully!",
+            "error": "An unexpected error occurred. Please try again."
+        }
+    }
+}

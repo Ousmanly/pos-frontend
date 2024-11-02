@@ -4,16 +4,19 @@ import 'bootstrap/dist/js/bootstrap.js'
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 import "vue-toastification/dist/index.css";
-import { createI18n } from 'vue-i18n';
 // import 'vue-toastification/dist/indec'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createI18n } from 'vue-i18n';
 
 import App from './App.vue'
 import router from './router'
 import Toast from 'vue-toastification'
-import { createI18n } from 'vue-i18n';
+// import { createI18n } from 'vue-i18n';
+import fr from './locale/fr.json'
+import en from './locale/en.json'
+import ar from './locale/ar.json'
 const app = createApp(App)
 
 const i18n = createI18n({

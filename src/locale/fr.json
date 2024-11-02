@@ -1,0 +1,47 @@
+{
+    "sidebar": {
+        "dashboard": "Tableau de Bord",
+        "users": "Utilisateurs",
+        "suppliers": "Fournisseurs",
+        "products": "Produits",
+        "receptions": "Réceptions",
+        "sales": "Ventes",
+        "movements": "Mouvements",
+        "inventories": "Inventaires"
+    },
+    "navbar": {
+        "admin": "Admin",
+        "user": "Utilisateur"
+    },
+    "user": {
+        "add_user": "Ajouter un utilisateur",
+        "users": "Utilisateurs",
+        "id": "Id",
+        "name": "Nom",
+        "role": "Rôle",
+        "email": "Email",
+        "status": "Statut",
+        "actions": "Actions",
+        "view": "Voir",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "confirm_delete": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+        "user_details": "Détails de l'utilisateur",
+        "close": "Fermer",
+        "form": {
+            "name": "Nom",
+            "email": "E-mail",
+            "password": "Mot de passe",
+            "role": "Rôle",
+            "addButton": "Ajouter",
+            "cancelButton": "Annuler",
+            "selectRole": "Sélectionnez un rôle",
+            "userUpdated": "L'utilisateur a été mis à jour avec succès!",
+            "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer."
+        },
+        "messages": {
+            "userAdded": "L'utilisateur a été ajouté avec succès!",
+            "error": "Une erreur inattendue s'est produite. Veuillez réessayer."
+        }
+    }
+}
