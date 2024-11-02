@@ -206,6 +206,10 @@ export const usePosStore = defineStore("pos", {
       return await axios.post("http://localhost:3005/api/sales", sales );
 
     },
+    async addInventory(inventories) {
+      return await axios.post("http://localhost:3005/api/inventories", inventories );
+
+    },
     
     // async addRecete(recette) {
     //   return await axios.post("http://localhost:3005/api/recipes", recette);

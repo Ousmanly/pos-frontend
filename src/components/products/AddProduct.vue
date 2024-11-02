@@ -4,71 +4,45 @@
         <button @click="changeLanguage('en')" class="btn btn-info me-2">{{ $t('buttons.english') }}</button>
         <button @click="changeLanguage('fr')" class="btn btn-info">{{ $t('buttons.french') }}</button>
       </div> -->
-      <form
-        @submit.prevent="addProduct"
-        class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"
-      >
-      <!-- <h1>{{ `size is ${size}` }}</h1> -->
-  
-        <div class="mb-3">
-          <label for="name" class="form-label">Name :</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="name"
-            id="name"
-            required
-          />
-         </div>
-        <div class="mb-3">
-          <label for="sale" class="form-label">Sale price :</label>
-          <input
-            type="number"
-            min="0"
-            class="form-control"
-            v-model="sale_price"
-            id="sale"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="purchase" class="form-label">Pusrchase price :</label>
-          <input
-            type="number"
-            class="form-control"
-            v-model="purchase_price"
-            id="purchase"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="seuil" class="form-label">Seuil :</label>
-          <input
-            type="number"
-            class="form-control"
-            v-model="seuil"
-            id="seuil"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="code_bare" class="form-label">Code bare :</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="code_bare"
-            id="code_bare"
-            required
-          />
-        </div>
-        <button class="clr btn text-white mt-3 mb-4 me-3"> Add</button>
-        <RouterLink
-          class="list text-decoration-none text-white me-5 fw-bold"
-          to="/listproduct"
-        >
-          <button class="btn btn-danger mt-3 mb-4">Cancel</button>
-        </RouterLink>
-      </form>
+      <form @submit.prevent="addProduct" class="formulaire form shadow p-3 bg-body rounded">
+    <div class="form-group d-flex gap-3">
+      <div class="mb-3 flex-fill">
+        <label for="name" class="form-label">Name :</label>
+        <input type="text" class="form-control" v-model="name" id="name" required />
+        <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
+      </div>
+      <div class="mb-3 flex-fill">
+        <label for="sale" class="form-label">Sale price :</label>
+        <input type="number" min="0" class="form-control" v-model="sale_price" id="sale" required />
+      </div>
+    </div>
+
+    <div class="form-group d-flex gap-3">
+      <div class="mb-3 flex-fill">
+        <label for="purchase" class="form-label">Purchase price :</label>
+        <input type="number" class="form-control" v-model="purchase_price" id="purchase" required />
+      </div>
+      <div class="mb-3 flex-fill">
+        <label for="seuil" class="form-label">Seuil :</label>
+        <input type="number" class="form-control" v-model="seuil" id="seuil" required />
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="code_bare" class="form-label">Code bar :</label>
+      <input type="text" class="form-control" v-model="code_bare" id="code_bare" required />
+      <div v-if="errors.code_bare" class="text-danger">{{ errors.code_bare }}</div>
+    </div>
+
+    <div v-if="errors.general" class="text-danger mb-3">{{ errors.general }}</div>
+
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-dark me-2">Add</button>
+      <RouterLink to="/listproduct">
+        <button type="button" class="btn btn-danger">Cancel</button>
+      </RouterLink>
+    </div>
+  </form>
     </div>
   </template>
   
@@ -77,7 +51,7 @@
     import { getCurrentInstance } from 'vue';
   
     const router = useRouter();
-    import { ref } from "vue";
+    import { ref, reactive } from "vue";
     import { usePosStore } from "@/stores/pos";
     import { useToast } from "vue-toastification";
     const toast = useToast()
@@ -87,6 +61,10 @@
     const purchase_price = ref("");
     const seuil = ref("");
     const code_bare = ref("");
+    const errors = reactive({
+      name: "",
+      code_bare: "",
+    });
     const addProduct = async () => {
     try {
         const newProduct = {
@@ -97,17 +75,17 @@
             code_bare: code_bare.value
         };
         await store.addProduct(newProduct);
-          name.value="",
-          sale_price.value="", 
-          purchase_price.value="",
-          seuil.value="",
-          code_bare.value=""
+        Object.keys(errors).forEach(key => errors[key] = "");
           toast.success("Product has been added success")
           router.push("/listproduct");
     } catch (error) {
-        toast.error("faild to create a Product")
-
-
+      if (error.response && error.response.data && error.response.data.errors ) {
+    error.response.data.errors.forEach(err => {
+      errors[err.path] = err.msg; 
+    });
+  } else {
+      toast.error("An unexpected error occurred. Please try again.");
+    }
   
     }
   };
@@ -127,15 +105,19 @@
     background-color: #24272a;
   }
   .formulaire {
-    width: 50%;
-    border-radius: 10px;
-    padding: 20px;
-    margin: auto;
-    margin-top: 16vh;
-  }
-  textarea {
-    resize: none;
-  }
+  margin: auto;
+  margin-top: 16vh;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.form-group {
+  display: flex;
+  gap: 1rem;
+}
+.form-label {
+  font-weight: bold;
+}
   .text-danger {
   color: red;
 }

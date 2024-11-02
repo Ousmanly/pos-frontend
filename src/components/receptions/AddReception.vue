@@ -37,6 +37,7 @@
       <div class="form-group mb-4">
         <label for="quantity" class="form-label">Quantity:</label>
         <input type="number" min="0" class="form-control" v-model="quantity" id="quantity" required />
+        <div v-if="errors.quantity" class="text-danger">{{ errors.quantity }}</div>
       </div>
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-dark me-2">Add</button>
@@ -60,7 +61,7 @@
 
     const toast = useToast()
     const store = usePosStore();
-
+ 
     onMounted(async () => {
     await store.loadDataFromSuplierApi();
     await store.loadDataFromProductApi();
@@ -77,8 +78,10 @@ const activeProducts = computed(() => store.products.filter(product => product.s
     const selectedSupplier = ref("");
     const selectedProduct = ref("");
   const price = ref();
-  const quantity = ref(0);
-
+  const quantity = ref();
+  const errors = reactive({
+    receptionDetails:""
+    });
 const addReception = async () => {
   try {
     const newReception = {
@@ -93,16 +96,23 @@ const addReception = async () => {
       ]
     }
     await store.addReception(newReception);
-    recepted_at.value = "";
-    selectedSupplier.value = "";
-    selectedProduct.value = "";
-    price.value = "";
-    quantity.value = 0;
+    Object.keys(errors).forEach(key => errors[key] = "");
 
     toast.success("Reception has been added successfully");
     router.push("/listreception");
   } catch (error) {
-    toast.error("Failed to create a reception");
+    if (error.response && error.response.data && error.response.data.errors) {
+      error.response.data.errors.forEach(err => {
+        // Détecte les erreurs spécifiques par `path`
+        if (err.path === "receptionDetails[0].quantity") {
+          errors.quantity = err.msg; // Affiche le message d'erreur pour le champ `quantity`
+        } else {
+          errors.general = err.msg; // Capture les autres erreurs
+        }
+      });
+    } else {
+      toast.error("An unexpected error occurred. Please try again.");
+    }
   }
 };
 

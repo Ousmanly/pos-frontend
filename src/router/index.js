@@ -18,6 +18,7 @@ import MouvementView from '@/views/MouvementView.vue'
 import SaleView from '@/views/SaleView.vue'
 import AddSale from '@/components/sales/AddSale.vue'
 import InventoryView from '@/views/InventoryView.vue'
+import AddInventory from '@/components/inventories/AddInventory.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -106,6 +107,11 @@ const router = createRouter({
           path: '/listinventories',
           name: 'listinventories',
           component: InventoryView
+        },
+        {
+          path: '/addinventories',
+          name: 'addinventories',
+          component: AddInventory
         },
       ]
     },

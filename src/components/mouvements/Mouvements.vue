@@ -25,31 +25,6 @@
                     <td>{{ mouvement.product_name }}</td>
                     <td>{{ mouvement.user_name }}</td>
                     <td>{{ new Date(mouvement.mouvement_at).toLocaleDateString() }}</td>
-                    <!-- <td class="text-center">
-                      <button class="btn btn-sm" @click="openModal(supplier)">
-                        <i
-                          class="fa-solid fa-eye"
-                          style="color: #26a49c; font-size: 19px"
-                        ></i>
-                      </button>
-                      <RouterLink :to="{ path: `/modifie-supplier/${supplier.id}` }">
-                      <button class="btn btn-sm">
-                        <i
-                          class="fa-solid fa-pen-to-square"
-                          style="color: #ffb200; font-size: 19px"
-                        ></i>
-                      </button>
-                      </RouterLink>
-                      <button
-                        class="btn btn-sm"
-                        @click="destroySupplier(supplier.id)"
-                      >
-                        <i
-                          class="fa-solid fa-trash"
-                          style="color: #e30d0d; font-size: 19px"
-                        ></i>
-                      </button>
-                    </td> -->
                  </tr>
                     
                 </tbody>

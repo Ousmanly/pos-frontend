@@ -3,7 +3,7 @@
       <div class="page-background container bg-color">
         <RouterLink
           class="list text-decoration-none text-white fw-bold"
-          to="/ajoutsupplier"
+          to="/addinventories"
         >
           <button
             class="clr btn text-white mb-4 fw-bold"
