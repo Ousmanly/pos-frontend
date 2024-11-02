@@ -83,7 +83,8 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 const toast = useToast();
 
-onMounted(() => {
+onMounted(async() => {
+  await store.loadDataFromUserApi();
   const user = store.users.find((user) => user.id === id);
   if (user) {
     name.value = user.name;

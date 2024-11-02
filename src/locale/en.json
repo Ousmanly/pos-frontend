@@ -43,5 +43,31 @@
             "userAdded": "User has been added successfully!",
             "error": "An unexpected error occurred. Please try again."
         }
+    },
+    "supplier": {
+        "page": {
+            "id": "Id",
+            "title": "Suppliers",
+            "addButton": "Add supplier",
+            "supplierDetails": "Supplier details",
+            "name": "Name",
+            "phone": "Phone",
+            "user": "User",
+            "status": "Status",
+            "actions": "Actions",
+            "confirmDelete": "Are you sure you want to delete?",
+            "close": "Close"
+        },
+        "form": {
+            "name": "Name:",
+            "phone": "Phone:",
+            "add": "Add",
+            "cancel": "Cancel",
+            "successMessage": "Supplier has been added successfully",
+            "unexpectedError": "An unexpected error occurred. Please try again.",
+            "confirm": "Confirm",
+            "supplierUpdated": "The supplier has been updated successfully!"
+
+        }
     }
 }

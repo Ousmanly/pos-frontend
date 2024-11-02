@@ -5,7 +5,7 @@
       class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"
     >
     <div class="mb-3">
-          <label for="name" class="form-label">name :</label>
+          <label for="name" class="form-label">{{ $t("supplier.form.name") }} :</label>
           <input
             type="text"
             class="form-control"
@@ -16,7 +16,7 @@
           <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
         </div>
         <div class="mb-3">
-          <label for="phone" class="form-label">phone :</label>
+          <label for="phone" class="form-label">{{ $t("supplier.form.phone") }} :</label>
           <input
             type="text"
             class="form-control"
@@ -26,12 +26,12 @@
           />
         </div>
         <div v-if="errors.phone" class="text-danger">{{ errors.phone }}</div>
-        <button class="clr btn text-white mt-3 mb-4 me-3"> Confirm</button>
+        <button class="clr btn text-white mt-3 mb-4 me-3"> {{ $t("supplier.form.confirm") }}</button>
         <RouterLink
           class="list text-decoration-none text-white me-5 fw-bold"
           to="/listsupplier"
         >
-          <button class="btn btn-danger mt-3 mb-4">Cancel</button>
+          <button class="btn btn-danger mt-3 mb-4">{{ $t("supplier.form.cancel") }}</button>
         </RouterLink>
     </form>
   </div>
@@ -40,8 +40,11 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted, reactive } from "vue";
+import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
 
-
+const { t } = useI18n();
+const toast = useToast()
 const store = usePosStore();
 const router = useRouter();
 const route = useRoute();
@@ -54,17 +57,10 @@ const errors = reactive({
   name: "",
   phone: "",
 });
-import { getCurrentInstance } from 'vue';
 import { usePosStore } from "@/stores/pos";
 
-
-const { proxy } = getCurrentInstance();
-
-const changeLanguage = (locale) => {
-  proxy.$i18n.locale = locale;
-};
-
-onMounted(() => {
+onMounted(async() => {
+  await store.loadDataFromSuplierApi();
   const supplier = store.suppliers.find((supplier) => supplier.id === id);
   if (supplier) {
     name.value = supplier.name;
@@ -84,6 +80,7 @@ const handleUpdateSupplier = async() => {
   };
   await store.updateSupplier(updatedSupplier);
   Object.keys(errors).forEach((key) => (errors[key] = ""));
+  toast.success(t("supplier.form.supplierUpdated"));
   router.push("/listsupplier");
   }catch (error) {
     if (error.response && error.response.data && error.response.data.errors) {
@@ -91,7 +88,7 @@ const handleUpdateSupplier = async() => {
         errors[err.path] = err.msg; 
       });
     } else {
-      toast.error("An unexpected error occurred. Please try again.");
+      toast.error(t("supplier.form.unexpectedError"));
     }
   }
 };

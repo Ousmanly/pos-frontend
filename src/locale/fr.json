@@ -43,5 +43,30 @@
             "userAdded": "L'utilisateur a été ajouté avec succès!",
             "error": "Une erreur inattendue s'est produite. Veuillez réessayer."
         }
+    },
+    "supplier": {
+        "page": {
+            "id": "Id",
+            "title": "Fournisseurs",
+            "addButton": "Ajouter un fournisseur",
+            "supplierDetails": "Détails du fournisseur",
+            "name": "Nom",
+            "phone": "Téléphone",
+            "user": "Utilisateur",
+            "status": "Statut",
+            "actions": "Actions",
+            "close": "Fermer",
+            "confirmDelete": "Êtes-vous sûr de vouloir supprimer?"
+        },
+        "form": {
+            "name": "Nom:",
+            "phone": "Téléphone:",
+            "add": "Ajouter",
+            "cancel": "Annuler",
+            "successMessage": "Le fournisseur a été ajouté avec succès",
+            "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+            "confirm": "Confirmer",
+            "supplierUpdated":"Le fournisseur a été mis à jour avec succès!"
+        }
     }
 }

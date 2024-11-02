@@ -1,17 +1,11 @@
 <template>
   <div class="container">
-    <!-- <div class="mb-4 d-flex justify-content-end">
-        <button @click="changeLanguage('en')" class="btn btn-info me-2">{{ $t('buttons.english') }}</button>
-        <button @click="changeLanguage('fr')" class="btn btn-info">{{ $t('buttons.french') }}</button>
-      </div> -->
     <form
       @submit.prevent="addSupplier"
       class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"
     >
-      <!-- <h1>{{ `size is ${size}` }}</h1> -->
-
       <div class="mb-3">
-        <label for="name" class="form-label">name :</label>
+        <label for="name" class="form-label">{{ $t("supplier.form.name") }} :</label>
         <input
           type="text"
           class="form-control"
@@ -22,7 +16,7 @@
         <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
       </div>
       <div class="mb-3">
-        <label for="phone" class="form-label">phone :</label>
+        <label for="phone" class="form-label">{{ $t("supplier.form.phone") }}  :</label>
         <input
           type="text"
           class="form-control"
@@ -32,12 +26,12 @@
         />
         <div v-if="errors.phone" class="text-danger">{{ errors.phone }}</div>
       </div>
-      <button class="clr btn text-white mt-3 mb-4 me-3">Add</button>
+      <button class="clr btn text-white mt-3 mb-4 me-3">{{ $t("supplier.form.add") }} </button>
       <RouterLink
         class="list text-decoration-none text-white me-5 fw-bold"
         to="/listsupplier"
       >
-        <button class="btn btn-danger mt-3 mb-4">Cancel</button>
+        <button class="btn btn-danger mt-3 mb-4">{{ $t("supplier.form.cancel") }} </button>
       </RouterLink>
     </form>
   </div>
@@ -51,6 +45,9 @@ const router = useRouter();
 import { ref, reactive } from "vue";
 import { usePosStore } from "@/stores/pos";
 import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 const toast = useToast();
 const store = usePosStore();
 const name = ref("");
@@ -62,12 +59,12 @@ const errors = reactive({
 const addSupplier = async () => {
   try {
     const newSupplier = {
-      name: name.value,
+      name: name.value, 
       phone: phone.value,
     };
     await store.addSupplier(newSupplier);
     Object.keys(errors).forEach((key) => (errors[key] = ""));
-    toast.success("Supplier has been added success");
+    toast.success(t("supplier.form.successMessage"));
     router.push("/listsupplier");
   } catch (error) {
     if (error.response && error.response.data && error.response.data.errors) {
@@ -75,7 +72,7 @@ const addSupplier = async () => {
         errors[err.path] = err.msg; 
       });
     } else {
-      toast.error("An unexpected error occurred. Please try again.");
+      toast.error(t("supplier.form.unexpectedError"));
     }
   }
 };

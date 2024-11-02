@@ -5,30 +5,39 @@
         class="list text-decoration-none text-white fw-bold"
         to="/ajoutsupplier"
       >
+      <!-- title
+addButton
+supplierDetails
+name
+phone
+user
+status
+actions
+confirmDelete -->
         <button
           class="clr btn text-white mb-4 fw-bold"
           v-if="affichebtn"
           @click="maskBtn"
         >
-          Add supplier
+        {{ $t("supplier.page.addButton") }}
         </button>
       </RouterLink>
     
       <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success-t bold">Suppliers</h2>
+        <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("supplier.page.title") }}</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                      <th>Id</th>
-                      <th>Name</th>
-                      <th>Phone</th>
-                      <th>User</th>
-                      <th>Status</th>
-                      <th class="text-center">Actions</th>
+                      <th>{{ $t("supplier.page.id") }}</th>
+                      <th>{{ $t("supplier.page.name") }}</th>
+                      <th>{{ $t("supplier.page.phone") }}</th>
+                      <th>{{ $t("supplier.page.user") }}</th>
+                      <th>{{ $t("supplier.page.status") }}</th>
+                      <th class="text-center">{{ $t("supplier.page.actions") }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,19 +89,19 @@
     <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h5 class="font-wb-md mt-3">Supplier details</h5>
+          <h5 class="font-wb-md mt-3">{{ $t("supplier.page.supplierDetails") }}</h5>
         </div>
         <div class="modal-body">
           
           <p>
-            <strong>Name: </strong> {{ selectedSupplier.name }}
+            <strong>{{ $t("supplier.page.name") }}: </strong> {{ selectedSupplier.name }}
           </p>
           <p>
-            <strong>Phone: </strong> {{ selectedSupplier.phone }}
+            <strong>{{ $t("supplier.page.phone") }}: </strong> {{ selectedSupplier.phone }}
           </p>
         </div>
         <button class="btn btn-danger text-white font-wb" @click="closeModal">
-          Close
+          {{ $t("supplier.page.close") }}
         </button>
       </div>
     </div>
@@ -103,6 +112,9 @@
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { useToast } from 'vue-toastification';
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 const toast = useToast()
 const store = usePosStore();
 import { getCurrentInstance } from "vue";
@@ -131,7 +143,7 @@ onMounted(async () => {
   await store.loadDataFromSuplierApi();
 });
   const destroySupplier = (id) => {
-    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
+    const confirmation = confirm(t("supplier.page.confirmDelete"));
     if (confirmation ) {
       store.deleteSupplier(id);
     }

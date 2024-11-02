@@ -108,6 +108,9 @@
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 const toast = useToast();
 const store = usePosStore();
 
@@ -130,7 +133,7 @@ onMounted(async () => {
   await store.loadDataFromUserApi();
 });
 const destroyUser = (id) => {
-  const confirmation = confirm("Are you sure to delete this user?");
+  const confirmation = confirm(t("user.confirm_delete"));
   if (confirmation) {
     store.destroyUser(id);
   }
