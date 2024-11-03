@@ -1,7 +1,10 @@
 <template>
     <div class="login-container d-flex justify-content-center align-items-center vh-100">
       <div class="login-card card shadow p-4">
-        <h2 class="mb-4 text-center">Connexion</h2>
+        <div class="d-flex justify-content-center mb-2">
+        <img src="../assets/logo.png" alt="logo" width="80" height="83" />
+      </div>
+        <h3 class="mb-4 text-center">Connexion</h3>
         
         <form @submit.prevent="handleLogin">
           <div class="input-group mb-3">
@@ -20,11 +23,16 @@
             />
           </div>
   
-          <small @click="togglePasswordVisibility" style="cursor: pointer; color: blue; display: block; text-align: right;">
+          <div class="d-flex justify-content-between mb-3">
+          <small @click="togglePasswordVisibility" style="cursor: pointer; color: blue;">
             {{ showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe" }}
           </small>
+          <router-link to="/forgot-password" class="text-primary">
+            Mot de passe oublié ?
+          </router-link>
+        </div>
   
-          <button type="submit" class="btn btn-primary w-100 mt-3">Se connecter</button>
+          <button type="submit" class="btn w-100 btn-conn mt-3">Se connecter</button>
         </form>
       </div>
     </div>
@@ -45,7 +53,7 @@
     const success = await store.login(email.value, password.value);
     if (success) {
         toast.success("connexion reussi")
-        router.push("/home");
+        router.push("/dashboard");
     } else {
         toast.error("connexion failed")
     }
@@ -64,7 +72,11 @@
     background-color: #f8f9fa;
     min-height: 100vh;
   }
-  
+  .btn-conn{
+    background: linear-gradient(45deg, #242d32, #26a49c);
+    color: white;
+    font-weight: bold;
+  }
   .login-card {
     width: 100%;
     max-width: 400px;

@@ -4,18 +4,18 @@
     
       <div class="card shadow mb-4 clr">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success-t bold">Mouvements</h2>
+        <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("mouvement.title") }}</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                      <th>Id</th>
-                      <th>quantity</th>
-                      <th>Product</th>
-                      <th>Provoked By</th>
-                      <th>Date of mouvement</th>
+                      <th>{{ $t("mouvement.id") }}</th>
+                      <th>{{ $t("mouvement.quantity") }}</th>
+                      <th>{{ $t("mouvement.product") }}</th>
+                      <th>{{ $t("mouvement.provokedBy") }}</th>
+                      <th>{{ $t("mouvement.date") }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,55 +33,14 @@
     </div>
 </div>
     </div>
-    <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
-      <div class="modal-content" @click.stop>
-        <div class="modal-header">
-          <h5 class="font-wb-md mt-3">Supplier details</h5>
-        </div>
-        <div class="modal-body">
-          
-          <p>
-            <strong>Name: </strong> {{ selectedSupplier.name }}
-          </p>
-          <p>
-            <strong>Phone: </strong> {{ selectedSupplier.phone }}
-          </p>
-        </div>
-        <button class="btn btn-danger text-white font-wb" @click="closeModal">
-          Close
-        </button>
-      </div>
-    </div>
   </div>
 </template>
   
   <script setup>
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
-import { useToast } from 'vue-toastification';
-const toast = useToast()
+
 const store = usePosStore();
-import { getCurrentInstance } from "vue";
-const { proxy } = getCurrentInstance();
-
-//   const changeLanguage = (locale) => {
-//     proxy.$i18n.locale = locale;
-//   };
-
-let affichebtn = true;
-const maskBtn = () => {
-  affichebtn = false;
-};
-const isModalVisible = ref(false);
-const selectedSupplier = ref(null);
-const openModal = (supplier) => {
-  selectedSupplier.value = supplier;
-  isModalVisible.value = true;
-};
-
-const closeModal = () => {
-  isModalVisible.value = false;
-};
 
 onMounted(async () => {
   await store.loadDataFromMouvementApi();

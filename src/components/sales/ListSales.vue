@@ -10,80 +10,93 @@
           v-if="affichebtn"
           @click="maskBtn"
         >
-          Add Sale
+          {{ $t("sale.title") }}
         </button>
       </RouterLink>
-    
-      <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success-t bold">Sales</h2>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Date of creation</th>
-                      <th>Date of sale</th>
-                      <th>Customer Name</th>
-                      <th>Customer email</th>
-                      <th>Customer phone</th>
-                      <th>Created By</th>
-                      <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="sale in store.sales" :key="sale.id">
-                    <td>{{ sale.id }}</td>
-                    <td>{{ new Date(sale.created_at).toLocaleDateString() }}</td>
-                    <td>{{ new Date(sale.sale_at).toLocaleDateString() }}</td>
-                    <td>{{ sale.name }}</td>
-                    <td>{{ sale.email }}</td>
-                    <td>{{ sale.phone }}</td>
-                    <td>{{ sale.user_name }}</td>
 
-                    <td class="text-center">
-                      <button class="btn btn-sm" @click="openModal(sale)">
-                        <i
-                          class="fa-solid fa-eye"
-                          style="color: #26a49c; font-size: 19px"
-                        ></i>
-                      </button>
-                      <button
-                        class="btn btn-sm"
-                        @click="destroySale(sale.id)"
-                      >
-                        <i
-                          class="fa-solid fa-trash"
-                          style="color: #e30d0d; font-size: 19px"
-                        ></i>
-                      </button>
-                    </td>
-                 </tr>
-                    
-                </tbody>
-            </table>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h2 class="m-0 font-weight-bold text-success-t bold">
+            {{ $t("sale.title") }}
+          </h2>
         </div>
-    </div>
-</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+              class="table table-bordered"
+              id="dataTable"
+              width="100%"
+              cellspacing="0"
+            >
+              <thead>
+                <tr>
+                  <th>{{ $t("sale.columns.id") }}</th>
+                  <th>{{ $t("sale.columns.creationDate") }}</th>
+                  <th>{{ $t("sale.columns.saleDate") }}</th>
+                  <th>{{ $t("sale.columns.customerName") }}</th>
+                  <th>{{ $t("sale.columns.customerEmail") }}</th>
+                  <th>{{ $t("sale.columns.customerPhone") }}</th>
+                  <th>{{ $t("sale.columns.createdBy") }}</th>
+                  <th class="text-center">{{ $t("sale.columns.actions") }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="sale in store.sales" :key="sale.id">
+                  <td>{{ sale.id }}</td>
+                  <td>{{ new Date(sale.created_at).toLocaleDateString() }}</td>
+                  <td>{{ new Date(sale.sale_at).toLocaleDateString() }}</td>
+                  <td>{{ sale.name }}</td>
+                  <td>{{ sale.email }}</td>
+                  <td>{{ sale.phone }}</td>
+                  <td>{{ sale.user_name }}</td>
+
+                  <td class="text-center">
+                    <button class="btn btn-sm" @click="openModal(sale)">
+                      <i
+                        class="fa-solid fa-eye"
+                        style="color: #26a49c; font-size: 19px"
+                      ></i>
+                    </button>
+                    <button class="btn btn-sm" @click="destroySale(sale.id)">
+                      <i
+                        class="fa-solid fa-trash"
+                        style="color: #e30d0d; font-size: 19px"
+                      ></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
     <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h5 class="font-wb-md mt-3">Details reception</h5>
+          <h5 class="font-wb-md mt-3">{{ $t("sale.modal.title") }}</h5>
         </div>
         <div class="modal-body">
-          
           <div v-for="detail in selectedSale.sale_details" :key="detail">
-            <p><strong>Product: </strong> {{ detail.product_name }}</p>
-            <p><strong>Price: </strong> {{ detail.price }}</p>
-            <p><strong>Quantity: </strong> {{ detail.sale_quantity }}</p>
-            <p><strong>Amount: </strong> {{ detail.amount }}</p>
+            <p>
+              <strong>{{ $t("sale.modal.product") }}: </strong>
+              {{ detail.product_name }}
+            </p>
+            <p>
+              <strong>{{ $t("sale.modal.price") }}: </strong> {{ detail.price }}
+            </p>
+            <p>
+              <strong>{{ $t("sale.modal.quantity") }}: </strong>
+              {{ detail.sale_quantity }}
+            </p>
+            <p>
+              <strong>{{ $t("sale.modal.amount") }}: </strong>
+              {{ detail.amount }}
+            </p>
           </div>
         </div>
         <button class="btn btn-danger text-white font-wb" @click="closeModal">
-          Close
+          {{ $t("sale.modal.closeButton") }}
         </button>
       </div>
     </div>
@@ -93,15 +106,10 @@
   <script setup>
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
-import { useToast } from 'vue-toastification';
-const toast = useToast()
-const store = usePosStore();
-import { getCurrentInstance } from "vue";
-const { proxy } = getCurrentInstance();
+import { useI18n } from "vue-i18n";
 
-//   const changeLanguage = (locale) => {
-//     proxy.$i18n.locale = locale;
-//   };
+const { t } = useI18n();
+const store = usePosStore();
 
 let affichebtn = true;
 const maskBtn = () => {
@@ -121,12 +129,12 @@ const closeModal = () => {
 onMounted(async () => {
   await store.loadDataFromSaleApi();
 });
-  const destroySale = (id) => {
-    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
-    if (confirmation ) {
-      store.destroySale(id);
-    }
-  };
+const destroySale = (id) => {
+  const confirmation = confirm(t("sale.deleteConfirmation"));
+  if (confirmation) {
+    store.destroySale(id);
+  }
+};
 </script>
      
   <style scoped>
@@ -150,13 +158,15 @@ onMounted(async () => {
   max-width: 300px;
   position: relative;
 }
-.text-success-t{
-    color: #26a49c;
-  }
-.font-wb-md{
+.text-success-t {
+  color: #26a49c;
+}
+.font-wb-md {
   margin: auto;
 }
-.font-wb, .font-wb-md, .bold{
+.font-wb,
+.font-wb-md,
+.bold {
   font-weight: bold;
 }
 

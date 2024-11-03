@@ -21,7 +21,8 @@ export const usePosStore = defineStore("pos", {
     nextIdsale: 1,
     inventories: [],
     nextIdInvt: 1,
-    // userName: "",
+    isAuthenticated: false,
+    userName: "",
     // searchQuery: "",
   }),
 
@@ -38,7 +39,7 @@ export const usePosStore = defineStore("pos", {
        /////
         await this.fetchUserName();
         /////
-        // this.userName = response.data.user.name; 
+        // this.isAuthenticated = true;
         ////
         return true;
       } catch (error) {
@@ -52,6 +53,7 @@ export const usePosStore = defineStore("pos", {
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         await this.fetchUserName();
+        this.isAuthenticated = true
       } else {
         console.warn("Aucun token trouvé dans le localStorage");
       }
@@ -66,6 +68,26 @@ export const usePosStore = defineStore("pos", {
       }
     },
     
+    // async refreshToken() {
+    //   try {
+    //     const response = await axios.post("http://localhost:3005/api/refresh-token", {
+    //       token: localStorage.getItem("token"),
+    //     });
+    //     const newToken = response.data.token;
+    //     localStorage.setItem("token", newToken);
+    //     axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+    //   } catch (error) {
+    //     console.error("Erreur lors du rafraîchissement du token :", error);
+    //     // Gérer la déconnexion si le rafraîchissement échoue
+    //     this.logout();
+    //   }
+    // },
+    async logout() {
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common['Authorization'];
+      this.isAuthenticated = false;
+      // Redirigez ou faites d'autres actions nécessaires pour déconnecter l'utilisateur
+    },
 
     // getFilteredRecettes() {
     //   return this.recettes.filter(recette =>

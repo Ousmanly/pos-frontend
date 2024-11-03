@@ -68,5 +68,122 @@
             "confirm": "تأكيد",
             "supplierUpdated": "تم تحديث المورد بنجاح!"
         }
+    },
+    "sale": {
+        "title": "المبيعات",
+        "addSaleButton": "إضافة عملية بيع",
+        "columns": {
+            "id": "المعرف",
+            "creationDate": "تاريخ الإنشاء",
+            "saleDate": "تاريخ البيع",
+            "customerName": "اسم العميل",
+            "customerEmail": "البريد الإلكتروني للعميل",
+            "customerPhone": "هاتف العميل",
+            "createdBy": "تم الإنشاء بواسطة",
+            "actions": "إجراءات"
+        },
+        "modal": {
+            "title": "تفاصيل الاستلام",
+            "product": "المنتج",
+            "price": "السعر",
+            "quantity": "الكمية",
+            "amount": "المبلغ",
+            "closeButton": "إغلاق"
+        },
+        "deleteConfirmation": "هل أنت متأكد أنك تريد الحذف؟",
+        "labels": {
+            "saleAt": "تاريخ البيع:",
+            "product": "المنتج:",
+            "customerName": "اسم العميل:",
+            "phone": "الهاتف:",
+            "email": "البريد الإلكتروني:",
+            "price": "السعر:",
+            "quantity": "الكمية:"
+        },
+        "buttons": {
+            "add": "إضافة",
+            "cancel": "إلغاء",
+            "addSale": "إضافة بيع"
+        },
+        "messages": {
+            "success": "تمت إضافة البيع بنجاح",
+            "error": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى."
+        }
+    },
+    "reception": {
+        "addReception": "إضافة استقبال",
+        "receptions": "استقبالات",
+        "id": "معرف",
+        "createdAt": "تم الإنشاء في",
+        "receptedAt": "تم الاستلام في",
+        "supplierName": "اسم المورد",
+        "supplierPhone": "هاتف المورد",
+        "createdBy": "أنشأها",
+        "actions": "الإجراءات",
+        "detailsReception": "تفاصيل الاستقبال",
+        "product": "المنتج",
+        "price": "السعر",
+        "quantity": "الكمية",
+        "close": "إغلاق",
+        "confirmDelete": "هل أنت متأكد أنك تريد الحذف؟"
+    },
+    "product": {
+        "addProduct": "إضافة منتج",
+        "name": "الاسم",
+        "stock": "المخزون",
+        "salePrice": "سعر البيع",
+        "purchasePrice": "سعر الشراء",
+        "seuil": "الحد الأدنى",
+        "createdAt": "تاريخ الإنشاء",
+        "updatedAt": "تاريخ التحديث",
+        "barcode": "الباركود",
+        "createdBy": "أنشأه",
+        "close": "إغلاق",
+        "deleteConfirmation": "هل أنت متأكد من أنك تريد الحذف؟",
+        "productDeleted": "تم حذف المنتج",
+        "add": "إضافة",
+        "productAdded": "تم إضافة المنتج بنجاح!",
+        "addError": "حدث خطأ أثناء إضافة المنتج.",
+        "updateProduct": "تحديث المنتج",
+        "confirm": "تأكيد",
+        "cancel": "إلغاء",
+        "productUpdated": "تم تحديث المنتج بنجاح",
+        "updateFailed": "فشل في تحديث المنتج"
+    },
+    "mouvement": {
+        "title": "الحركات",
+        "id": "المعرف",
+        "quantity": "الكمية",
+        "product": "المنتج",
+        "provokedBy": "بواسطة",
+        "date": "تاريخ الحركة"
+    },
+    "inventory": {
+        "title": "الجرد",
+        "make_inventory_button": "إجراء جرد",
+        "table": {
+            "id": "الرمز",
+            "remark": "ملاحظة",
+            "product": "المنتج",
+            "quantity": "الكمية",
+            "actions": "الإجراءات"
+        },
+        "modal": {
+            "title": "تفاصيل الجرد",
+            "product": "المنتج",
+            "quantity": "الكمية",
+            "created_by": "أنشأه",
+            "created_at": "تم إنشاؤه في",
+            "close_button": "إغلاق"
+        },
+        "form": {
+            "remark": "ملاحظة",
+            "product": "المنتج",
+            "quantity": "الكمية",
+            "add_button": "إضافة",
+            "cancel_button": "إلغاء",
+            "success_message": "تمت إضافة الجرد",
+            "error_message": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى."
+        }
     }
 }

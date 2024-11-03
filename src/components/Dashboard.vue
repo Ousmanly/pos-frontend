@@ -87,8 +87,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item ms-5 text-white">
-                  <!-- <img src="../assets/logo.png" alt="logo" width="90px" height="40px"> -->
+                <li class="nav-item ms-5 text-white decon" @click="handleLogoClick">
+                  Deconexion
                 </li>
               </ul>
               <div class="d-flex text-white me-5">
@@ -132,6 +132,10 @@ const isCollapsed = ref(false);
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
+}; 
+const handleLogoClick = async() => {
+  await store.logout();
+  proxy.$router.push('/'); // Utilise proxy pour rediriger
 };
 
 onMounted(async () => {
@@ -160,7 +164,9 @@ onMounted(async () => {
   display: flex;
   min-height: 100vh;
 }
-
+.decon{
+  cursor: pointer;
+}
 .sidebar {
   width: 200px;
   height: 100vh;

@@ -79,6 +79,9 @@ const router = useRouter();
 import { ref, reactive } from "vue";
 import { usePosStore } from "@/stores/pos";
 import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 const toast = useToast();
 const store = usePosStore();
 const name = ref("");
@@ -103,7 +106,7 @@ const addUser = async () => {
     };
     await store.addUser(newUser);
     Object.keys(errors).forEach((key) => (errors[key] = ""));
-    toast.success(`{{ $t('user.messages.userAdded') }}`);
+    toast.success(t('user.messages.userAdded'));
     router.push("/listuser");
   } catch (error) {
     if (error.response && error.response.data && error.response.data.errors) {
@@ -111,7 +114,7 @@ const addUser = async () => {
         errors[err.path] = err.msg;
       });
     } else {
-      toast.error(`{{ $t('user.messages.error') }}`);
+      toast.error(('user.messages.error'));
     }
   }
 };

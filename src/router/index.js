@@ -19,6 +19,7 @@ import SaleView from '@/views/SaleView.vue'
 import AddSale from '@/components/sales/AddSale.vue'
 import InventoryView from '@/views/InventoryView.vue'
 import AddInventory from '@/components/inventories/AddInventory.vue'
+import { usePosStore } from '@/stores/pos'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,16 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
+      meta: { requiresAuth: true },
+    //   beforeEnter: (to, from, next) => {
+    //   const store = usePosStore();
+    //   // Vérifiez si l'utilisateur est connecté
+    //   if (to.meta.requiresAuth && !store.isAuthenticated) {
+    //     next("/home"); // Autoriser l'accès à la route
+    //   } else {
+    //     next(); // Rediriger vers la page de connexion
+    //   }
+    // },
       children: [
         {
           path: '/home',
@@ -150,5 +161,13 @@ const router = createRouter({
     }
   ]
 })
-
+router.beforeEach(async(to, from, next) => {
+  const store = usePosStore();
+  await store.initAuth();
+  if (to.meta.requiresAuth && !store.isAuthenticated) {
+    next("/");
+  } else {
+    next();
+  }
+});
 export default router

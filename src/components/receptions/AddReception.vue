@@ -34,9 +34,9 @@
           <input type="number" min="0" class="form-control" v-model="price" id="price" required />
         </div>
       </div>
-      <div class="form-group mb-4">
+      <div>
         <label for="quantity" class="form-label">Quantity:</label>
-        <input type="number" min="0" class="form-control" v-model="quantity" id="quantity" required />
+        <input type="number" min="0" class="form-control mb-4" v-model="quantity" id="quantity" required />
         <div v-if="errors.quantity" class="text-danger">{{ errors.quantity }}</div>
       </div>
       <div class="d-flex justify-content-between">

@@ -67,7 +67,123 @@
             "unexpectedError": "An unexpected error occurred. Please try again.",
             "confirm": "Confirm",
             "supplierUpdated": "The supplier has been updated successfully!"
-
+        }
+    },
+    "sale": {
+        "title": "Sales",
+        "addSaleButton": "Add Sale",
+        "columns": {
+            "id": "Id",
+            "creationDate": "Date of creation",
+            "saleDate": "Date of sale",
+            "customerName": "Customer Name",
+            "customerEmail": "Customer Email",
+            "customerPhone": "Customer Phone",
+            "createdBy": "Created By",
+            "actions": "Actions"
+        },
+        "modal": {
+            "title": "Reception Details",
+            "product": "Product",
+            "price": "Price",
+            "quantity": "Quantity",
+            "amount": "Amount",
+            "closeButton": "Close"
+        },
+        "deleteConfirmation": "Are you sure you want to delete?",
+        "labels": {
+            "saleAt": "Sale at:",
+            "product": "Product:",
+            "customerName": "Customer Name:",
+            "phone": "Phone:",
+            "email": "Email:",
+            "price": "Price:",
+            "quantity": "Quantity:"
+        },
+        "buttons": {
+            "add": "Add",
+            "cancel": "Cancel",
+            "addSale": "Add Sale"
+        },
+        "messages": {
+            "success": "Sale has been added successfully",
+            "error": "An unexpected error occurred. Please try again."
+        }
+    },
+    "reception": {
+        "addReception": "Add Receptions",
+        "receptions": "Receptions",
+        "id": "Id",
+        "createdAt": "Created at",
+        "receptedAt": "Recepted at",
+        "supplierName": "Supplier Name",
+        "supplierPhone": "Supplier Phone",
+        "createdBy": "Created By",
+        "actions": "Actions",
+        "detailsReception": "Details Reception",
+        "product": "Product",
+        "price": "Price",
+        "quantity": "Quantity",
+        "close": "Close",
+        "confirmDelete": "Are you sure you want to delete?"
+    },
+    "product": {
+        "addProduct": "Add product",
+        "name": "Name",
+        "stock": "Stock",
+        "salePrice": "Sale price",
+        "purchasePrice": "Purchase price",
+        "seuil": "Threshold",
+        "createdAt": "Created at",
+        "updatedAt": "Updated at",
+        "barcode": "Barcode",
+        "createdBy": "Created by",
+        "close": "Close",
+        "deleteConfirmation": "Are you sure you want to delete?",
+        "productDeleted": "Product has been deleted",
+        "add": "Add",
+        "productAdded": "Product has been added successfully!",
+        "addError": "An error occurred while adding the product.",
+        "updateProduct": "Update Product",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "productUpdated": "Product has been updated successfully",
+        "updateFailed": "Failed to update product"
+    },
+    "mouvement": {
+        "title": "Movements",
+        "id": "Id",
+        "quantity": "Quantity",
+        "product": "Product",
+        "provokedBy": "Provoked By",
+        "date": "Date of Movement"
+    },
+    "inventory": {
+        "title": "Inventories",
+        "make_inventory_button": "Make an inventory",
+        "table": {
+            "id": "Id",
+            "remark": "Remark",
+            "product": "Product",
+            "quantity": "Quantity",
+            "actions": "Actions"
+        },
+        "modal": {
+            "title": "Inventory details",
+            "product": "Product",
+            "quantity": "Quantity",
+            "created_by": "Created By",
+            "created_at": "Created at",
+            "close_button": "Close"
+        },
+        "form": {
+            "remark": "Remark",
+            "product": "Product",
+            "quantity": "Quantity",
+            "add_button": "Add",
+            "cancel_button": "Cancel",
+            "success_message": "Inventory has been added",
+            "error_message": "An unexpected error occurred. Please try again."
         }
     }
 }

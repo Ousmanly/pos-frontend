@@ -10,24 +10,15 @@
           v-if="affichebtn"
           @click="maskBtn"
         >
-          Add product
+        {{ $t("product.addProduct") }}
         </button>
       </RouterLink>
-
-      <!-- <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h2 class="m-0 font-weight-bold text-success">Users</h2>
-  </div> -->
   <div class="card-body">
     <div class="user-list">
       <div v-for="product in store.products" :key="product.id" class="user-card mb-3 p-3 border rounded shadow-sm">
         <div class="d-flex justify-content-between">
           <div>
             <h5 class="font-bold-prod">{{ product.name }}</h5>
-            <!-- <p class="m-0"><strong>Role:</strong> {{ user.role }}</p>
-            <p class="m-0"><strong>Email:</strong> {{ user.email }}</p> -->
-          <!-- </div> -->
-          <!-- <div class="text-center"> -->
             <button class="btn btn-sm" @click="openModal(product)">
               <i class="fa-solid fa-eye" style="color: #26a49c; font-size: 19px"></i>
             </button>
@@ -52,41 +43,6 @@
 </div>
 
     </div>
-    <!-- <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
-      <div class="modal-content" @click.stop>
-        <div class="modal-header">
-          <h5 class="font-wb-md mt-3">Supplier details</h5>
-        </div>
-        <div class="modal-body">
-          <p><strong>Name: </strong> {{ selectedUser.name }}</p>
-          <p><strong>Role: </strong> {{ selectedUser.role }}</p>
-          <p><strong>Email: </strong> {{ selectedUser.email }}</p>
-        </div>
-        <button class="btn btn-danger text-white font-wb" @click="closeModal">
-          Close
-        </button>
-      </div>
-    </div> -->
-    <!-- <div v-if="isModalVisible" class="modal-overlay d-flex align-items-center justify-content-center" @click="closeModal">
-      <div class="modal-content card shadow p-3" style="width: 400px;" @click.stop>
-        <div class="card-header">
-          <h5 class="font-weight-bold mt-2">{{ selectedProduct.name }}</h5>
-        </div>
-        <div class="card-body">
-          <p><strong>Stock: </strong> {{ selectedProduct.stock }}</p>
-          <p><strong>Sale price: </strong> {{ selectedProduct.sale_price }}</p>
-          <p><strong>Purchase price: </strong> {{ selectedProduct.purchase_price }}</p>
-          <p><strong>Seuil: </strong> {{ selectedProduct.seuil }}</p>
-          <p><strong>Create at: </strong> {{ selectedProduct.created_at }}</p>
-          <p><strong>Update at: </strong> {{ selectedProduct.updated_at }}</p>
-          <p><strong>Code bare: </strong> {{ selectedProduct.code_bare }}</p>
-          <p><strong>Create By: </strong> {{ selectedProduct.id_user }}</p>
-        </div>
-        <div class="card-footer text-right">
-          <button class="btn btn-danger text-white font-weight-bold" @click="closeModal">Close</button>
-        </div>
-      </div>
-    </div> -->
     <div v-if="isModalVisible" class="modal-overlay d-flex align-items-center justify-content-center" @click="closeModal">
   <div class="modal-content card shadow-lg p-4 rounded" style="width: 450px;" @click.stop>
     <div class="card-header bg-dark text-white text-center rounded-top" style="height: 40px;">
@@ -96,46 +52,46 @@
       <table class="table table-bordered table-sm">
         <tbody>
           <tr>
-            <th>Stock</th>
+            <th>{{ $t("product.stock") }}</th>
             <td>{{ selectedProduct.stock }}</td>
           </tr>
           <tr>
-            <th>Sale price</th>
+            <th>{{ $t("product.salePrice") }}</th>
             <td>{{ selectedProduct.sale_price }}</td>
           </tr>
           <tr>
-            <th>Purchase price</th>
+            <th>{{ $t("product.purchasePrice") }}</th>
             <td>{{ selectedProduct.purchase_price }}</td>
           </tr>
           <tr>
-            <th>Seuil</th>
+            <th>{{ $t("product.seuil") }}</th>
             <td>{{ selectedProduct.seuil }}</td>
           </tr>
           <tr>
-            <th>Create at</th>
+            <th>{{ $t("product.createdAt") }}</th>
             <td>{{ new Date(selectedProduct.created_at).toLocaleDateString() }}</td>
           </tr>
           <tr>
-            <th>Update at</th>
+            <th>{{ $t("product.updatedAt") }}</th>
             <td>{{ new Date(selectedProduct.updated_at).toLocaleDateString() }}</td>
           </tr>
           <tr>
-            <th>Code bare</th>
+            <th>{{ $t("product.barcode") }}</th>
             <td>{{ selectedProduct.code_bare }}</td>
           </tr>
           <tr>
-            <th>Create By</th>
+            <th>{{ $t("product.createdBy") }}</th>
             <td>{{ selectedProduct.user_name }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="card-footer text-right">
-      <button class="btn btn-outline-secondary font-weight-bold" @click="closeModal">Close</button>
+      <button class="btn btn-outline-secondary font-weight-bold" @click="closeModal">{{ $t("product.close") }}</button>
     </div>
   </div>
-</div>
 
+</div>
 
 </template>
   
@@ -143,6 +99,9 @@
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 const toast = useToast();
 const store = usePosStore();
 import { getCurrentInstance } from "vue";
@@ -171,9 +130,8 @@ onMounted(async () => {
   await store.loadDataFromProductApi();
 });
 const destroyProduct = (id) => {
-  const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
+  const confirmation = confirm(t("product.deleteConfirmation"));
   if (confirmation) {
-    toast.success("Product has been deleted")
     store.destroyProduct(id);
   }
 };

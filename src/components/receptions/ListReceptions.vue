@@ -10,26 +10,26 @@
           v-if="affichebtn"
           @click="maskBtn"
         >
-          Add Receptions
+        {{ $t("reception.addReception") }}
         </button>
       </RouterLink>
     
       <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success-t bold">Receptions</h2>
+        <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("reception.receptions") }}</h2>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                      <th>Id</th>
-                      <th>Created at</th>
-                      <th>Recepted at</th>
-                      <th>Supplier Name</th>
-                      <th>Supplier Phone</th>
-                      <th>Create By</th>
-                      <th class="text-center">Actions</th>
+                      <th>{{ $t("reception.id") }}</th>
+                      <th>{{ $t("reception.createdAt") }}</th>
+                      <th>{{ $t("reception.receptedAt") }}</th>
+                      <th>{{ $t("reception.supplierName") }}</th>
+                      <th>{{ $t("reception.supplierPhone") }}</th>
+                      <th>{{ $t("reception.createdAt") }}</th>
+                      <th class="text-center">{{ $t("reception.actions") }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,18 +69,18 @@
     <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h5 class="font-wb-md mt-3">Details reception</h5>
+          <h5 class="font-wb-md mt-3">{{ $t("reception.detailsReception") }}</h5>
         </div>
         <div class="modal-body">
           
           <div v-for="detail in selectedReception.reception_details" :key="detail">
-            <p><strong>Product: </strong> {{ detail.product_name }}</p>
-            <p><strong>Price: </strong> {{ detail.price }}</p>
-            <p><strong>Quantity: </strong> {{ detail.quantity }}</p>
+            <p><strong>{{ $t("reception.product") }}: </strong> {{ detail.product_name }}</p>
+            <p><strong>{{ $t("reception.price") }}: </strong> {{ detail.price }}</p>
+            <p><strong>{{ $t("reception.quantity") }}: </strong> {{ detail.quantity }}</p>
           </div>
         </div>
         <button class="btn btn-danger text-white font-wb" @click="closeModal">
-          Close
+          {{ $t("reception.close") }}
         </button>
       </div>
     </div>
@@ -91,6 +91,9 @@
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { useToast } from 'vue-toastification';
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 const toast = useToast()
 const store = usePosStore();
 import { getCurrentInstance } from "vue";
@@ -119,7 +122,7 @@ onMounted(async () => {
   await store.loadDataFromReceptionApi();
 });
   const destroyReception = (id) => {
-    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
+    const confirmation = confirm(t("reception.confirmDelete"));
     if (confirmation ) {
       store.destroyReception(id);
     }

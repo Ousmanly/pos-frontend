@@ -5,7 +5,7 @@
       class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"
     >
     <div class="mb-3">
-          <label for="name" class="form-label">Name :</label>
+          <label for="name" class="form-label">{{ $t("product.name") }} :</label>
           <input
             type="text"
             class="form-control"
@@ -15,7 +15,7 @@
           />
          </div>
         <div class="mb-3">
-          <label for="sale" class="form-label">Sale price :</label>
+          <label for="sale" class="form-label">{{ $t("product.salePrice") }} :</label>
           <input
             type="number"
             class="form-control"
@@ -25,7 +25,7 @@
           />
         </div>
         <div class="mb-3">
-          <label for="purchase" class="form-label">Pusrchase price :</label>
+          <label for="purchase" class="form-label">{{ $t("product.purchasePrice") }}:</label>
           <input
             type="number"
             class="form-control"
@@ -35,7 +35,7 @@
           />
         </div>
         <div class="mb-3">
-          <label for="seuil" class="form-label">Seuil :</label>
+          <label for="seuil" class="form-label">{{ $t("product.seuil") }} :</label>
           <input
             type="number"
             class="form-control"
@@ -45,7 +45,7 @@
           />
         </div>
         <div class="mb-3">
-          <label for="code_bare" class="form-label">Code bare :</label>
+          <label for="code_bare" class="form-label">{{ $t("product.barcode") }} :</label>
           <input
             type="text"
             class="form-control"
@@ -54,12 +54,12 @@
             required
           />
         </div>
-        <button class="clr btn text-white mt-3 mb-4 me-3"> Confirm</button>
+        <button class="clr btn text-white mt-3 mb-4 me-3"> {{ $t("product.confirm") }}</button>
         <RouterLink
           class="list text-decoration-none text-white me-5 fw-bold"
           to="/listproduct"
         >
-          <button class="btn btn-danger mt-3 mb-4">Cancel</button>
+          <button class="btn btn-danger mt-3 mb-4">{{ $t("product.cancel") }}</button>
         </RouterLink>
     </form>
   </div>
@@ -84,12 +84,11 @@ const id = Number(route.params.id);
 import { getCurrentInstance } from 'vue';
 import { usePosStore } from "@/stores/pos";
 import { useToast } from "vue-toastification";
-const toast = useToast()
-const { proxy } = getCurrentInstance();
+import { useI18n } from "vue-i18n";
 
-const changeLanguage = (locale) => {
-  proxy.$i18n.locale = locale;
-};
+const { t } = useI18n();
+const toast = useToast()
+
 
 onMounted(() => {
   const product = store.products.find((product) => product.id === id);
@@ -116,10 +115,10 @@ const handleUpdateProduct = async() => {
     code_bare: code_bare.value
   };
   await store.updateProduct(updatedProduct);
-      toast.success("Product has been added success")
+      toast.success(t("product.productUpdated"))
       router.push("/listproduct");
   }catch (error) {
-    toast.error("Failed to update product")
+    toast.error(t("product.updateFailed"))
   }
 };
 

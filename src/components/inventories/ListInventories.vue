@@ -10,24 +10,24 @@
             v-if="affichebtn"
             @click="maskBtn"
           >
-            Make an inventory
+          {{ $t("inventory.make_inventory_button") }}
           </button>
         </RouterLink>
       
         <div class="card shadow mb-4">
       <div class="card-header py-3">
-          <h2 class="m-0 font-weight-bold text-success-t bold">Inventories</h2>
+          <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("inventory.title") }}</h2>
       </div>
       <div class="card-body">
           <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                       <tr>
-                        <th>Id</th>
-                        <th>Remarque</th>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th class="text-center">Actions</th>
+                        <th>{{ $t("inventory.table.id") }}</th>
+                        <th>{{ $t("inventory.table.remark") }}</th>
+                        <th>{{ $t("inventory.table.product") }}</th>
+                        <th>{{ $t("inventory.table.quantity") }}</th>
+                        <th class="text-center">{{ $t("inventory.table.actions") }}</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -52,47 +52,29 @@
       </div>
   </div>
 </div>
-      <!-- <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
-        <div class="modal-content" @click.stop>
-          <div class="modal-header">
-            <h5 class="font-wb-md mt-3">Inventory details</h5>
-          </div>
-          <div class="modal-body">
-            
-            <p>
-              <strong>Product: </strong> {{ selectedInventory.product_name }}
-            </p>
-            <p>
-              <strong>Quantity: </strong> {{ selectedInventory.quantity }}
-            </p>
-          </div>
-          <button class="btn btn-danger text-white font-wb" @click="closeModal">
-            Close
-          </button>
-        </div>
-      </div> -->
+     
       <div v-if="isModalVisible" class="modal-overlay d-flex align-items-center justify-content-center" @click="closeModal">
   <div class="modal-content card shadow-lg p-4 rounded" style="width: 450px;" @click.stop>
     <div class="card-header bg-dark text-white text-center rounded-top" style="height: 40px;">
-      <h5 class="font-weight-bold-p text-center">Inventory details</h5>
+      <h5 class="font-weight-bold-p text-center">{{ $t("inventory.modal.title") }}</h5>
     </div>
     <div class="card-body">
       <table class="table table-bordered table-sm">
         <tbody>
           <tr>
-            <th>Product</th>
+            <th>{{ $t("inventory.modal.product") }}</th>
             <td>{{ selectedInventory.product_name }}</td>
           </tr>
           <tr>
-            <th>Quantity</th>
+            <th>{{ $t("inventory.modal.quantity") }}</th>
             <td>{{ selectedInventory.quantity }}</td>
           </tr>
           <tr>
-            <th>Created By</th>
+            <th>{{ $t("inventory.modal.created_by") }}</th>
             <td>{{ selectedInventory.user_name }}</td>
           </tr>
           <tr>
-            <th>Created at</th>
+            <th>{{ $t("inventory.modal.created_at") }}</th>
             <td>{{ new Date(selectedInventory.created_at).toLocaleDateString() }}</td>
           </tr>
           
@@ -100,7 +82,7 @@
       </table>
     </div>
     <div class="card-footer text-right">
-      <button class="btn btn-outline-secondary font-weight-bold" @click="closeModal">Close</button>
+      <button class="btn btn-outline-secondary font-weight-bold" @click="closeModal">{{ $t("inventory.modal.close_button") }}</button>
     </div>
   </div>
     </div>
@@ -110,15 +92,7 @@
     <script setup>
   import { usePosStore } from "@/stores/pos";
   import { onMounted, ref } from "vue";
-  import { useToast } from 'vue-toastification';
-  const toast = useToast()
   const store = usePosStore();
-  import { getCurrentInstance } from "vue";
-  const { proxy } = getCurrentInstance();
-  
-  //   const changeLanguage = (locale) => {
-  //     proxy.$i18n.locale = locale;
-  //   };
   
   let affichebtn = true;
   const maskBtn = () => {
