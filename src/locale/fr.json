@@ -1,4 +1,5 @@
 {
+    "logout": "Déconnexion",
     "sidebar": {
         "dashboard": "Tableau de Bord",
         "users": "Utilisateurs",
@@ -83,7 +84,7 @@
             "actions": "Actions"
         },
         "modal": {
-            "title": "Détails de la réception",
+            "title": "Détails de la vente",
             "product": "Produit",
             "price": "Prix",
             "quantity": "Quantité",

@@ -88,7 +88,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item ms-5 text-white decon" @click="handleLogoClick">
-                  Deconexion
+                  {{ $t("logout") }}
                 </li>
               </ul>
               <div class="d-flex text-white me-5">

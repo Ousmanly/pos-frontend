@@ -86,6 +86,8 @@ export const usePosStore = defineStore("pos", {
       localStorage.removeItem("token");
       delete axios.defaults.headers.common['Authorization'];
       this.isAuthenticated = false;
+      this.userName = "";
+      toast.success("Déconnexion réussie!");
       // Redirigez ou faites d'autres actions nécessaires pour déconnecter l'utilisateur
     },
 

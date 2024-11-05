@@ -1,4 +1,5 @@
 {
+    "logout": "Logout",
     "sidebar": {
         "dashboard": "Dashboard",
         "users": "Users",
@@ -83,7 +84,7 @@
             "actions": "Actions"
         },
         "modal": {
-            "title": "Reception Details",
+            "title": "sale Details",
             "product": "Product",
             "price": "Price",
             "quantity": "Quantity",

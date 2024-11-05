@@ -28,7 +28,7 @@
                       <th>{{ $t("reception.receptedAt") }}</th>
                       <th>{{ $t("reception.supplierName") }}</th>
                       <th>{{ $t("reception.supplierPhone") }}</th>
-                      <th>{{ $t("reception.createdAt") }}</th>
+                      <th>{{ $t("reception.createdBy") }}</th>
                       <th class="text-center">{{ $t("reception.actions") }}</th>
                     </tr>
                 </thead>

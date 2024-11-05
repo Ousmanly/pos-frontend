@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-center mb-2">
         <img src="../assets/logo.png" alt="logo" width="80" height="83" />
       </div>
-        <h3 class="mb-4 text-center">Connexion</h3>
+        <h3 class="mb-4 text-center">Login</h3>
         
         <form @submit.prevent="handleLogin">
           <div class="input-group mb-3">
@@ -18,21 +18,21 @@
               v-model="password" 
               :type="showPassword ? 'text' : 'password'" 
               class="form-control" 
-              placeholder="Mot de passe" 
+              placeholder="Password" 
               required 
             />
           </div>
   
           <div class="d-flex justify-content-between mb-3">
           <small @click="togglePasswordVisibility" style="cursor: pointer; color: blue;">
-            {{ showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe" }}
+            {{ showPassword ? "Hide password" : "Show password" }}
           </small>
           <router-link to="/forgot-password" class="text-primary">
-            Mot de passe oublié ?
+            Forget password ?
           </router-link>
         </div>
   
-          <button type="submit" class="btn w-100 btn-conn mt-3">Se connecter</button>
+          <button type="submit" class="btn w-100 btn-conn mt-3">Login</button>
         </form>
       </div>
     </div>
@@ -53,7 +53,7 @@
     const success = await store.login(email.value, password.value);
     if (success) {
         toast.success("connexion reussi")
-        router.push("/dashboard");
+        router.push("/home");
     } else {
         toast.error("connexion failed")
     }
