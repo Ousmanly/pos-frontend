@@ -205,5 +205,15 @@ onMounted(async () => {
   color: #333;
   padding: 20px;
 }
+@media (max-width: 820px) {
+  th, td{
+    font-size: 13px;
+  }
+}
+@media (max-width: 630px) {
+  th, td{
+    font-size: 10px;
+  }
+}
 </style>
   

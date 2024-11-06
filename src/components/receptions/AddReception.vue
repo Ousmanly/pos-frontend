@@ -20,7 +20,8 @@
           </select>
         </div>
       </div>
-      <div class="form-group d-flex gap-3">
+
+      <!-- <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
           <label for="product" class="form-label">Product Name:</label>
           <select class="form-select" v-model="selectedProduct" id="product" required>
@@ -44,7 +45,46 @@
         <RouterLink to="/listreception">
           <button type="button" class="btn btn-danger">Cancel</button>
         </RouterLink>
+      </div> -->
+      <div v-for="(detail, index) in receptionDetails" :key="index" class="mb-3">
+        <div class="form-group d-flex gap-3">
+          <div class="mb-3 flex-fill">
+            <label for="product" class="form-label">Product Name:</label>
+          <select class="form-select" v-model="detail.id_product" id="product" required>
+            <option v-for="product in activeProducts" :key="product.id" :value="product.id">
+              {{ product.name }}
+            </option>
+          </select>
+          </div>
+          <div class="mb-3 flex-fill">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" min="0" class="form-control" v-model="detail.price" id="price" required />
+         </div>
+          <div class="mb-3 flex-fill">
+            <label for="quantity" class="form-label">Quantity:</label>
+            <input type="number" min="0" class="form-control mb-4" v-model="detail.quantity" id="quantity" required />
+          </div>
+            <button class="btn" @click="removeProduct(index)">
+              <i
+                class="fa-solid fa-trash"
+                style="color: #e30d0d; font-size: 29px"
+              ></i>
+            </button>  
+        </div>
       </div>
+
+      <button type="button" class="btn btn-am mb-3" @click="addProduct">
+        {{ $t("sale.buttons.addMore") }}
+      </button>
+
+      <div v-if="errors.general" class="text-danger mb-3">{{ errors.general }}</div>
+      
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-dark me-2">{{ $t("reception.button.add") }}</button>
+        <RouterLink to="/listreception">
+          <button type="button" class="btn btn-danger">{{ $t("reception.button.cancel") }}</button>
+        </RouterLink>
+      </div> 
     </form>
     </div>
   </template>
@@ -74,26 +114,38 @@ const activeProducts = computed(() => store.products.filter(product => product.s
 // const products = computed(() => store.products);
 
 
-    const recepted_at = ref("");
-    const selectedSupplier = ref("");
-    const selectedProduct = ref("");
+  const recepted_at = ref("");
+  const selectedSupplier = ref("");
+  const selectedProduct = ref("");
   const price = ref();
   const quantity = ref();
   const errors = reactive({
     receptionDetails:""
     });
+      /////
+    const receptionDetails = ref([{ id_product: "", price: null, quantity: 1 }]);
+
+  const addProduct = () => {
+    receptionDetails.value.push({ id_product: "", price: null, quantity: 1 });
+  };
+
+  const removeProduct = (index) => {
+    receptionDetails.value.splice(index, 1);
+  };
+  ///////
 const addReception = async () => {
   try {
     const newReception = {
       id_supplier: selectedSupplier.value,
       recepted_at: recepted_at.value,
-      receptionDetails: [
-        {
-          id_product: selectedProduct.value,
-          price: price.value,
-          quantity: quantity.value
-        }
-      ]
+      // receptionDetails: [
+      //   {
+      //     id_product: selectedProduct.value,
+      //     price: price.value,
+      //     quantity: quantity.value
+      //   }
+      // ]
+      receptionDetails:receptionDetails.value
     }
     await store.addReception(newReception);
     Object.keys(errors).forEach(key => errors[key] = "");
@@ -132,7 +184,8 @@ const addReception = async () => {
     background-color: #24272a;
   }
   .formulaire {
-    width: 50%;
+    /* width: 50%; */
+    max-width: 700px;
     margin: auto;
     margin-top: 16vh;
   }
@@ -150,6 +203,10 @@ const addReception = async () => {
 button.btn-dark {
   background-color: #343a40;
   border: none;
+}
+.btn-am  {
+  background-color: #343a40;
+  color: white;
 }
 button.btn-dark:hover {
   background-color: #24272a;

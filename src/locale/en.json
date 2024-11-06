@@ -1,5 +1,13 @@
 {
     "logout": "Logout",
+    "totalProduct":"Total products",
+    "totalUser":"Total users",
+    "totalSale":"Total sales",
+    "language":{
+        "en":"English",
+        "fr": "Français",
+        "ar": "العربية"
+    },
     "sidebar": {
         "dashboard": "Dashboard",
         "users": "Users",
@@ -129,7 +137,11 @@
         "price": "Price",
         "quantity": "Quantity",
         "close": "Close",
-        "confirmDelete": "Are you sure you want to delete?"
+        "confirmDelete": "Are you sure you want to delete?",
+        "button":{
+            "add": "Add",
+            "cancel": "Cancel"
+        }
     },
     "product": {
         "addProduct": "Add product",

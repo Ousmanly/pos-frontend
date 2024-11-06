@@ -284,7 +284,7 @@ button.btn-dark:hover {
         </div>
       </div>
 
-      <button type="button" class="btn btn-primary mb-3" @click="addProduct">
+      <button type="button" class="btn btn-am mb-3" @click="addProduct">
         {{ $t("sale.buttons.addMore") }}
       </button>
 
@@ -358,6 +358,10 @@ const addSale = async () => {
 </script>
 <style scoped>
 .clr {
+  background-color: #343a40;
+}
+.btn-am  {
+  color: white;
   background-color: #343a40;
 }
 .clr:hover {

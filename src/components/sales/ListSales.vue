@@ -14,7 +14,7 @@
         </button>
       </RouterLink>
 
-      <div class="card shadow mb-4 ">
+      <div class="card shadow mb-4 d-flex justify-content-between ">
         <div class="card-header py-3">
           <h2 class="m-0 font-weight-bold text-success-t bold">
             {{ $t("sale.title") }}
@@ -34,7 +34,7 @@
                   <th>{{ $t("sale.columns.creationDate") }}</th>
                   <th>{{ $t("sale.columns.saleDate") }}</th>
                   <th>{{ $t("sale.columns.customerName") }}</th>
-                  <th>{{ $t("sale.columns.customerEmail") }}</th>
+                  <th v-if="closeEmail">{{ $t("sale.columns.customerEmail") }}</th>
                   <th>{{ $t("sale.columns.customerPhone") }}</th>
                   <th>{{ $t("sale.columns.createdBy") }}</th>
                   <th class="text-center">{{ $t("sale.columns.actions") }}</th>
@@ -46,7 +46,7 @@
                   <td>{{ new Date(sale.created_at).toLocaleDateString() }}</td>
                   <td>{{ new Date(sale.sale_at).toLocaleDateString() }}</td>
                   <td>{{ sale.name }}</td>
-                  <td>{{ sale.email }}</td>
+                  <td v-if="closeEmail">{{ sale.email }}</td>
                   <td>{{ sale.phone }}</td>
                   <td>{{ sale.user_name }}</td>
 
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="sale-card">
+    <!-- <div class="sale-card">
       <RouterLink
         class="list text-decoration-none text-white fw-bold"
         to="/addsale"
@@ -106,7 +106,7 @@
                 </div>
               </div>
             </div>
-      </div>
+      </div> -->
               
 
     <!-- <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
@@ -145,7 +145,6 @@
           <h5 class="font-wb-md mt-3">{{ $t("sale.modal.title") }}</h5>
         </div>
         <div class="modal-body">
-          <!-- Table for displaying sale details -->
           <table class="table table-bordered ">
             <thead>
               <tr>
@@ -164,7 +163,6 @@
               </tr>
             </tbody>
           </table>
-          <!-- Display total amount -->
           <div class="d-flex justify-content-between">
             <div class="total-amount text-end">
             <strong>{{ $t("sale.modal.totalAmount") }}: </strong>
@@ -184,12 +182,16 @@
   
   <script setup>
 import { usePosStore } from "@/stores/pos";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
-const store = usePosStore();
+const store = usePosStore()
+const closeEmail = ref(true);
 
+const checkScreenWidth = () => {
+  closeEmail.value = window.innerWidth >= 995;
+};
 let affichebtn = true;
 const maskBtn = () => {
   affichebtn = false;
@@ -204,7 +206,6 @@ const openModal = (sale) => {
 const closeModal = () => {
   isModalVisible.value = false;
 };
-// Calculer le montant total des détails de vente
 const calculateTotalAmount = (details) => {
   return details.reduce((total, detail) => {
     return total + parseInt(detail.amount);
@@ -212,6 +213,10 @@ const calculateTotalAmount = (details) => {
 };
 onMounted(async () => {
   await store.loadDataFromSaleApi();
+  window.addEventListener('resize', checkScreenWidth);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenWidth);
 });
 const destroySale = (id) => {
   const confirmation = confirm(t("sale.deleteConfirmation"));
@@ -222,26 +227,6 @@ const destroySale = (id) => {
 </script>
      
   <style scoped>
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  padding-top: 5px;
-  border-radius: 8px;
-  max-width: 300px;
-  position: relative;
-} */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -293,11 +278,11 @@ const destroySale = (id) => {
 }
 
 
-.sale-card {
+/* .sale-card {
   display: none;
-}
+} */
 
-.sale-card-content {
+/* .sale-card-content {
   margin: auto;
   margin-bottom: 20px;
   border: 1px solid #ddd;
@@ -305,22 +290,18 @@ const destroySale = (id) => {
   border-radius: 8px;
   width: fit-content;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Responsive Styles for screens smaller than 700px */
 @media (max-width: 995px) {
-  .sale-table {
-    display: none;
+  th, td{
+    font-size: 13px;
   }
-
-  .sale-card {
-    display: block;
+}
+@media (max-width: 770px) {
+  th, td{
+    font-size: 10px;
   }
-
-  /* .card-actions {
-    display: flex;
-    justify-content: space-between;
-  } */
 }
 </style>
   

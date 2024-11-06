@@ -100,7 +100,7 @@ button:hover {
 .message {
   margin-top: 1rem;
   text-align: center;
-  color: red;
+  color: black;
 }
 </style>
   

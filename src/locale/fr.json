@@ -1,5 +1,8 @@
 {
     "logout": "Déconnexion",
+    "totalProduct": "Total des produits",
+    "totalUser": "Total des utilisateurs",
+    "totalSale": "Total des ventes",
     "sidebar": {
         "dashboard": "Tableau de Bord",
         "users": "Utilisateurs",
@@ -129,7 +132,11 @@
         "price": "Prix",
         "quantity": "Quantité",
         "close": "Fermer",
-        "confirmDelete": "Êtes-vous sûr de vouloir supprimer?"
+        "confirmDelete": "Êtes-vous sûr de vouloir supprimer?",
+        "button":{
+            "cancel": "Annuler",
+            "add": "Ajouter"
+        }
     },
     "product": {
         "addProduct": "Ajouter un produit",

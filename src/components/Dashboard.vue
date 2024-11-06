@@ -83,7 +83,7 @@
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span class="fas fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -102,9 +102,9 @@
                   @change="changeLanguage($event.target.value)"
                   class="language-select"
                 >
-                  <option value="en">En</option>
-                  <option value="fr">Fr</option>
-                  <option value="ar">Ar</option>
+                  <option value="en">{{ $t("language.en") }}</option>
+                  <option value="fr">{{ $t("language.fr") }}</option>
+                  <option value="ar">{{ $t("language.ar") }}</option>
                 </select>
               </div>
             </div>
@@ -135,7 +135,7 @@ const toggleSidebar = () => {
 }; 
 const handleLogoClick = async() => {
   await store.logout();
-  proxy.$router.push('/'); // Utilise proxy pour rediriger
+  proxy.$router.push('/');
 };
 
 onMounted(async () => {
@@ -159,6 +159,9 @@ onMounted(async () => {
 }
 .user-icon {
   font-size: 24px;
+}
+.navbar-toggler-icon {
+  background-color: white;  /* Donne une couleur blanche à l'icône */
 }
 .app-container {
   display: flex;

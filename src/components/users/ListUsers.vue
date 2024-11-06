@@ -197,5 +197,11 @@ const toggleStatus = async (user) => {
   color: #333;
   padding: 20px;
 }
+@media (max-width: 820px) {
+  th, td{
+    font-size: 13px;
+  }
+}
+
 </style>
   

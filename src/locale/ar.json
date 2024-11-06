@@ -1,5 +1,8 @@
 {
     "logout": "تسجيل الخروج",
+    "totalProduct": "إجمالي المنتجات",
+    "totalUser": "إجمالي المستخدمين",
+    "totalSale": "إجمالي المبيعات",
     "sidebar": {
         "dashboard": "لوحة التحكم",
         "users": "المستخدمون",
@@ -106,8 +109,8 @@
             "add": "إضافة",
             "cancel": "إلغاء",
             "addSale": "إضافة بيع",
-            "remove" : "إزالة",
-            "addMore" : "أضف المزيد"
+            "remove": "إزالة",
+            "addMore": "أضف المزيد"
         },
         "messages": {
             "success": "تمت إضافة البيع بنجاح",
@@ -129,7 +132,11 @@
         "price": "السعر",
         "quantity": "الكمية",
         "close": "إغلاق",
-        "confirmDelete": "هل أنت متأكد أنك تريد الحذف؟"
+        "confirmDelete": "هل أنت متأكد أنك تريد الحذف؟",
+        "button": {
+            "add": "إضافة",
+            "cancel": "إلغاء"
+        }
     },
     "product": {
         "addProduct": "إضافة منتج",

@@ -66,7 +66,7 @@
     </div>
 </div>
     </div>
-    <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
+    <!-- <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
           <h5 class="font-wb-md mt-3">{{ $t("reception.detailsReception") }}</h5>
@@ -82,6 +82,36 @@
         <button class="btn btn-danger text-white font-wb" @click="closeModal">
           {{ $t("reception.close") }}
         </button>
+      </div>
+    </div> -->
+    <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <div class="modal-header">
+          <h5 class="font-wb-md mt-3">{{ $t("reception.detailsReception") }}</h5>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered ">
+            <thead>
+              <tr>
+                <th>{{ $t("reception.product") }}</th>
+                <th>{{ $t("reception.price") }}</th>
+                <th>{{ $t("reception.quantity") }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="detail in selectedReception.reception_details" :key="detail.id">
+                <td>{{ detail.product_name }}</td>
+                <td>{{ detail.price }}</td>
+                <td>{{ detail.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-danger text-white font-wb" @click="closeModal">
+            {{ $t("reception.close") }}
+        </button>
+         
+        </div>
+        
       </div>
     </div>
   </div>
@@ -133,7 +163,7 @@ onMounted(async () => {
     .text-success-t{
     color: #26a49c;
   }
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -151,6 +181,26 @@ onMounted(async () => {
   padding-top: 5px;
   border-radius: 8px;
   max-width: 300px;
+  position: relative;
+} */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
   position: relative;
 }
 .font-wb-md{
@@ -175,6 +225,16 @@ onMounted(async () => {
   height: fit-content;
   color: #333;
   padding: 20px;
+}
+@media (max-width: 820px) {
+  th, td{
+    font-size: 13px;
+  }
+}
+@media (max-width: 770px) {
+  th, td{
+    font-size: 10px;
+  }
 }
 </style>
   
