@@ -84,12 +84,13 @@
             "actions": "Actions"
         },
         "modal": {
-            "title": "sale Details",
+            "title": "Sale Details",
             "product": "Product",
             "price": "Price",
             "quantity": "Quantity",
             "amount": "Amount",
-            "closeButton": "Close"
+            "closeButton": "Close",
+            "totalAmount": "Total Amount"
         },
         "deleteConfirmation": "Are you sure you want to delete?",
         "labels": {
@@ -104,7 +105,9 @@
         "buttons": {
             "add": "Add",
             "cancel": "Cancel",
-            "addSale": "Add Sale"
+            "addSale": "Add Sale",
+            "remove":"Remove",
+            "addMore":"Add more"
         },
         "messages": {
             "success": "Sale has been added successfully",

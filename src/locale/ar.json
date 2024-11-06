@@ -89,7 +89,8 @@
             "price": "السعر",
             "quantity": "الكمية",
             "amount": "المبلغ",
-            "closeButton": "إغلاق"
+            "closeButton": "إغلاق",
+            "totalAmount": "المبلغ الإجمالي"
         },
         "deleteConfirmation": "هل أنت متأكد أنك تريد الحذف؟",
         "labels": {
@@ -104,7 +105,9 @@
         "buttons": {
             "add": "إضافة",
             "cancel": "إلغاء",
-            "addSale": "إضافة بيع"
+            "addSale": "إضافة بيع",
+            "remove" : "إزالة",
+            "addMore" : "أضف المزيد"
         },
         "messages": {
             "success": "تمت إضافة البيع بنجاح",

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page-background container bg-color">
+    <div class="page-background container bg-color sale-table">
       <RouterLink
         class="list text-decoration-none text-white fw-bold"
         to="/addsale"
@@ -14,7 +14,7 @@
         </button>
       </RouterLink>
 
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4 ">
         <div class="card-header py-3">
           <h2 class="m-0 font-weight-bold text-success-t bold">
             {{ $t("sale.title") }}
@@ -23,7 +23,7 @@
         <div class="card-body">
           <div class="table-responsive">
             <table
-              class="table table-bordered"
+              class="table table-bordered "
               id="dataTable"
               width="100%"
               cellspacing="0"
@@ -71,7 +71,45 @@
         </div>
       </div>
     </div>
-    <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
+
+    <div class="sale-card">
+      <RouterLink
+        class="list text-decoration-none text-white fw-bold"
+        to="/addsale"
+      >
+        <button
+          class="clr btn text-white mb-4 fw-bold"
+          v-if="affichebtn"
+          @click="maskBtn"
+        >
+          {{ $t("sale.title") }}
+        </button>
+      </RouterLink>
+      <div  v-for="sale in store.sales" :key="sale.id">
+        <div class="card sale-card-content">
+                <div class="card-body">
+                  <p><strong>{{ $t("sale.columns.id") }}: </strong>{{ sale.id }}</p>
+                  <p><strong>{{ $t("sale.columns.creationDate") }}: </strong>{{ new Date(sale.created_at).toLocaleDateString() }}</p>
+                  <p><strong>{{ $t("sale.columns.saleDate") }}: </strong>{{ new Date(sale.sale_at).toLocaleDateString() }}</p>
+                  <p><strong>{{ $t("sale.columns.customerName") }}: </strong>{{ sale.name }}</p>
+                  <p><strong>{{ $t("sale.columns.customerEmail") }}: </strong>{{ sale.email }}</p>
+                  <p><strong>{{ $t("sale.columns.customerPhone") }}: </strong>{{ sale.phone }}</p>
+                  <p><strong>{{ $t("sale.columns.createdBy") }}: </strong>{{ sale.user_name }}</p>
+                  <div class="card-actions">
+                    <button class="btn btn-sm" @click="openModal(sale)">
+                      <i class="fa-solid fa-eye" style="color: #26a49c; font-size: 19px"></i>
+                    </button>
+                    <button class="btn btn-sm" @click="destroySale(sale.id)">
+                      <i class="fa-solid fa-trash" style="color: #e30d0d; font-size: 19px"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+              
+
+    <!-- <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
           <h5 class="font-wb-md mt-3">{{ $t("sale.modal.title") }}</h5>
@@ -99,13 +137,54 @@
           {{ $t("sale.modal.closeButton") }}
         </button>
       </div>
+    </div> -->
+     <!-- Modal for Sale details (Invoice style) -->
+     <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <div class="modal-header">
+          <h5 class="font-wb-md mt-3">{{ $t("sale.modal.title") }}</h5>
+        </div>
+        <div class="modal-body">
+          <!-- Table for displaying sale details -->
+          <table class="table table-bordered ">
+            <thead>
+              <tr>
+                <th>{{ $t("sale.modal.product") }}</th>
+                <th>{{ $t("sale.modal.price") }}</th>
+                <th>{{ $t("sale.modal.quantity") }}</th>
+                <th>{{ $t("sale.modal.amount") }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="detail in selectedSale.sale_details" :key="detail.id">
+                <td>{{ detail.product_name }}</td>
+                <td>{{ detail.price }}</td>
+                <td>{{ detail.sale_quantity }}</td>
+                <td>{{ detail.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Display total amount -->
+          <div class="d-flex justify-content-between">
+            <div class="total-amount text-end">
+            <strong>{{ $t("sale.modal.totalAmount") }}: </strong>
+            {{ calculateTotalAmount(selectedSale.sale_details) }} MRU 
+          </div>
+          <button class="btn btn-danger text-white font-wb" @click="closeModal">
+          {{ $t("sale.modal.closeButton") }}
+        </button>
+          </div>
+         
+        </div>
+        
+      </div>
     </div>
   </div>
 </template>
   
   <script setup>
 import { usePosStore } from "@/stores/pos";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -125,7 +204,12 @@ const openModal = (sale) => {
 const closeModal = () => {
   isModalVisible.value = false;
 };
-
+// Calculer le montant total des détails de vente
+const calculateTotalAmount = (details) => {
+  return details.reduce((total, detail) => {
+    return total + parseInt(detail.amount);
+  }, 0);
+};
 onMounted(async () => {
   await store.loadDataFromSaleApi();
 });
@@ -138,7 +222,7 @@ const destroySale = (id) => {
 </script>
      
   <style scoped>
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -157,7 +241,28 @@ const destroySale = (id) => {
   border-radius: 8px;
   max-width: 300px;
   position: relative;
+} */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
 .text-success-t {
   color: #26a49c;
 }
@@ -185,6 +290,37 @@ const destroySale = (id) => {
   height: fit-content;
   color: #333;
   padding: 20px;
+}
+
+
+.sale-card {
+  display: none;
+}
+
+.sale-card-content {
+  margin: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  width: fit-content;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Styles for screens smaller than 700px */
+@media (max-width: 995px) {
+  .sale-table {
+    display: none;
+  }
+
+  .sale-card {
+    display: block;
+  }
+
+  /* .card-actions {
+    display: flex;
+    justify-content: space-between;
+  } */
 }
 </style>
   

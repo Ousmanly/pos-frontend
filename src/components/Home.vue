@@ -1,51 +1,33 @@
 <template>
   <div class="container">
     <div class="container mt-home">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="card text-dark bg-primary-light mb-3 text-center shadow">
+      <div class="row justify-content-center">
+        <div class="col-md-3 me-3">
+          <div class="card text-dark mb-3 text-center shadow product-card">
             <div class="card-body">
               <h3 class="card-title">0</h3>
               <p class="card-text">Total Products</p>
               <!-- Icône de panier pour les produits -->
-              <i class="bi bi-cart3 icon"></i>
-              <a href="#" class="text-dark">More info <i class="bi bi-arrow-right-circle"></i></a>
             </div>
           </div>
         </div>
 
-        <div class="col-md-3">
-          <div class="card text-dark bg-success-light mb-3 text-center shadow">
+        <div class="col-md-3 me-3">
+          <div class="card text-dark mb-3 text-center shadow sale-card">
             <div class="card-body">
               <h3 class="card-title">0</h3>
-              <p class="card-text">Total Paid Orders</p>
+              <p class="card-text">Total Sale</p>
               <!-- Icône de reçu pour les commandes payées -->
-              <i class="bi bi-receipt icon"></i>
-              <a href="#" class="text-dark">More info <i class="bi bi-arrow-right-circle"></i></a>
             </div>
           </div>
         </div>
 
         <div class="col-md-3">
-          <div class="card text-dark bg-warning-light mb-3 text-center shadow">
+          <div class="card text-dark mb-3 text-center shadow user-card">
             <div class="card-body">
               <h3 class="card-title">1</h3>
               <p class="card-text">Total Users</p>
               <!-- Icône d'utilisateur pour le nombre d'utilisateurs -->
-              <i class="bi bi-people icon"></i>
-              <a href="#" class="text-dark">More info <i class="bi bi-arrow-right-circle"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card text-dark bg-danger-light mb-3 text-center shadow">
-            <div class="card-body">
-              <h3 class="card-title">0</h3>
-              <p class="card-text">Total Stores</p>
-              <!-- Icône de bâtiment pour les magasins -->
-              <i class="bi bi-shop icon"></i>
-              <a href="#" class="text-dark">More info <i class="bi bi-arrow-right-circle"></i></a>
             </div>
           </div>
         </div>
@@ -67,6 +49,10 @@
 .card {
   border-radius: 8px;
   transition: transform 0.2s;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80px 80px; /* Ajuster selon la taille souhaitée */
+  background-blend-mode: multiply;
 }
 
 .card:hover {
@@ -82,37 +68,53 @@
   font-size: 1.2rem;
 }
 
+/* Fonds de couleur semi-transparent et logos pour chaque type de carte */
+.product-card {
+  background-color: rgba(47, 178, 150, 0.1); /* Vert clair */
+  border: 2px solid rgba(47, 178, 150, 1);
+  background-image: url('../assets/products.png'); /* Remplacez par le chemin de votre icône de produit */
+}
+.product-card h3 {
+  color: white;
+  margin-top: 30px;
+}
+.product-card p {
+  color: black;
+  font-weight: bold;
+  margin-top:15px;
+  font-size: 25px;
+}
+
+.sale-card {
+  background-color: rgba(15, 90, 95, 0.1); /* Bleu clair */
+  border: 3px solid rgba(15, 90, 95, 1);
+  background-image: url('../assets/online-shopping.png'); /* Remplacez par le chemin de votre icône de vente */
+}
+.sale-card h3 {
+  color: white;
+  margin-top: 30px;
+}
+.sale-card p {
+  color: black;
+  font-weight: bold;
+  margin-top:15px;
+  font-size: 25px;
+}
+
+.user-card {
+  background-color: rgba(59, 217, 169, 0.1); /* Vert clair */
+  border: 3px solid rgba(59, 217, 169, 1); /* Bordure de couleur #3BD9A9 */
+  background-image: url('path/to/user-icon.png'); /* Remplacez par le chemin de votre icône d'utilisateur */
+}
+.user-card h3 {
+  color: #3BD9A9;
+}
+
 /* Style des icônes */
 .icon {
   font-size: 2rem;
   margin-top: 10px;
   display: block;
   color: #333;
-}
-
-/* Couleurs personnalisées avec opacité */
-.bg-primary-light {
-  background-color: rgba(0, 123, 255, 0.6); /* Bleu avec opacité de 60% */
-}
-
-.bg-success-light {
-  background-color: rgba(40, 167, 69, 0.6); /* Vert avec opacité de 60% */
-}
-
-.bg-warning-light {
-  background-color: rgba(255, 193, 7, 0.6); /* Jaune avec opacité de 60% */
-}
-
-.bg-danger-light {
-  background-color: rgba(220, 53, 69, 0.6); /* Rouge avec opacité de 60% */
-}
-
-/* Style pour les liens en texte sombre */
-a.text-dark {
-  color: #333;
-}
-
-a.text-dark:hover {
-  color: #000;
 }
 </style>
