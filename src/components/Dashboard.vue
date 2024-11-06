@@ -148,8 +148,8 @@ onMounted(async () => {
 .navbar-bg {
   background-color: #242d32;
   box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.3);
-  border-bottom-left-radius: 9%;
-  border-bottom-right-radius: 9%;
+  /* border-bottom-left-radius: 9%; */
+  /* border-bottom-right-radius: 9%; */
 }
 .bg-sidbar {
   box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.3);

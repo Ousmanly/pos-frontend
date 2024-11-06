@@ -1,6 +1,5 @@
 <template>
     <div class="reset-password">
-      <h2>Définir un nouveau mot de passe</h2>
       <form @submit.prevent="handleResetPassword">
         <input
           type="password"
@@ -14,7 +13,7 @@
           placeholder="Confirmez le mot de passe"
           required
         />
-        <button type="submit">Réinitialiser le mot de passe</button>
+        <button type="submit">Confirmer</button>
       </form>
       <p v-if="message" class="message">{{ message }}</p>
     </div>
@@ -57,6 +56,62 @@
   </script>
   
   <style scoped>
-  /* Ajoute des styles pour l'affichage */
-  </style>
+    .reset-password {
+  color: #fff; /* Couleur du texte */
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 70px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 2px solid #26a49c;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #242d32;
+  background-color: #fff;
+  outline: none;
+}
+
+input[type="password"]::placeholder {
+  color: #aaa;
+}
+
+input[type="password"]:focus {
+  border-color: #26a49c;
+  box-shadow: 0 0 5px rgba(38, 164, 156, 0.5);
+}
+
+button {
+  background-color: #26a49c;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1e8e85;
+}
+
+.message {
+  margin-top: 1rem;
+  text-align: center;
+  color: red;
+}
+</style>
   

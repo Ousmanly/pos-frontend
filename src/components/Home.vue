@@ -1,13 +1,12 @@
 <template>
   <div class="container">
-    <div class="container mt-home">
+    <!-- <div class="container mt-home">
       <div class="row justify-content-center">
         <div class="col-md-3 me-3">
           <div class="card text-dark mb-3 text-center shadow product-card">
             <div class="card-body">
               <h3 class="card-title">0</h3>
               <p class="card-text">Total Products</p>
-              <!-- Icône de panier pour les produits -->
             </div>
           </div>
         </div>
@@ -17,7 +16,6 @@
             <div class="card-body">
               <h3 class="card-title">0</h3>
               <p class="card-text">Total Sale</p>
-              <!-- Icône de reçu pour les commandes payées -->
             </div>
           </div>
         </div>
@@ -27,12 +25,11 @@
             <div class="card-body">
               <h3 class="card-title">1</h3>
               <p class="card-text">Total Users</p>
-              <!-- Icône d'utilisateur pour le nombre d'utilisateurs -->
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -40,18 +37,16 @@
 </script>
 
 <style scoped>
-/* Ajout d'une marge en haut */
 .mt-home {
   margin-top: 100px;
 }
 
-/* Styles pour les cartes */
 .card {
   border-radius: 8px;
   transition: transform 0.2s;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 80px 80px; /* Ajuster selon la taille souhaitée */
+  background-size: 80px 80px;
   background-blend-mode: multiply;
 }
 
@@ -68,11 +63,10 @@
   font-size: 1.2rem;
 }
 
-/* Fonds de couleur semi-transparent et logos pour chaque type de carte */
 .product-card {
-  background-color: rgba(47, 178, 150, 0.1); /* Vert clair */
+  background-color: rgba(47, 178, 150, 0.1); 
   border: 2px solid rgba(47, 178, 150, 1);
-  background-image: url('../assets/products.png'); /* Remplacez par le chemin de votre icône de produit */
+  background-image: url('../assets/products.png');
 }
 .product-card h3 {
   color: white;
@@ -86,9 +80,9 @@
 }
 
 .sale-card {
-  background-color: rgba(15, 90, 95, 0.1); /* Bleu clair */
+  background-color: rgba(15, 90, 95, 0.1); 
   border: 3px solid rgba(15, 90, 95, 1);
-  background-image: url('../assets/online-shopping.png'); /* Remplacez par le chemin de votre icône de vente */
+  background-image: url('../assets/online-shopping.png'); 
 }
 .sale-card h3 {
   color: white;
@@ -102,15 +96,22 @@
 }
 
 .user-card {
-  background-color: rgba(59, 217, 169, 0.1); /* Vert clair */
-  border: 3px solid rgba(59, 217, 169, 1); /* Bordure de couleur #3BD9A9 */
-  background-image: url('path/to/user-icon.png'); /* Remplacez par le chemin de votre icône d'utilisateur */
+  background-color: rgba(59, 217, 169, 0.1); 
+  border: 3px solid rgba(59, 217, 169, 1); 
+  background-image: url('path/to/user-icon.png'); 
 }
 .user-card h3 {
   color: #3BD9A9;
 }
+.container {
+  background-image: url('@/assets/pos5.jpg'); /* Ensure correct path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh; /* Ensures the container takes up the full screen height */
+}
 
-/* Style des icônes */
 .icon {
   font-size: 2rem;
   margin-top: 10px;
