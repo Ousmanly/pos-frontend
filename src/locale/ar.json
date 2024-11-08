@@ -39,6 +39,7 @@
             "role": "الدور",
             "addButton": "إضافة",
             "cancelButton": "إلغاء",
+            "confirm": "تأكيد",
             "selectRole": "اختر دورًا",
             "userUpdated": "تم تحديث المستخدم بنجاح!",
             "unexpectedError": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى."

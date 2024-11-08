@@ -22,6 +22,7 @@ import AddInventory from '@/components/inventories/AddInventory.vue'
 import { usePosStore } from '@/stores/pos'
 import ForgotPassword from '@/components/ForgotPassword.vue'
 import ResetPassword from '@/components/ResetPassword.vue'
+import EditCurrentUser from '@/components/users/EditCurrent!user.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -125,28 +126,14 @@ const router = createRouter({
           name: 'addinventories',
           component: AddInventory
         },
+        {
+          path: '/edituser',
+          name: 'edituser',
+          component: EditCurrentUser
+        },
       ]
     },
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: HomeView
-    // },
-    // {
-    //   path: '/listsupplier',
-    //   name: 'listsupplier',
-    //   component: SupplierView
-    // },
-    // {
-    //   path: '/ajoutsupplier',
-    //   name: 'ajoutsupplier',
-    //   component: AjoutSupplier
-    // },
-    // {
-    //   path: '/dashboard',
-    //   name: 'dashboard',
-    //   component: Dashboard
-    // },
+    
     {
       path: '/',
       name: 'login',
@@ -155,9 +142,6 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     {

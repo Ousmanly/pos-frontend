@@ -43,7 +43,7 @@
         </select>
       </div>
       <button class="clr btn text-white mt-3 mb-4 me-3">
-        {{ $t("user.form.addButton") }}
+        {{ $t("user.form.confirm") }}
       </button>
       <RouterLink
         class="list text-decoration-none text-white me-5 fw-bold"

@@ -39,6 +39,7 @@
             "role": "Rôle",
             "addButton": "Ajouter",
             "cancelButton": "Annuler",
+            "confirm": "Confirmer",
             "selectRole": "Sélectionnez un rôle",
             "userUpdated": "L'utilisateur a été mis à jour avec succès!",
             "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer."

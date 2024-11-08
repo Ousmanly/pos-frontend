@@ -44,6 +44,7 @@
             "role": "Role",
             "addButton": "Add",
             "cancelButton": "Cancel",
+            "confirm": "Confirm",
             "selectRole": "Select a role",
             "userUpdated": "User has been updated successfully!",
             "unexpectedError": "An unexpected error occurred. Please try again."

@@ -1,9 +1,5 @@
 <template>
     <div class="container">
-      <!-- <div class="mb-4 d-flex justify-content-end">
-        <button @click="changeLanguage('en')" class="btn btn-info me-2">{{ $t('buttons.english') }}</button>
-        <button @click="changeLanguage('fr')" class="btn btn-info">{{ $t('buttons.french') }}</button>
-      </div> -->
       <form @submit.prevent="addReception" class="formulaire form shadow p-3 bg-body rounded">
       <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
@@ -20,32 +16,6 @@
           </select>
         </div>
       </div>
-
-      <!-- <div class="form-group d-flex gap-3">
-        <div class="mb-3 flex-fill">
-          <label for="product" class="form-label">Product Name:</label>
-          <select class="form-select" v-model="selectedProduct" id="product" required>
-            <option v-for="product in activeProducts" :key="product.id" :value="product.id">
-              {{ product.name }}
-            </option>
-          </select>
-        </div>
-        <div class="mb-3 flex-fill">
-          <label for="price" class="form-label">Price:</label>
-          <input type="number" min="0" class="form-control" v-model="price" id="price" required />
-        </div>
-      </div>
-      <div>
-        <label for="quantity" class="form-label">Quantity:</label>
-        <input type="number" min="0" class="form-control mb-4" v-model="quantity" id="quantity" required />
-        <div v-if="errors.quantity" class="text-danger">{{ errors.quantity }}</div>
-      </div>
-      <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-dark me-2">Add</button>
-        <RouterLink to="/listreception">
-          <button type="button" class="btn btn-danger">Cancel</button>
-        </RouterLink>
-      </div> -->
       <div v-for="(detail, index) in receptionDetails" :key="index" class="mb-3">
         <div class="form-group d-flex gap-3">
           <div class="mb-3 flex-fill">
@@ -107,11 +77,9 @@
     await store.loadDataFromProductApi();
   });
 
-// const suppliers = computed(() => store.suppliers);
 const activeSuppliers = computed(() => store.suppliers.filter(supplier => supplier.status));
 const activeProducts = computed(() => store.products.filter(product => product.status));
 
-// const products = computed(() => store.products);
 
 
   const recepted_at = ref("");
@@ -122,7 +90,6 @@ const activeProducts = computed(() => store.products.filter(product => product.s
   const errors = reactive({
     receptionDetails:""
     });
-      /////
     const receptionDetails = ref([{ id_product: "", price: null, quantity: 1 }]);
 
   const addProduct = () => {
@@ -132,19 +99,11 @@ const activeProducts = computed(() => store.products.filter(product => product.s
   const removeProduct = (index) => {
     receptionDetails.value.splice(index, 1);
   };
-  ///////
 const addReception = async () => {
   try {
     const newReception = {
       id_supplier: selectedSupplier.value,
       recepted_at: recepted_at.value,
-      // receptionDetails: [
-      //   {
-      //     id_product: selectedProduct.value,
-      //     price: price.value,
-      //     quantity: quantity.value
-      //   }
-      // ]
       receptionDetails:receptionDetails.value
     }
     await store.addReception(newReception);
@@ -155,11 +114,10 @@ const addReception = async () => {
   } catch (error) {
     if (error.response && error.response.data && error.response.data.errors) {
       error.response.data.errors.forEach(err => {
-        // Détecte les erreurs spécifiques par `path`
         if (err.path === "receptionDetails[0].quantity") {
-          errors.quantity = err.msg; // Affiche le message d'erreur pour le champ `quantity`
+          errors.quantity = err.msg; 
         } else {
-          errors.general = err.msg; // Capture les autres erreurs
+          errors.general = err.msg;
         }
       });
     } else {
@@ -184,7 +142,6 @@ const addReception = async () => {
     background-color: #24272a;
   }
   .formulaire {
-    /* width: 50%; */
     max-width: 700px;
     margin: auto;
     margin-top: 16vh;

@@ -93,7 +93,26 @@
               </ul>
               <div class="d-flex text-white me-5">
                 <h4 class="text-center d-flex align-items-center me-3">
-                  <i class="fas fa-user me-2 user-icon"></i>
+                  <div class="dropdown">
+                    <i
+                      class="fas fa-user me-2 user-icon dropdown-toggle"
+                      id="userDropdown"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      style="cursor: pointer"
+                    ></i>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                      <li>
+                        <a @click="goToProfile" class="dropdown-item" >Profile</a>
+                      </li>
+                      <li>
+                        <a @click="goToChangePassword" class="dropdown-item" >Password</a>
+                      </li>
+                      <li>
+                        <a @click="handleLogoClick" class="dropdown-item" >Logout</a>
+                      </li>
+                    </ul>
+                  </div>
                   <span>{{ store.userName || "Admin" }}</span>
                 </h4>
                 <select
@@ -134,22 +153,27 @@ const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
 }; 
 const handleLogoClick = async() => {
+  const confirmation = confirm("Are you sure want to logout");
+  if (confirmation) {
   await store.logout();
   proxy.$router.push('/');
+  }
 };
 
 onMounted(async () => {
   await store.initAuth();
   console.log("Nom d'utilisateur après initAuth:", store.userName);
 });
+
+const goToProfile = () => {
+  proxy.$router.push('/edituser');
+};
 </script>
   
   <style scoped>
 .navbar-bg {
   background-color: #242d32;
   box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.3);
-  /* border-bottom-left-radius: 9%; */
-  /* border-bottom-right-radius: 9%; */
 }
 .bg-sidbar {
   box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.3);
@@ -161,7 +185,7 @@ onMounted(async () => {
   font-size: 24px;
 }
 .navbar-toggler-icon {
-  background-color: white;  /* Donne une couleur blanche à l'icône */
+  background-color: white;  
 }
 .app-container {
   display: flex;
@@ -217,6 +241,14 @@ onMounted(async () => {
   outline: none;
   border-color: #26a49c;
   box-shadow: 0 0 5px #26a49c;
+}
+
+.user-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+.dropdown-item{
+  cursor: pointer;
 }
 </style>
   
