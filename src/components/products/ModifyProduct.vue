@@ -14,6 +14,16 @@
             required
           />
          </div>
+    <div class="mb-3">
+          <label for="update" class="form-label">Update at :</label>
+          <input
+            type="date"
+            class="form-control"
+            v-model="updated_at"
+            id="update"
+            required
+          />
+         </div>
         <div class="mb-3">
           <label for="sale" class="form-label">{{ $t("product.salePrice") }} :</label>
           <input
@@ -74,6 +84,7 @@ const store = usePosStore();
 const router = useRouter();
 const route = useRoute();
 
+const updated_at = ref("");
 const name = ref("");
 const sale_price = ref("");
 const purchase_price = ref("");
@@ -94,6 +105,7 @@ onMounted(() => {
   const product = store.products.find((product) => product.id === id);
   if (product) {
     name.value = product.name;
+    updated_at.value= product.updated_at
     sale_price.value = product.sale_price , 
     purchase_price.value = product.purchase_price,
     seuil.value = product.seuil,
@@ -109,6 +121,7 @@ const handleUpdateProduct = async() => {
     id,
     name: name.value,
     originalName: originalName.value,
+    updated_at: updated_at.value,
     sale_price: sale_price.value, 
     purchase_price: purchase_price.value,
     seuil: seuil.value,

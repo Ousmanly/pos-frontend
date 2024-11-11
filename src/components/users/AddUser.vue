@@ -74,7 +74,6 @@
   
   <script setup>
 import { useRouter } from "vue-router";
-
 const router = useRouter();
 import { ref, reactive } from "vue";
 import { usePosStore } from "@/stores/pos";
@@ -114,7 +113,7 @@ const addUser = async () => {
         errors[err.path] = err.msg;
       });
     } else {
-      toast.error(('user.messages.error'));
+      toast.error(t('user.messages.error'));
     }
   }
 };

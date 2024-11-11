@@ -29,23 +29,108 @@
           </div>
         </div>
       </div>
+      
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+          <canvas id="totalsChart"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { usePosStore } from '@/stores/pos';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { Chart,registerables} from 'chart.js';
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+Chart.register(...registerables);
 const store = usePosStore();
 
 const totalProduct = computed(() => store.products.length);
 const totalSale = computed(() => store.sales.length);
 const totalUsers = computed(() => store.users.length);
 
+const chartRef = ref(null);
+let chartInstance = null;
+const productMonthlyData = ref(Array(12).fill(0));
+const saleMonthlyData = ref(Array(12).fill(0)); 
+const userMonthlyData = ref(Array(12).fill(0)); 
+const createChart = () => {
+  const ctx = document.getElementById('totalsChart').getContext('2d');
+  chartInstance  = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        t('months.Jan'),
+        t('months.Feb'),
+        t('months.Mar'),
+        t('months.Apr'),
+        t('months.May'),
+        t('months.Jun'),
+        t('months.Jul'),
+        t('months.Aug'),
+        t('months.Sep'),
+        t('months.Oct'),
+        t('months.Nov'),
+        t('months.Dec'),
+      ],
+      datasets: [
+        {
+          label: t('home.product'),
+          data: productMonthlyData.value, 
+          borderColor: "rgba(47, 178, 150, 1)",
+          backgroundColor: "rgba(0, 123, 255, 0.1)",
+          fill: true,
+        },
+        {
+          label: t('home.sale'),
+          data: saleMonthlyData.value, 
+          borderColor: "rgba(15, 90, 95, 1)",
+          backgroundColor: "rgba(40, 167, 69, 0.1)",
+          fill: true,
+        },
+        {
+          label: t('home.users'),
+          data: userMonthlyData.value, 
+          borderColor: "rgba(15, 90, 95, 1);",
+          backgroundColor: "rgba(40, 167, 69, 0.1)",
+          fill: true,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+};
+
+
+function updateMonthlyData() {
+  const currentMonth = new Date().getMonth(); 
+
+  productMonthlyData.value[currentMonth] = totalProduct.value;
+  saleMonthlyData.value[currentMonth] = totalSale.value;
+  userMonthlyData.value[currentMonth] = totalUsers.value;
+
+  if (chartInstance) {
+    chartInstance.update();
+  }
+}
 onMounted(() => {
   store.loadDataFromProductApi();
   store.loadDataFromSaleApi();
   store.loadDataFromUserApi();
+
+  createChart();
+  updateMonthlyData();
 });
 </script>
 

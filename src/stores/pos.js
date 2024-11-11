@@ -263,6 +263,7 @@ export const usePosStore = defineStore("pos", {
         throw error;
       }
     },
+
     
 
     async updateProduct(updateProduct) {

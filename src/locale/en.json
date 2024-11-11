@@ -51,7 +51,7 @@
         },
         "messages": {
             "userAdded": "User has been added successfully!",
-            "error": "An unexpected error occurred. Please try again."
+            "error": "An unexpected error occurred. Please check you're role."
         }
     },
     "supplier": {
@@ -74,7 +74,7 @@
             "add": "Add",
             "cancel": "Cancel",
             "successMessage": "Supplier has been added successfully",
-            "unexpectedError": "An unexpected error occurred. Please try again.",
+            "unexpectedError": "An unexpected error occurred. Please check you're role.",
             "confirm": "Confirm",
             "supplierUpdated": "The supplier has been updated successfully!"
         }
@@ -120,7 +120,7 @@
         },
         "messages": {
             "success": "Sale has been added successfully",
-            "error": "An unexpected error occurred. Please try again."
+            "error": "An unexpected error occurred. Please check you're role."
         }
     },
     "reception": {
@@ -160,7 +160,7 @@
         "productDeleted": "Product has been deleted",
         "add": "Add",
         "productAdded": "Product has been added successfully!",
-        "addError": "An error occurred while adding the product.",
+        "addError": "An unexpected error occurred. Please check you're role.",
         "updateProduct": "Update Product",
         "confirm": "Confirm",
         "cancel": "Cancel",
@@ -200,7 +200,27 @@
             "add_button": "Add",
             "cancel_button": "Cancel",
             "success_message": "Inventory has been added",
-            "error_message": "An unexpected error occurred. Please try again."
+            "error_message": "An unexpected error occurred. Please check you're role."
         }
+    },
+    "home":{
+        "sale":"Sales",
+        "product":"Product in stock",
+        "users":"Users"
+    },
+    "months": {
+      "Jan": "Jan",
+      "Feb": "Feb",
+      "Mar": "Mar",
+      "Apr": "Apr",
+      "May": "May",
+      "Jun": "Jun",
+      "Jul": "Jul",
+      "Aug": "Aug",
+      "Sep": "Sep",
+      "Oct": "Oct",
+      "Nov": "Nov",
+      "Dec": "Dec"
     }
+
 }

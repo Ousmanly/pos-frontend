@@ -46,7 +46,7 @@
         },
         "messages": {
             "userAdded": "L'utilisateur a été ajouté avec succès!",
-            "error": "Une erreur inattendue s'est produite. Veuillez réessayer."
+            "error": "Une erreur inattendue s'est produite. Veuillez vérifier votre role."
         }
     },
     "supplier": {
@@ -115,7 +115,7 @@
         },
         "messages": {
             "success": "La vente a été ajoutée avec succès",
-            "error": "Une erreur inattendue est survenue. Veuillez réessayer."
+            "error": "Une erreur inattendue s'est produite. Veuillez vérifier votre role."
         }
     },
     "reception": {
@@ -155,7 +155,7 @@
         "productDeleted": "Le produit a été supprimé",
         "add": "Ajouter",
         "productAdded": "Produit ajouté avec succès !",
-        "addError": "Une erreur s'est produite lors de l'ajout du produit.",
+        "addError": "Une erreur inattendue s'est produite. Veuillez vérifier votre role.",
         "updateProduct": "Mettre à jour le produit",
         "confirm": "Confirmer",
         "cancel": "Annuler",
@@ -195,7 +195,26 @@
             "add_button": "Ajouter",
             "cancel_button": "Annuler",
             "success_message": "L'inventaire a été ajouté",
-            "error_message": "Une erreur inattendue est survenue. Veuillez réessayer."
+            "error_message": "Une erreur inattendue s'est produite. Veuillez vérifier votre role."
         }
+    },
+    "home":{
+        "sale":"Ventes",
+        "product":"Produits en stock",
+        "users":"Utilisateurs"
+    },
+    "months": {
+      "Jan": "Janv",
+      "Feb": "Fév",
+      "Mar": "Mars",
+      "Apr": "Avr",
+      "May": "Mai",
+      "Jun": "Juin",
+      "Jul": "Juil",
+      "Aug": "Août",
+      "Sep": "Sept",
+      "Oct": "Oct",
+      "Nov": "Nov",
+      "Dec": "Déc"
     }
 }

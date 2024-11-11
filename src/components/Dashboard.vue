@@ -87,9 +87,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item ms-5 text-white decon" @click="handleLogoClick">
-                  {{ $t("logout") }}
-                </li>
               </ul>
               <div class="d-flex text-white me-5">
                 <h4 class="text-center d-flex align-items-center me-3">
@@ -103,13 +100,15 @@
                     ></i>
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
                       <li>
-                        <a @click="goToProfile" class="dropdown-item" >Profile</a>
+                        <a @click="goToProfile" class="dropdown-item" ><i class="fas fa-user-edit me-2"></i>
+                          Profile</a>
                       </li>
                       <li>
-                        <a @click="goToChangePassword" class="dropdown-item" >Password</a>
+                        <a @click="goToChangePassword" class="dropdown-item" ><i class="fas fa-key me-2"></i>Password</a>
                       </li>
                       <li>
-                        <a @click="handleLogoClick" class="dropdown-item" >Logout</a>
+                        <a @click="handleLogoClick" class="dropdown-item" ><i class="fas fa-sign-out-alt me-2"></i>
+                          Logout</a>
                       </li>
                     </ul>
                   </div>
@@ -167,6 +166,9 @@ onMounted(async () => {
 
 const goToProfile = () => {
   proxy.$router.push('/edituser');
+};
+const goToChangePassword = () => {
+  proxy.$router.push('/change-password');
 };
 </script>
   
@@ -249,6 +251,15 @@ const goToProfile = () => {
 }
 .dropdown-item{
   cursor: pointer;
+}
+.dropdown-menu{
+  top:40px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #f8f9fa;
+}
+.dropdown-menu:hover li{
+  background-color: #ffffff;
 }
 </style>
   

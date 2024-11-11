@@ -23,6 +23,7 @@ import { usePosStore } from '@/stores/pos'
 import ForgotPassword from '@/components/ForgotPassword.vue'
 import ResetPassword from '@/components/ResetPassword.vue'
 import EditCurrentUser from '@/components/users/EditCurrent!user.vue'
+import ChangePasswordVue from '@/components/ChangePassword.vue.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -153,6 +154,11 @@ const router = createRouter({
       path: '/reset-password',
       name: 'ResetPassword',
       component:ResetPassword
+    },
+    {
+      path: '/change-password',
+      name: 'change-password',
+      component:ChangePasswordVue
     },
     
   ]
