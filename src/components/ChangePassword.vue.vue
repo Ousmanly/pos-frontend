@@ -1,6 +1,6 @@
 <template>
   <div class="reset-password">
-    <form @submit.prevent="handleResetPassword">
+    <!-- <form @submit.prevent="handleResetPassword">
       <input
         type="password"
         v-model="oldPassword"
@@ -13,9 +13,50 @@
         placeholder="Nouveau mot de passe"
         required
       />
-      <button type="submit">Confirmer</button>
+      <button type="submit">{{ $t("user.form.confirm") }}</button>
+      <RouterLink
+        class="list text-decoration-none text-white me-5 fw-bold"
+        to="/home"
+      >
+        <button class="btn btn-danger mt-3 mb-4">
+          {{ $t("user.form.cancelButton") }}
+        </button>
+      </RouterLink>
     </form>
-    <p v-if="message" class="message">{{ message }}</p>
+    <p v-if="message" class="message">{{ message }}</p> -->
+
+    <form
+      @submit.prevent="handleResetPassword"
+      class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"
+    >
+      <div class="mb-3">
+        <input
+        type="password"
+        v-model="oldPassword"
+        placeholder="Mot de passe actuel"
+        required
+      />
+      </div>
+      <div class="mb-3">
+        <input
+        type="password"
+        v-model="newPassword"
+        placeholder="Nouveau mot de passe"
+        required
+      />
+      </div>
+      <button class="clr btn text-white mt-3 mb-4 me-3">
+        {{ $t("user.form.confirm") }}
+      </button>
+      <RouterLink
+        class="list text-decoration-none text-white me-5 fw-bold"
+        to="/home"
+      >
+        <button class="btn btn-danger mt-3 mb-4">
+          {{ $t("user.form.cancelButton") }}
+        </button>
+      </RouterLink>
+    </form>
   </div>
 </template>
 
@@ -23,7 +64,6 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { useToast } from "vue-toastification";
-
 const newPassword = ref('');
 const oldPassword = ref('');
 const message = ref('');
@@ -54,58 +94,27 @@ async function handleResetPassword() {
 
 
 <style scoped>
-  .reset-password {
-color: #fff; 
-padding: 2rem;
-border-radius: 10px;
-width: 100%;
-max-width: 400px;
-margin: 70px auto;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+.clr {
+  background-color: #343a40;
 }
-
-
-form {
-display: flex;
-flex-direction: column;
+.clr:hover {
+  background-color: #24272a;
 }
-
-input[type="password"] {
-padding: 10px;
-margin-bottom: 1rem;
-border: 2px solid #26a49c;
-border-radius: 5px;
-font-size: 1rem;
-color: #242d32;
-background-color: #fff;
-outline: none;
+input{
+  width: 100%;
+  margin: auto;
 }
-
-input[type="password"]::placeholder {
-color: #aaa;
+.formulaire {
+  width: 40%;
+  border-radius: 10px;
+  padding: 20px;
+  margin: auto;
+  margin-top: 16vh;
 }
-
-input[type="password"]:focus {
-border-color: #26a49c;
-box-shadow: 0 0 5px rgba(38, 164, 156, 0.5);
+textarea {
+  resize: none;
 }
-
-button {
-background-color: #26a49c;
-color: #fff;
-padding: 10px;
-border: none;
-font-weight: bold;
-border-radius: 5px;
-font-size: 1rem;
-cursor: pointer;
-transition: background-color 0.3s ease;
-}
-
-button:hover {
-background-color: #1e8e85;
-}
-
 .message {
 margin-top: 1rem;
 text-align: center;
