@@ -22,6 +22,7 @@
             class="form-control"
             v-model="phone"
             id="phone"
+            @input="validatePhone"
             required
           />
         </div>
@@ -68,8 +69,20 @@ onMounted(async() => {
     originalName.value = supplier.name;
   }
 });
-
+const validatePhone = () => {
+  const phoneRegex = /^[0-9\s]*$/; 
+  if (!phoneRegex.test(phone.value)) {
+    errors.phone = "Phone must be a number ";
+  } else {
+    errors.phone = "";
+  }
+};
 const handleUpdateSupplier = async() => {
+  validatePhone();
+  
+  if (errors.phone) {
+    return; 
+  }
   try{
     
   const updatedSupplier = {
@@ -111,5 +124,8 @@ const handleUpdateSupplier = async() => {
 }
 textarea {
   resize: none;
+}
+.text-danger {
+  color: red;
 }
 </style>

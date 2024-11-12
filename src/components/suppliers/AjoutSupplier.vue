@@ -22,6 +22,7 @@
           class="form-control"
           v-model="phone"
           id="phone"
+          @input="validatePhone"
           required
         />
         <div v-if="errors.phone" class="text-danger">{{ errors.phone }}</div>
@@ -56,7 +57,20 @@ const errors = reactive({
   name: "",
   phone: "",
 });
+const validatePhone = () => {
+  const phoneRegex = /^[0-9\s]*$/; 
+  if (!phoneRegex.test(phone.value)) {
+    errors.phone = "Phone must be a number ";
+  } else {
+    errors.phone = "";
+  }
+};
 const addSupplier = async () => {
+  validatePhone();
+  
+  if (errors.phone) {
+    return; 
+  }
   try {
     const newSupplier = {
       name: name.value, 
