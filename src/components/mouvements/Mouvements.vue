@@ -5,6 +5,7 @@
       <div class="card shadow mb-4 clr">
     <div class="card-header py-3">
         <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("mouvement.title") }}</h2>
+        <Loader v-if="isLoading"/>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -39,11 +40,20 @@
   <script setup>
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
+import Loader from "../Loader.vue";
 
 const store = usePosStore();
-
+const isLoading = ref(true)
 onMounted(async () => {
-  await store.loadDataFromMouvementApi();
+  try {
+    isLoading.value= true
+    await store.loadDataFromMouvementApi();
+    await new Promise((resolve)=> setTimeout(resolve, 1000))
+  } catch (error) {
+    console.log(error)
+  }finally{
+    isLoading.value = false
+  }
 });
 </script>
      

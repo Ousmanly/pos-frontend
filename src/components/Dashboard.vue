@@ -25,25 +25,25 @@
             <span v-if="!isCollapsed">{{ $t("sidebar.dashboard") }} </span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="trying == 'ADMIN'">
           <router-link to="/listuser" class="nav-link text-black">
             <i class="fas fa-users me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.users") }}</span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="trying == 'ADMIN'">
           <router-link to="/listsupplier" class="nav-link text-black">
             <i class="fas fa-truck me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.suppliers") }}</span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="trying == 'ADMIN'">
           <router-link to="/listproduct" class="nav-link text-black">
             <i class="fas fa-box me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.products") }}</span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="trying == 'ADMIN'">
           <router-link to="/listreception" class="nav-link text-black">
             <i class="fas fa-archive me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.receptions") }}</span>
@@ -55,13 +55,13 @@
             <span v-if="!isCollapsed">{{ $t("sidebar.sales") }}</span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="trying == 'ADMIN'">
           <router-link to="/mouvements" class="nav-link text-black">
             <i class="fas fa-exchange-alt me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.movements") }}</span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="trying == 'ADMIN'">
           <router-link to="/listinventories" class="nav-link text-black">
             <i class="fas fa-th-list me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.inventories") }}</span>
@@ -112,7 +112,7 @@
                       </li>
                     </ul>
                   </div>
-                  <span>{{ store.userName || "Admin" }}</span>
+                  <span>{{ store.userName || "" }}</span>
                 </h4>
                 <select
                   name="lang"
@@ -141,12 +141,13 @@ import { onMounted, ref } from "vue";
 import { getCurrentInstance } from "vue";
 
 const { proxy } = getCurrentInstance();
-
+// const affiche = ref(false)
 const changeLanguage = (locale) => {
   proxy.$i18n.locale = locale;
 };
 const store = usePosStore();
 const isCollapsed = ref(false);
+const trying = store.role
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;

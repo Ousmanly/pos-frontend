@@ -2,7 +2,7 @@
   <div class="container">
     <div class="container mt-home">
       <div class="row justify-content-center">
-        <div class="col-md-3 me-3">
+        <div class="col-md-3 me-3" v-if="trying == 'ADMIN'">
           <div class="card text-dark mb-3 text-center shadow product-card">
             <div class="card-body">
               <h3 class="card-title">{{ totalProduct }}</h3>
@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3" v-if="trying == 'ADMIN'">
           <div class="card text-dark mb-3 text-center shadow user-card">
             <div class="card-body">
               <h3 class="card-title">{{ totalUsers }}</h3>
@@ -48,7 +48,7 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 Chart.register(...registerables);
 const store = usePosStore();
-
+const trying = store.role
 const totalProduct = computed(() => store.products.length);
 const totalSale = computed(() => store.sales.length);
 const totalUsers = computed(() => store.users.length);
@@ -146,7 +146,6 @@ onMounted(() => {
   background-repeat: no-repeat;
   background-size: 80px 80px;
   background-blend-mode: multiply;
-  /* height: 200px; */
 }
 
 .card:hover {
@@ -169,7 +168,6 @@ onMounted(() => {
 }
 .product-card h3 {
   color: black;
-  /* margin-top: 30px; */
 }
 .product-card p {
   color: black;
@@ -185,7 +183,6 @@ onMounted(() => {
 }
 .sale-card h3 {
   color: black;
-  /* margin-top: 30px; */
 }
 .sale-card p {
   color: black;
@@ -202,7 +199,6 @@ onMounted(() => {
 }
 .user-card h3 {
   color: black;
-  /* margin-top: 30px; */
 }
 .user-card p {
   color: black;
@@ -210,14 +206,6 @@ onMounted(() => {
   margin-top:45px;
   font-size: 25px;
 }
-/* .container {
-  background-image: url('@/assets/pos5.jpg'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
-} */
 
 .icon {
   font-size: 2rem;

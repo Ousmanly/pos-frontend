@@ -5,15 +5,6 @@
         class="list text-decoration-none text-white fw-bold"
         to="/ajoutsupplier"
       >
-      <!-- title
-addButton
-supplierDetails
-name
-phone
-user
-status
-actions
-confirmDelete -->
         <button
           class="clr btn text-white mb-4 fw-bold"
           v-if="affichebtn"
@@ -24,9 +15,20 @@ confirmDelete -->
       </RouterLink>
     
       <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("supplier.page.title") }}</h2>
-    </div>
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+          <h2 class="m-0 font-weight-bold text-success-t bold">
+            {{ $t("supplier.page.title") }}
+          </h2>
+          <Loader v-if="isLoading"/>
+          <form class="d-flex ms-auto">
+              <input
+                type="text"
+                class="form-control me-2"
+                v-model="store.searchQuery"
+                :placeholder="$t('supplier.search')"
+              />
+            </form>
+        </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -41,7 +43,7 @@ confirmDelete -->
                     </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="supplier in store.suppliers" :key="supplier.id">
+                  <tr v-for="supplier in store.getFilteredSuppliers()" :key="supplier.id">
                     <td>{{ supplier.id }}</td>
                     <td>{{ supplier.name }}</td>
                     <td>{{ supplier.phone }}</td>
@@ -113,6 +115,8 @@ import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { useToast } from 'vue-toastification';
 import { useI18n } from "vue-i18n";
+import Loader from "../Loader.vue";
+const isLoading = ref(true)
 
 const { t } = useI18n();
 const toast = useToast()
@@ -120,9 +124,6 @@ const store = usePosStore();
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
 
-//   const changeLanguage = (locale) => {
-//     proxy.$i18n.locale = locale;
-//   };
 
 let affichebtn = true;
 const maskBtn = () => {
@@ -140,7 +141,15 @@ const closeModal = () => {
 };
 
 onMounted(async () => {
-  await store.loadDataFromSuplierApi();
+  try {
+    isLoading.value= true
+    await store.loadDataFromSuplierApi();
+    // await new Promise((resolve)=> setTimeout(resolve, 1000))
+  } catch (error) {
+    console.log(error);
+  }finally{
+    isLoading.value= false
+  }
 });
   const destroySupplier = (id) => {
     const confirmation = confirm(t("supplier.page.confirmDelete"));

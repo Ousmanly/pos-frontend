@@ -15,10 +15,19 @@
       </RouterLink>
 
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
           <h2 class="m-0 font-weight-bold text-success-t bold">
             {{ $t("user.users") }}
           </h2>
+          <Loader v-if="isLoading"/>
+          <form class="d-flex ms-auto">
+              <input
+                type="text"
+                class="form-control me-2"
+                v-model="store.searchQuery"
+                :placeholder="$t('user.search')"
+              />
+            </form>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -39,7 +48,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="user in store.users" :key="user.id">
+                <tr v-for="user in store.getFilteredUsers()" :key="user.id">
                   <td>{{ user.id }}</td>
                   <td>{{ user.name }}</td>
                   <td>{{ user.role }}</td>
@@ -109,6 +118,8 @@ import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useI18n } from "vue-i18n";
+import Loader from "../Loader.vue";
+const isLoading = ref(true)
 
 const { t } = useI18n();
 const toast = useToast();
@@ -130,7 +141,15 @@ const closeModal = () => {
 };
 
 onMounted(async () => {
-  await store.loadDataFromUserApi();
+  try {
+    isLoading.value= true
+    await store.loadDataFromUserApi();
+    // await new Promise((resolve)=> setTimeout(resolve, 1000))  
+  } catch (error) {
+    console.log(error);
+  }finally{
+    isLoading.value= false
+  }
 });
 const destroyUser = (id) => {
   const confirmation = confirm(t("user.confirm_delete"));

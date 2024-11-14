@@ -15,10 +15,19 @@
       </RouterLink>
 
       <div class="card shadow mb-4 d-flex justify-content-between ">
-        <div class="card-header py-3">
+        <Loader v-if="isLoading"/>
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
           <h2 class="m-0 font-weight-bold text-success-t bold">
             {{ $t("sale.title") }}
           </h2>
+          <form class="d-flex ms-auto">
+              <input
+                type="text"
+                class="form-control me-2"
+                v-model="store.searchQuery"
+                :placeholder="$t('sale.search')"
+              />
+            </form>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -41,7 +50,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="sale in store.sales" :key="sale.id">
+                <!-- <tr v-for="sale in store.sales" :key="sale.id"> -->
+                <tr v-for="sale in store.getFilteredSales()" :key="sale.id">
                   <td>{{ sale.id }}</td>
                   <td>{{ new Date(sale.created_at).toLocaleDateString() }}</td>
                   <td>{{ new Date(sale.sale_at).toLocaleDateString() }}</td>
@@ -72,73 +82,6 @@
       </div>
     </div>
 
-    <!-- <div class="sale-card">
-      <RouterLink
-        class="list text-decoration-none text-white fw-bold"
-        to="/addsale"
-      >
-        <button
-          class="clr btn text-white mb-4 fw-bold"
-          v-if="affichebtn"
-          @click="maskBtn"
-        >
-          {{ $t("sale.title") }}
-        </button>
-      </RouterLink>
-      <div  v-for="sale in store.sales" :key="sale.id">
-        <div class="card sale-card-content">
-                <div class="card-body">
-                  <p><strong>{{ $t("sale.columns.id") }}: </strong>{{ sale.id }}</p>
-                  <p><strong>{{ $t("sale.columns.creationDate") }}: </strong>{{ new Date(sale.created_at).toLocaleDateString() }}</p>
-                  <p><strong>{{ $t("sale.columns.saleDate") }}: </strong>{{ new Date(sale.sale_at).toLocaleDateString() }}</p>
-                  <p><strong>{{ $t("sale.columns.customerName") }}: </strong>{{ sale.name }}</p>
-                  <p><strong>{{ $t("sale.columns.customerEmail") }}: </strong>{{ sale.email }}</p>
-                  <p><strong>{{ $t("sale.columns.customerPhone") }}: </strong>{{ sale.phone }}</p>
-                  <p><strong>{{ $t("sale.columns.createdBy") }}: </strong>{{ sale.user_name }}</p>
-                  <div class="card-actions">
-                    <button class="btn btn-sm" @click="openModal(sale)">
-                      <i class="fa-solid fa-eye" style="color: #26a49c; font-size: 19px"></i>
-                    </button>
-                    <button class="btn btn-sm" @click="destroySale(sale.id)">
-                      <i class="fa-solid fa-trash" style="color: #e30d0d; font-size: 19px"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div> -->
-              
-
-    <!-- <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
-      <div class="modal-content" @click.stop>
-        <div class="modal-header">
-          <h5 class="font-wb-md mt-3">{{ $t("sale.modal.title") }}</h5>
-        </div>
-        <div class="modal-body">
-          <div v-for="detail in selectedSale.sale_details" :key="detail">
-            <p>
-              <strong>{{ $t("sale.modal.product") }}: </strong>
-              {{ detail.product_name }}
-            </p>
-            <p>
-              <strong>{{ $t("sale.modal.price") }}: </strong> {{ detail.price }}
-            </p>
-            <p>
-              <strong>{{ $t("sale.modal.quantity") }}: </strong>
-              {{ detail.sale_quantity }}
-            </p>
-            <p>
-              <strong>{{ $t("sale.modal.amount") }}: </strong>
-              {{ detail.amount }}
-            </p>
-          </div>
-        </div>
-        <button class="btn btn-danger text-white font-wb" @click="closeModal">
-          {{ $t("sale.modal.closeButton") }}
-        </button>
-      </div>
-    </div> -->
-     <!-- Modal for Sale details (Invoice style) -->
      <div v-if="isModalVisible" class="modal-overlay d-flex" @click="closeModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
@@ -184,11 +127,11 @@
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
-
+import Loader from "../Loader.vue";
 const { t } = useI18n();
 const store = usePosStore()
 const closeEmail = ref(true);
-
+const isLoading = ref(true)
 const checkScreenWidth = () => {
   closeEmail.value = window.innerWidth >= 995;
 };
@@ -212,8 +155,16 @@ const calculateTotalAmount = (details) => {
   }, 0);
 };
 onMounted(async () => {
-  await store.loadDataFromSaleApi();
-  window.addEventListener('resize', checkScreenWidth);
+  try {
+    isLoading.value= true
+    await store.loadDataFromSaleApi();
+    window.addEventListener('resize', checkScreenWidth);
+    await new Promise((resolve)=> setTimeout(resolve, 1000))
+  } catch (error) {
+    console.log(error);
+  }finally{
+    isLoading.value= false
+  }
 });
 onBeforeUnmount(() => {
   window.removeEventListener('resize', checkScreenWidth);
@@ -278,21 +229,6 @@ const destroySale = (id) => {
 }
 
 
-/* .sale-card {
-  display: none;
-} */
-
-/* .sale-card-content {
-  margin: auto;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 8px;
-  width: fit-content;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-} */
-
-/* Responsive Styles for screens smaller than 700px */
 @media (max-width: 995px) {
   th, td{
     font-size: 13px;

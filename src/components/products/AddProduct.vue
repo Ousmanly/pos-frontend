@@ -1,17 +1,5 @@
 <template>
   <div class="container">
-    addProduct
-stock
-salePrice
-purchasePrice
-seuil
-createdAt
-updatedAt
-barcode
-createdBy
-close
-deleteConfirmation
-productDeleted
     <form
       @submit.prevent="addProduct"
       class="formulaire form shadow p-3 bg-body rounded"

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="page-background container bg-color">
-      <RouterLink
+      <div class="card-header py-3 align-items-center">
+        <RouterLink
         class="list text-decoration-none text-white fw-bold"
         to="/addproduct"
       >
@@ -13,9 +14,19 @@
         {{ $t("product.addProduct") }}
         </button>
       </RouterLink>
+          <form class="d-flex ms-auto">
+              <input
+                type="text"
+                class="form-control me-2"
+                v-model="store.searchQuery"
+                :placeholder="$t('product.search')"
+              />
+            </form>
+        </div>
+        <Loader v-if="isLoading"/>
   <div class="card-body">
     <div class="user-list">
-      <div v-for="product in store.products" :key="product.id" class="user-card mb-3 p-3 border rounded shadow-sm">
+      <div v-for="product in store.getFilteredProduct()" :key="product.id" class="user-card mb-3 p-3 border rounded shadow-sm">
         <div class="d-flex justify-content-between">
           <div>
             <h5 class="font-bold-prod">{{ product.name }}</h5>
@@ -100,16 +111,14 @@ import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useI18n } from "vue-i18n";
+import Loader from "../Loader.vue";
+const isLoading = ref(true)
 
 const { t } = useI18n();
 const toast = useToast();
 const store = usePosStore();
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
-
-//   const changeLanguage = (locale) => {
-//     proxy.$i18n.locale = locale;
-//   };
 
 let affichebtn = true;
 const maskBtn = () => {
@@ -127,7 +136,15 @@ const closeModal = () => {
 };
 
 onMounted(async () => {
-  await store.loadDataFromProductApi();
+  try {
+    isLoading.value= true
+    await store.loadDataFromProductApi();
+    // await new Promise((resolve)=> setTimeout(resolve, 1000))
+  } catch (error) {
+    console.log(error);
+  }finally{
+    isLoading.value= false
+  }
 });
 const destroyProduct = (id) => {
   const confirmation = confirm(t("product.deleteConfirmation"));
@@ -139,43 +156,19 @@ const destroyProduct = (id) => {
 const toggleStatus = async (product) => {
   try {
     product.status = !product.status;
-    await store.updateProductStatus(product.id, product.status); // Met à jour dans la base de données
-    // toast.success(`Status updated to ${user.status ? "Active" : "Inactive"}`);
+    await store.updateProductStatus(product.id, product.status);
   } catch (error) {
     // toast.error("Failed to update status");
     console.error(error);
   }
 };
-// const destroySupplier = (id) => {
-//     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer?");
-//     if (confirmation ) {
-//       toast.success("Suppression reussi")
-//       store.deleteSupplier(id);
-//     }
-//   };
 </script>
      
   <style scoped>
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  padding-top: 5px;
-  border-radius: 8px;
-  max-width: 300px;
-  position: relative;
-} */
+.d-flex input{
+  width: fit-content;
+}
 .font-bold-prod{
   font-weight: bold;
 }
@@ -197,13 +190,11 @@ const toggleStatus = async (product) => {
 }
 
 .font-weight-bold-p {
-  /* background-color: #007bff; */
-  /* color: white; */
   font-weight: bold;
 }
 
 .table {
-  margin-bottom: 0; /* Enlève le margin pour un look compact */
+  margin-bottom: 0; 
 }
 
 .table th, .table td {
@@ -255,12 +246,11 @@ const toggleStatus = async (product) => {
 .user-list {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: center; */
   gap: 1rem;
 }
 
 .user-card {
-  width: 300px; /* Limite la largeur de chaque carte */
+  width: 300px;
   max-width: 100%;
   background-color: #ffffff;
 }

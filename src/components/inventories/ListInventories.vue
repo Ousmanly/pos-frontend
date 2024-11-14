@@ -18,6 +18,7 @@
       <div class="card-header py-3">
           <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("inventory.title") }}</h2>
       </div>
+      <Loader v-if="isLoading"/>
       <div class="card-body">
           <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -92,6 +93,8 @@
     <script setup>
   import { usePosStore } from "@/stores/pos";
   import { onMounted, ref } from "vue";
+  import Loader from "../Loader.vue";
+  const isLoading = ref(true)
   const store = usePosStore();
   
   let affichebtn = true;
@@ -110,7 +113,15 @@
   };
   
   onMounted(async () => {
-    await store.loadDataFromInventoryApi();
+    try {
+      isLoading.value= true
+      await store.loadDataFromInventoryApi();
+      // await new Promise((resolve)=> setTimeout(resolve, 1000))
+    } catch (error) {
+      console.log(error);
+    }finally{
+      isLoading.value= false
+    }
   });
   </script>
        

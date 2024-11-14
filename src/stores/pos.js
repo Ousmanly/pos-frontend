@@ -21,11 +21,38 @@ export const usePosStore = defineStore("pos", {
     nextIdInvt: 1,
     isAuthenticated: false,
     userName: "",
+    role: "",
     user: {},
+    searchQuery: "",
   }),
 
   actions: {
-
+    
+    getFilteredSales() {
+      return this.sales.filter(sale =>
+        sale.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+    getFilteredReceptions() {
+      return this.receptions.filter(reception =>
+        reception.recepted_at.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+    getFilteredUsers() {
+      return this.users.filter(user =>
+        user.email.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+    getFilteredSuppliers() {
+      return this.suppliers.filter(supplier =>
+        supplier.phone.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+    getFilteredProduct() {
+      return this.products.filter(product =>
+        product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
     async login(email, password) {
       try {
         const response = await axios.post("http://localhost:3005/api/login", { email, pass_word: password });
@@ -33,6 +60,7 @@ export const usePosStore = defineStore("pos", {
         localStorage.setItem("token", token); 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; 
         await this.fetchUserName();
+        await this.fetchRole();
         return true;
       } catch (error) {
         console.error("Erreur de connexion :", error);
@@ -45,6 +73,7 @@ export const usePosStore = defineStore("pos", {
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         await this.fetchUserName();
+        await this.fetchRole();
         this.isAuthenticated = true
       } else {
         console.warn("Aucun token trouvé dans le localStorage");
@@ -58,6 +87,15 @@ export const usePosStore = defineStore("pos", {
         this.user = resp.data.user;
       } catch (error) {
         console.error("Erreur lors de la récupération du nom d'utilisateur connecté :", error.response ? error.response.data : error);
+      }
+    },
+    async fetchRole() {
+      try {
+        const resp = await axios.get("http://localhost:3005/api/user");
+        this.role = resp.data.user.role;
+        this.user = resp.data.user;
+      } catch (error) {
+        console.error("Erreur lors de la récupération du role d'utilisateur connecté :", error.response ? error.response.data : error);
       }
     },
     
@@ -263,9 +301,6 @@ export const usePosStore = defineStore("pos", {
         throw error;
       }
     },
-
-    
-
     async updateProduct(updateProduct) {
       try {
         const index = this.products.findIndex((product) => product.id === updateProduct.id);
@@ -282,6 +317,4 @@ export const usePosStore = defineStore("pos", {
       }
     },
   },
-  
-  
 });

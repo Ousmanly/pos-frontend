@@ -75,7 +75,6 @@ const errors = reactive({
   email: "",
 });
 
-// import { getCurrentInstance } from 'vue';
 import { usePosStore } from "@/stores/pos";
 import { useToast } from "vue-toastification";
 import { useI18n } from "vue-i18n";

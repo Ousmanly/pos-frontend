@@ -1,30 +1,5 @@
 <template>
   <div class="reset-password">
-    <!-- <form @submit.prevent="handleResetPassword">
-      <input
-        type="password"
-        v-model="oldPassword"
-        placeholder="Ancien mot de passe"
-        required
-      />
-      <input
-        type="password"
-        v-model="newPassword"
-        placeholder="Nouveau mot de passe"
-        required
-      />
-      <button type="submit">{{ $t("user.form.confirm") }}</button>
-      <RouterLink
-        class="list text-decoration-none text-white me-5 fw-bold"
-        to="/home"
-      >
-        <button class="btn btn-danger mt-3 mb-4">
-          {{ $t("user.form.cancelButton") }}
-        </button>
-      </RouterLink>
-    </form>
-    <p v-if="message" class="message">{{ message }}</p> -->
-
     <form
       @submit.prevent="handleResetPassword"
       class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"

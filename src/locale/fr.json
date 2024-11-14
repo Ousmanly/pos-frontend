@@ -18,6 +18,7 @@
         "user": "Utilisateur"
     },
     "user": {
+        "search":"Chercher par email",
         "add_user": "Ajouter un utilisateur",
         "users": "Utilisateurs",
         "id": "Id",
@@ -46,10 +47,11 @@
         },
         "messages": {
             "userAdded": "L'utilisateur a été ajouté avec succès!",
-            "error": "Une erreur inattendue s'est produite. Veuillez vérifier votre role."
+            "error": "Une erreur inattendue s'est produite."
         }
     },
     "supplier": {
+        "search":"Chercher par téléphone",
         "page": {
             "id": "Id",
             "title": "Fournisseurs",
@@ -75,6 +77,7 @@
         }
     },
     "sale": {
+        "search":"Chercher vente par nom",
         "title": "Ventes",
         "addSaleButton": "Ajouter une vente",
         "columns": {
@@ -115,10 +118,11 @@
         },
         "messages": {
             "success": "La vente a été ajoutée avec succès",
-            "error": "Une erreur inattendue s'est produite. Veuillez vérifier votre role."
+            "error": "Une erreur inattendue s'est produite."
         }
     },
     "reception": {
+        "search":"Cherche par date réception",
         "addReception": "Ajouter Réceptions",
         "receptions": "Réceptions",
         "id": "Id",
@@ -140,6 +144,7 @@
         }
     },
     "product": {
+        "search":"Chercher produit",
         "addProduct": "Ajouter un produit",
         "name": "Nom",
         "stock": "Stock",
@@ -155,7 +160,7 @@
         "productDeleted": "Le produit a été supprimé",
         "add": "Ajouter",
         "productAdded": "Produit ajouté avec succès !",
-        "addError": "Une erreur inattendue s'est produite. Veuillez vérifier votre role.",
+        "addError": "Une erreur inattendue s'est produite.",
         "updateProduct": "Mettre à jour le produit",
         "confirm": "Confirmer",
         "cancel": "Annuler",
@@ -195,7 +200,7 @@
             "add_button": "Ajouter",
             "cancel_button": "Annuler",
             "success_message": "L'inventaire a été ajouté",
-            "error_message": "Une erreur inattendue s'est produite. Veuillez vérifier votre role."
+            "error_message": "Une erreur inattendue s'est produite."
         }
     },
     "home":{

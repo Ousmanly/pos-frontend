@@ -40,8 +40,7 @@ async function handleForgotPassword() {
   
   <style scoped>
 .forgot-password {
-  /* background-color: #242d32;  */
-  color: #fff; /* Couleur du texte */
+  color: #fff;
   padding: 2rem;
   border-radius: 10px;
   width: 100%;
@@ -51,7 +50,7 @@ async function handleForgotPassword() {
 }
 
 h4 {
-  color: black; /* Couleur du titre */
+  color: black; 
   text-align: center;
   margin-bottom: 2rem;
 }

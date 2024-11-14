@@ -57,7 +57,7 @@
   
   <style scoped>
     .reset-password {
-  color: #fff; /* Couleur du texte */
+  color: #fff;
   padding: 2rem;
   border-radius: 10px;
   width: 100%;

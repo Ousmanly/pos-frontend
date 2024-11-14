@@ -23,6 +23,7 @@
         "user": "User"
     },
     "user": {
+        "search":"Search by email",
         "add_user": "Add user",
         "users": "Users",
         "id": "Id",
@@ -51,10 +52,11 @@
         },
         "messages": {
             "userAdded": "User has been added successfully!",
-            "error": "An unexpected error occurred. Please check you're role."
+            "error": "An unexpected error occurred."
         }
     },
     "supplier": {
+        "search":"Search by phone",
         "page": {
             "id": "Id",
             "title": "Suppliers",
@@ -74,12 +76,13 @@
             "add": "Add",
             "cancel": "Cancel",
             "successMessage": "Supplier has been added successfully",
-            "unexpectedError": "An unexpected error occurred. Please check you're role.",
+            "unexpectedError": "An unexpected error occurred.",
             "confirm": "Confirm",
             "supplierUpdated": "The supplier has been updated successfully!"
         }
     },
     "sale": {
+        "search":"Searh sale by name",
         "title": "Sales",
         "addSaleButton": "Add Sale",
         "columns": {
@@ -120,10 +123,11 @@
         },
         "messages": {
             "success": "Sale has been added successfully",
-            "error": "An unexpected error occurred. Please check you're role."
+            "error": "An unexpected error occurred."
         }
     },
     "reception": {
+        "search":"Search by recepted at",
         "addReception": "Add Receptions",
         "receptions": "Receptions",
         "id": "Id",
@@ -145,6 +149,7 @@
         }
     },
     "product": {
+        "search":"Search product",
         "addProduct": "Add product",
         "name": "Name",
         "stock": "Stock",
@@ -200,7 +205,7 @@
             "add_button": "Add",
             "cancel_button": "Cancel",
             "success_message": "Inventory has been added",
-            "error_message": "An unexpected error occurred. Please check you're role."
+            "error_message": "An unexpected error occurred."
         }
     },
     "home":{
