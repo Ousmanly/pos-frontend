@@ -11,7 +11,7 @@
           <input type="email" class="form-control" v-model="email" id="email" />
         </div>
       </div>
-      
+      <div v-if="errors.sale_at" class="text-danger mb-3">{{ errors.sale_at }}</div>
       <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
           <label for="customer" class="form-label">{{ $t("sale.labels.customerName") }}</label>
@@ -22,6 +22,7 @@
           <input type="text" class="form-control" v-model="phone" id="phone" @input="validatePhone"/>
         </div>        
       </div>
+      <div v-if="errors.name" class="text-danger text-first">{{ errors.name }}</div>
       <div v-if="errors.phone" class="text-danger text-end">{{ errors.phone }}</div>
       <div v-for="(detail, index) in saleDetails" :key="index" class="mb-3">
         <div class="form-group d-flex gap-3">
@@ -54,7 +55,8 @@
         {{ $t("sale.buttons.addMore") }}
       </button>
 
-      <div v-if="errors.general" class="text-danger mb-3">{{ errors.general }}</div>
+      <!-- <div v-if="errors.sale_at" class="text-danger mb-3">{{ errors.sale_at }}</div>
+      <div v-if="errors.name" class="text-danger mb-3">{{ errors.name }}</div> -->
       
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-dark me-2">{{ $t("sale.buttons.add") }}</button>
@@ -90,6 +92,7 @@ const errors = reactive({
   general: "" ,
   name: "",
   phone: "",
+  sale_at: "",
 });
 const saleDetails = ref([{ id_product: "", price: null, sale_quantity: 1 }]);
 
@@ -128,13 +131,27 @@ const addSale = async () => {
     toast.success(t("sale.messages.success"));
     router.push("/listsale");
   } catch (error) {
+    // if (error.response && error.response.data && error.response.data.errors) {
+    //   error.response.data.errors.forEach((err) => {
+    //     // errors.general = err.msg;
+    //     errors.name = err.msg;
+    //     errors.sale_at = err.msg;
+    //   });
+    // } else {
+    //   toast.error(t("sale.messages.error"));
+    // }
     if (error.response && error.response.data && error.response.data.errors) {
-      error.response.data.errors.forEach((err) => {
-        errors.general = err.msg;
-      });
+  error.response.data.errors.forEach((err) => {
+    if (err.path === "sale_at") {
+      errors.sale_at = err.msg;
+    } else if (err.path === "name") {
+      errors.name = err.msg;
     } else {
-      toast.error(t("sale.messages.error"));
+      errors.general = err.msg;
     }
+  });
+}
+
   }
 };
 </script>

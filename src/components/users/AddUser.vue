@@ -34,13 +34,13 @@
         <label for="password" class="form-label"
           >{{ $t("user.form.password") }} :</label
         >
-        <input
-          type="password"
-          class="form-control"
-          v-model="password"
-          id="password"
-          required
-        />
+        <div class="input-group">
+          <input type="password" class="form-control" v-model="password" id="password">
+          <button class="btn btn-outline-secondary" type="button" @click="togglePassword">
+            <!-- <i :class="eyeIconClass"></i> -->
+            <i :class="eyeIconClass"  ></i>
+          </button>
+        </div>
         <div v-if="errors.password" class="text-danger">
           {{ errors.password }}
         </div>
@@ -94,7 +94,8 @@ const errors = reactive({
   password: "",
   role: "",
 });
-
+// const eyeIconClass = ref("fas fa-eye-slash");
+const eyeIconClass = ref("fas fa-eye");
 const addUser = async () => {
   try {
     const newUser = {
@@ -117,6 +118,17 @@ const addUser = async () => {
     }
   }
 };
+
+const togglePassword = () => {
+  const passwordInput = document.getElementById('password');
+  const isPassword = passwordInput.type === 'password';
+  passwordInput.type = isPassword ? 'text' : 'password';
+
+  // eyeIconClass.value = isPassword ? "fas fa-eye-slash" : "fas fa-eye";
+  eyeIconClass.value = isPassword ? "fas fa-eye-slash" : "fas fa-eye"; 
+  console.log("Toggled password visibility:", eyeIconClass.value);
+};
+
 </script> 
   
   <style scoped>

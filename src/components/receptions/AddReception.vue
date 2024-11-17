@@ -5,6 +5,7 @@
         <div class="mb-3 flex-fill">
           <label for="recepted" class="form-label">Recepted at:</label>
           <input type="date" class="form-control" v-model="recepted_at" id="recepted" required />
+          <div v-if="errors.recepted_at" class="text-danger mb-3">{{ errors.recepted_at }}</div>
         </div>
         <div class="mb-3 flex-fill">
           <label for="supplier" class="form-label">Supplier Name:</label>
@@ -88,7 +89,8 @@ const activeProducts = computed(() => store.products.filter(product => product.s
   const price = ref();
   const quantity = ref();
   const errors = reactive({
-    receptionDetails:""
+    receptionDetails:"",
+    recepted_at:""
     });
     const receptionDetails = ref([{ id_product: "", price: null, quantity: 1 }]);
 
@@ -116,6 +118,8 @@ const addReception = async () => {
       error.response.data.errors.forEach(err => {
         if (err.path === "receptionDetails[0].quantity") {
           errors.quantity = err.msg; 
+        } else if (err.path == "recepted_at") {
+          errors.recepted_at = err.msg;
         } else {
           errors.general = err.msg;
         }

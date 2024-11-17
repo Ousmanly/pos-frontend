@@ -61,7 +61,9 @@ const validatePhone = () => {
   const phoneRegex = /^[0-9\s]*$/; 
   if (!phoneRegex.test(phone.value)) {
     errors.phone = "Phone must be a number ";
-  } else {
+  } else if(phone.value.length > 20) {
+    errors.phone = "Phone cannot be most 20 chractere long";
+  } else{
     errors.phone = "";
   }
 };
