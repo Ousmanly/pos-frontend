@@ -4,6 +4,9 @@
     "totalUser": "إجمالي المستخدمين",
     "totalSale": "إجمالي المبيعات",
     "sidebar": {
+        "profile" : "الملف الشخصي",
+        "password" : "كلمة المرور",
+        "logout" : "تسجيل الخروج",
         "dashboard": "لوحة التحكم",
         "users": "المستخدمون",
         "suppliers": "الموردون",
@@ -11,7 +14,8 @@
         "receptions": "الواردات",
         "sales": "المبيعات",
         "movements": "الحركات",
-        "inventories": "المخزون"
+        "inventories": "المخزون",
+        "confirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
     },
     "navbar": {
         "admin": "مدير",

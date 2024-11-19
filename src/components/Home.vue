@@ -81,22 +81,30 @@ const createChart = () => {
         {
           label: t('home.product'),
           data: productMonthlyData.value, 
-          borderColor: "rgba(47, 178, 150, 1)",
-          backgroundColor: "rgba(0, 123, 255, 0.1)",
+          // borderColor: "rgba(47, 178, 150, 1)",
+          // backgroundColor: "rgba(0, 123, 255, 0.1)",
+          borderColor: "rgba(19, 125, 187, 1)",
+          backgroundColor: "rgba(19, 125, 187, 0.1)",
+
           fill: true,
         },
         {
           label: t('home.sale'),
           data: saleMonthlyData.value, 
+          // borderColor: "rgba(15, 90, 95, 1)",
+          // backgroundColor: "rgba(40, 167, 69, 0.1)",
           borderColor: "rgba(15, 90, 95, 1)",
-          backgroundColor: "rgba(40, 167, 69, 0.1)",
+          backgroundColor: "rgba(15, 90, 95, 0.1)",
+
           fill: true,
         },
         {
           label: t('home.users'),
           data: userMonthlyData.value, 
-          borderColor: "rgba(15, 90, 95, 1);",
-          backgroundColor: "rgba(40, 167, 69, 0.1)",
+          borderColor: "rgba(47, 178, 150, 1)",
+          backgroundColor: "rgba(0, 123, 255, 0.1)",
+          // borderColor: "rgba(19, 125, 187, 1);",
+          // backgroundColor: "rgba(19, 125, 187, 0.1)",
           fill: true,
         },
       ],
@@ -162,8 +170,11 @@ onMounted(() => {
 }
 
 .product-card {
-  background-color: rgba(47, 178, 150, 0.1); 
-  border: 2px solid rgba(47, 178, 150, 1);
+  /* background-color: rgba(47, 178, 150, 0.1); 
+  border: 2px solid rgba(47, 178, 150, 1); */
+  background-color: rgba(19, 125, 187, 0.15); 
+border: 2px solid rgba(19, 125, 187, 0.35);
+
   background-image: url('../assets/packaging.png');
 }
 .product-card h3 {
@@ -177,8 +188,8 @@ onMounted(() => {
 }
 
 .sale-card {
-  background-color: rgba(15, 90, 95, 0.1); 
-  border: 3px solid rgba(15, 90, 95, 1);
+  background-color: rgba(15, 90, 95, 0.15); 
+  border: 3px solid rgba(15, 90, 95, 0.35);
   background-image: url('../assets/revenue.png'); 
 }
 .sale-card h3 {
@@ -192,8 +203,11 @@ onMounted(() => {
 }
 
 .user-card {
-  background-color: rgba(59, 217, 169, 0.1); 
-  border: 3px solid rgba(59, 217, 169, 1); 
+  /* background-color: rgba(59, 217, 169, 0.1); 
+  border: 3px solid rgba(59, 217, 169, 1);  */
+  background-color: rgba(19, 125, 187, 0.15); 
+  border: 3px solid rgba(19, 125, 187, 0.35);
+
   background-image: url('../assets/employee.png'); 
   padding-top: 0px;
 }

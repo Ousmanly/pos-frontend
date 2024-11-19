@@ -14,6 +14,7 @@
             required
           />
          </div>
+         <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
     <div class="mb-3">
           <label for="update" class="form-label">Update at :</label>
           <input
@@ -23,6 +24,7 @@
             id="update"
             required
           />
+          <div v-if="errors.updated_at" class="text-danger mb-3">{{ errors.updated_at }}</div>
          </div>
         <div class="mb-3">
           <label for="sale" class="form-label">{{ $t("product.salePrice") }} :</label>
@@ -77,7 +79,7 @@
 
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 
 
 const store = usePosStore();
@@ -92,6 +94,11 @@ const seuil = ref("");
 const code_bare = ref("");
 const originalName = ref("");
 const id = Number(route.params.id);
+
+const errors = reactive({
+  name: "",
+  updated_at: "",
+});
 import { getCurrentInstance } from 'vue';
 import { usePosStore } from "@/stores/pos";
 import { useToast } from "vue-toastification";
@@ -104,13 +111,16 @@ const toast = useToast()
 onMounted(() => {
   const product = store.products.find((product) => product.id === id);
   if (product) {
-    name.value = product.name;
-    updated_at.value= product.updated_at
+    name.value = product.name,
+    // updated_at.value= product.updated_at
+    updated_at.value = product.updated_at 
+      ? new Date(product.updated_at).toISOString().split("T")[0] 
+      : "";
     sale_price.value = product.sale_price , 
     purchase_price.value = product.purchase_price,
     seuil.value = product.seuil,
-    code_bare.value = product.code_bare
-    originalName.value = product.name;
+    code_bare.value = product.code_bare,
+    originalName.value = product.name
   }
 });
 
@@ -131,7 +141,19 @@ const handleUpdateProduct = async() => {
       toast.success(t("product.productUpdated"))
       router.push("/listproduct");
   }catch (error) {
-    toast.error(t("product.updateFailed"))
+    if (error.response && error.response.data && error.response.data.errors) {
+      error.response.data.errors.forEach((err) => {
+        if (err.path == "name") {
+          errors.name = err.msg;
+        }else if (err.path == "updated_at") {
+          errors.updated_at = err.msg;
+        }else{
+          errors[err.path] = err.msg;
+        }
+      });
+    } else {
+      toast.error(t("product.updateFailed"))
+    }
   }
 };
 

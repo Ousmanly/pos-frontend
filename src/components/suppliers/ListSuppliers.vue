@@ -206,7 +206,8 @@ onMounted(async () => {
   background-color: #24272a;
 }
 .text-success-t{
-    color: #26a49c;
+    /* color: #26a49c; */
+    color: #137dbb;
   }
 .page-background {
   min-height: 90vh;

@@ -1,53 +1,115 @@
 <template>
   <div class="container">
-    <form @submit.prevent="addSale" class="formulaire form shadow p-3 bg-body rounded">
+    <form
+      @submit.prevent="addSale"
+      class="formulaire form shadow p-3 bg-body rounded"
+    >
       <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
-          <label for="sale" class="form-label">{{ $t("sale.labels.saleAt") }}</label>
-          <input type="date" class="form-control" v-model="sale_at" id="sale" required />
+          <label for="sale" class="form-label">{{
+            $t("sale.labels.saleAt")
+          }}</label>
+          <input
+            type="date"
+            class="form-control"
+            v-model="sale_at"
+            id="sale"
+            required
+          />
         </div>
         <div class="mb-3 flex-fill">
-          <label for="email" class="form-label">{{ $t("sale.labels.email") }}</label>
-          <input type="email" class="form-control" v-model="email" id="email" />
+          <label for="email" class="form-label">{{
+            $t("sale.labels.email")
+          }}</label>
+          <input
+            type="email"
+            value="NE"
+            class="form-control"
+            v-model="email"
+            id="email"
+          />
         </div>
       </div>
-      <div v-if="errors.sale_at" class="text-danger mb-3">{{ errors.sale_at }}</div>
+      <div v-if="errors.sale_at" class="text-danger mb-3">
+        {{ errors.sale_at }}
+      </div>
       <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
-          <label for="customer" class="form-label">{{ $t("sale.labels.customerName") }}</label>
-          <input type="text" class="form-control" v-model="customer" id="customer" required />
+          <label for="customer" class="form-label">{{
+            $t("sale.labels.customerName")
+          }}</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="customer"
+            id="customer"
+            required
+          />
         </div>
         <div class="mb-3 flex-fill">
-          <label for="phone" class="form-label">{{ $t("sale.labels.phone") }}</label>
-          <input type="text" class="form-control" v-model="phone" id="phone" @input="validatePhone"/>
-        </div>        
+          <label for="phone" class="form-label">{{
+            $t("sale.labels.phone")
+          }}</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="phone"
+            id="phone"
+            @input="validatePhone"
+          />
+        </div>
       </div>
-      <div v-if="errors.name" class="text-danger text-first">{{ errors.name }}</div>
-      <div v-if="errors.phone" class="text-danger text-end">{{ errors.phone }}</div>
+      <div v-if="errors.name" class="text-danger text-first">
+        {{ errors.name }}
+      </div>
+      <div v-if="errors.phone" class="text-danger text-end">
+        {{ errors.phone }}
+      </div>
       <div v-for="(detail, index) in saleDetails" :key="index" class="mb-3">
         <div class="form-group d-flex gap-3">
           <div class="mb-3 flex-fill">
-            <label for="product" class="form-label">{{ $t("sale.labels.product") }}</label>
+            <label for="product" class="form-label">{{
+              $t("sale.labels.product")
+            }}</label>
             <select class="form-select" v-model="detail.id_product" required>
-              <option v-for="product in activeProducts" :key="product.id" :value="product.id">
+              <option
+                v-for="product in activeProducts"
+                :key="product.id"
+                :value="product.id"
+              >
                 {{ product.name }}
               </option>
             </select>
           </div>
           <div class="mb-3 flex-fill">
-            <label for="price" class="form-label">{{ $t("sale.labels.price") }}</label>
-            <input type="number" min="0" class="form-control" v-model="detail.price" />
+            <label for="price" class="form-label">{{
+              $t("sale.labels.price")
+            }}</label>
+            <input
+              type="number"
+              min="0"
+              class="form-control"
+              v-model="detail.price"
+            />
           </div>
           <div class="mb-3 flex-fill">
-            <label for="quantity" class="form-label">{{ $t("sale.labels.quantity") }}</label>
-            <input type="number" min="0" class="form-control" v-model="detail.sale_quantity" required />
+            <label for="quantity" class="form-label">{{
+              $t("sale.labels.quantity")
+            }}</label>
+            <input
+              type="number"
+              min="0"
+              class="form-control"
+              v-model="detail.sale_quantity"
+              required
+            />
           </div>
-            <button class="btn" @click="removeProduct(index)">
-              <i
-                class="fa-solid fa-trash"
-                style="color: #e30d0d; font-size: 29px"
-              ></i>
-            </button>  
+          <button class="btn" @click="removeProduct(index)">
+            <i
+              class="fa-solid fa-trash"
+              style="color: #e30d0d; font-size: 29px"
+            ></i>
+          </button>
         </div>
       </div>
 
@@ -57,11 +119,15 @@
 
       <!-- <div v-if="errors.sale_at" class="text-danger mb-3">{{ errors.sale_at }}</div>
       <div v-if="errors.name" class="text-danger mb-3">{{ errors.name }}</div> -->
-      
+
       <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-dark me-2">{{ $t("sale.buttons.add") }}</button>
+        <button type="submit" class="btn btn-dark me-2">
+          {{ $t("sale.buttons.add") }}
+        </button>
         <RouterLink to="/listsale">
-          <button type="button" class="btn btn-danger">{{ $t("sale.buttons.cancel") }}</button>
+          <button type="button" class="btn btn-danger">
+            {{ $t("sale.buttons.cancel") }}
+          </button>
         </RouterLink>
       </div>
     </form>
@@ -82,14 +148,16 @@ const store = usePosStore();
 onMounted(async () => {
   await store.loadDataFromProductApi();
 });
-const activeProducts = computed(() => store.products.filter((product) => product.status));
+const activeProducts = computed(() =>
+  store.products.filter((product) => product.status)
+);
 
 const sale_at = ref("");
 const customer = ref("");
 const phone = ref("");
 const email = ref("");
-const errors = reactive({ 
-  general: "" ,
+const errors = reactive({
+  general: "",
   name: "",
   phone: "",
   sale_at: "",
@@ -104,7 +172,7 @@ const removeProduct = (index) => {
   saleDetails.value.splice(index, 1);
 };
 const validatePhone = () => {
-  const phoneRegex = /^[0-9\s]*$/; 
+  const phoneRegex = /^[0-9\s]*$/;
   if (!phoneRegex.test(phone.value)) {
     errors.phone = "Phone must be a number ";
   } else {
@@ -114,9 +182,9 @@ const validatePhone = () => {
 
 const addSale = async () => {
   validatePhone();
-  
+
   if (errors.phone) {
-    return; 
+    return;
   }
   try {
     const newSale = {
@@ -141,17 +209,16 @@ const addSale = async () => {
     //   toast.error(t("sale.messages.error"));
     // }
     if (error.response && error.response.data && error.response.data.errors) {
-  error.response.data.errors.forEach((err) => {
-    if (err.path === "sale_at") {
-      errors.sale_at = err.msg;
-    } else if (err.path === "name") {
-      errors.name = err.msg;
-    } else {
-      errors.general = err.msg;
-    }
-  });
-}
-
+      error.response.data.errors.forEach((err) => {
+        if (err.path === "sale_at") {
+          errors.sale_at = err.msg;
+        } else if (err.path === "name") {
+          errors.name = err.msg;
+        } 
+      });
+    }else {
+          toast.error("Stock insuffisant");
+        }
   }
 };
 </script>
@@ -159,7 +226,7 @@ const addSale = async () => {
 .clr {
   background-color: #343a40;
 }
-.btn-am  {
+.btn-am {
   color: white;
   background-color: #343a40;
 }

@@ -9,10 +9,10 @@
           v-if="!isCollapsed"
           src="../assets/logo.png"
           alt="logo"
-          width="81px"
-          height="80px"
+          width="110px"
+          height="109px"
         />
-        <button @click="toggleSidebar" class="btn btn-link text-black">
+        <button @click="toggleSidebar" class="btn btn-link text-white">
           <i
             :class="isCollapsed ? 'fas fa-angle-right' : 'fas fa-angle-left'"
           ></i>
@@ -20,49 +20,49 @@
       </h4>
       <ul class="nav flex-column mt-4">
         <li class="nav-item">
-          <router-link to="/home" class="nav-link text-black">
+          <router-link to="/home" class="nav-link text-white " active-class="active-route">
             <i class="fas fa-tachometer-alt me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.dashboard") }} </span>
           </router-link>
         </li>
         <li class="nav-item" v-if="trying == 'ADMIN'">
-          <router-link to="/listuser" class="nav-link text-black">
+          <router-link to="/listuser" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-users me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.users") }}</span>
           </router-link>
         </li>
         <li class="nav-item" v-if="trying == 'ADMIN'">
-          <router-link to="/listsupplier" class="nav-link text-black">
+          <router-link to="/listsupplier" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-truck me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.suppliers") }}</span>
           </router-link>
         </li>
         <li class="nav-item" v-if="trying == 'ADMIN'">
-          <router-link to="/listproduct" class="nav-link text-black">
+          <router-link to="/listproduct" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-box me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.products") }}</span>
           </router-link>
         </li>
         <li class="nav-item" v-if="trying == 'ADMIN'">
-          <router-link to="/listreception" class="nav-link text-black">
+          <router-link to="/listreception" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-archive me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.receptions") }}</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/listsale" class="nav-link text-black">
+          <router-link to="/listsale" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-shopping-cart me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.sales") }}</span>
           </router-link>
         </li>
         <li class="nav-item" v-if="trying == 'ADMIN'">
-          <router-link to="/mouvements" class="nav-link text-black">
+          <router-link to="/mouvements" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-exchange-alt me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.movements") }}</span>
           </router-link>
         </li>
         <li class="nav-item" v-if="trying == 'ADMIN'">
-          <router-link to="/listinventories" class="nav-link text-black">
+          <router-link to="/listinventories" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-th-list me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.inventories") }}</span>
           </router-link>
@@ -101,18 +101,18 @@
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
                       <li>
                         <a @click="goToProfile" class="dropdown-item" ><i class="fas fa-user-edit me-2"></i>
-                          Profile</a>
+                          {{ $t("sidebar.profile") }}</a>
                       </li>
                       <li>
-                        <a @click="goToChangePassword" class="dropdown-item" ><i class="fas fa-key me-2"></i>Password</a>
+                        <a @click="goToChangePassword" class="dropdown-item" ><i class="fas fa-key me-2"></i>{{ $t("sidebar.password") }}</a>
                       </li>
                       <li>
                         <a @click="handleLogoClick" class="dropdown-item" ><i class="fas fa-sign-out-alt me-2"></i>
-                          Logout</a>
+                          {{ $t("sidebar.logout") }}</a>
                       </li>
                     </ul>
                   </div>
-                  <span>{{ store.userName || "" }}</span>
+                  <span class="fw-bold ">{{ store.userName || "" }}</span>
                 </h4>
                 <select
                   name="lang"
@@ -139,6 +139,8 @@
 import { usePosStore } from "@/stores/pos";
 import { onMounted, ref } from "vue";
 import { getCurrentInstance } from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
 const { proxy } = getCurrentInstance();
 // const affiche = ref(false)
@@ -153,7 +155,8 @@ const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
 }; 
 const handleLogoClick = async() => {
-  const confirmation = confirm("Are you sure want to logout");
+  // const confirmation = confirm("Are you sure want to logout");
+  const confirmation = confirm(t("sidebar.confirmation"));
   if (confirmation) {
   await store.logout();
   proxy.$router.push('/');
@@ -175,11 +178,23 @@ const goToChangePassword = () => {
   
   <style scoped>
 .navbar-bg {
-  background-color: #242d32;
+  /* background-color: #242d32; */
+  /* height: 60px; */
+  /* background-color: #3b5998; */
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #137dbb;
   box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.3);
 }
+.nav-link.active-route {
+  background-color: #137dbb;
+  color: white !important;
+  border-radius: 4px;
+}
+
 .bg-sidbar {
   box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.3);
+  background-color: #2c3940;
 }
 .text-success-t {
   color: #26a49c;
@@ -201,7 +216,7 @@ const goToChangePassword = () => {
   width: 200px;
   height: 100vh;
   position: fixed;
-  top: 54px;
+  top: 53px;
   left: 0;
   transition: width 0.3s;
 }
@@ -231,19 +246,24 @@ const goToChangePassword = () => {
   margin-left: 63px;
 }
 .language-select {
-  color: #26a49c;
-  border-color: #26a49c;
+  /* color: #26a49c; */
+  color: #137dbb;
+  /* border-color: #26a49c; */
+  border-color: #137dbb;
   border-radius: 8px;
 }
 
 .language-select option {
-  color: #26a49c;
+  /* color: #26a49c; */
+  color: #137dbb;
 }
 
 .language-select:focus {
   outline: none;
-  border-color: #26a49c;
-  box-shadow: 0 0 5px #26a49c;
+  /* border-color: #26a49c; */
+  border-color: #137dbb;
+  /* box-shadow: 0 0 5px #26a49c; */
+  box-shadow: 0 0 5px #137dbb;
 }
 
 .user-icon {

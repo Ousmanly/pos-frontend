@@ -4,6 +4,9 @@
     "totalUser": "Total des utilisateurs",
     "totalSale": "Total des ventes",
     "sidebar": {
+        "profile": "Profile",
+        "password": "Password",
+        "logout": "Déconnexion",
         "dashboard": "Tableau de Bord",
         "users": "Utilisateurs",
         "suppliers": "Fournisseurs",
@@ -11,7 +14,8 @@
         "receptions": "Réceptions",
         "sales": "Ventes",
         "movements": "Mouvements",
-        "inventories": "Inventaires"
+        "inventories": "Inventaires",
+        "confirmation": "Etes vous sure de vouloir se déconnécté"
     },
     "navbar": {
         "admin": "Admin",
@@ -77,6 +81,7 @@
         }
     },
     "sale": {
+        "stock": "Sock insuffisant",
         "search":"Chercher vente par nom",
         "title": "Ventes",
         "addSaleButton": "Ajouter une vente",

@@ -9,6 +9,9 @@
         "ar": "العربية"
     },
     "sidebar": {
+        "profile": "Profile",
+        "password": "Password",
+        "logout": "Logout",
         "dashboard": "Dashboard",
         "users": "Users",
         "suppliers": "Suppliers",
@@ -16,7 +19,8 @@
         "receptions": "Receptions",
         "sales": "Sales",
         "movements": "Movements",
-        "inventories": "Inventories"
+        "inventories": "Inventories",
+        "confirmation": "Are you sure want to logout"
     },
     "navbar": {
         "admin": "Admin",

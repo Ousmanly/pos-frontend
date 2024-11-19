@@ -2,9 +2,9 @@
     <div class="login-container d-flex justify-content-center align-items-center vh-100">
       <div class="login-card card shadow p-4">
         <div class="d-flex justify-content-center mb-2">
-        <img src="../assets/logo.png" alt="logo" width="80" height="83" />
+        <img class="mb-5" src="../assets/logo2.png" alt="logo" width="115" height="103" />
       </div>
-        <h3 class="mb-4 text-center">Login</h3>
+        <!-- <h3 class="mb-4 text-center">Login</h3> -->
         
         <form @submit.prevent="handleLogin">
           <div class="input-group mb-3">
@@ -73,7 +73,7 @@
     min-height: 100vh;
   }
   .btn-conn{
-    background: linear-gradient(45deg, #242d32, #26a49c);
+    background: linear-gradient(45deg, #242d32, #137dbb);
     color: white;
     font-weight: bold;
   }

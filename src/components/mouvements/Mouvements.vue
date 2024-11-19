@@ -48,7 +48,7 @@ onMounted(async () => {
   try {
     isLoading.value= true
     await store.loadDataFromMouvementApi();
-    await new Promise((resolve)=> setTimeout(resolve, 1000))
+    // await new Promise((resolve)=> setTimeout(resolve, 1000))
   } catch (error) {
     console.log(error)
   }finally{
@@ -59,7 +59,8 @@ onMounted(async () => {
      
   <style scoped>
   .text-success-t{
-    color: #26a49c;
+    /* color: #26a49c; */
+    color: #137dbb;
   }
 .clr {
   margin-top: 100px;

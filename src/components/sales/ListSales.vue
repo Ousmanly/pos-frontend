@@ -159,7 +159,7 @@ onMounted(async () => {
     isLoading.value= true
     await store.loadDataFromSaleApi();
     window.addEventListener('resize', checkScreenWidth);
-    await new Promise((resolve)=> setTimeout(resolve, 1000))
+    // await new Promise((resolve)=> setTimeout(resolve, 1000))
   } catch (error) {
     console.log(error);
   }finally{
@@ -200,7 +200,8 @@ const destroySale = (id) => {
 }
 
 .text-success-t {
-  color: #26a49c;
+  /* color: #26a49c; */
+  color: #137dbb;
 }
 .font-wb-md {
   margin: auto;

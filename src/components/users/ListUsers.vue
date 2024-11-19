@@ -198,7 +198,8 @@ const toggleStatus = async (user) => {
   font-weight: bold;
 }
 .text-success-t {
-  color: #26a49c;
+  /* color: #26a49c; */
+  color: #137dbb;
 }
 .modal-body {
   padding: 20px;

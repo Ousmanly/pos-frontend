@@ -63,7 +63,7 @@ app.use(createPinia())
 app.use(router)
 app.use(Toast, {
     position: "top-right",
-    timeout: 3000,
+    timeout: 1000,
     closeOnClick: true
   });
 app.mount('#app')

@@ -63,7 +63,8 @@ form {
 input[type="email"] {
   padding: 10px;
   margin-bottom: 1rem;
-  border: 2px solid #26a49c;
+  /* border: 2px solid #26a49c; */
+  border: 2px solid #137dbb;
   border-radius: 5px;
   font-size: 1rem;
   color: #242d32;
@@ -76,12 +77,14 @@ input[type="email"]::placeholder {
 }
 
 input[type="email"]:focus {
-  border-color: #26a49c;
+  border-color: #137dbb;
+  /* border-color: #26a49c; */
   box-shadow: 0 0 5px rgba(38, 164, 156, 0.5);
 }
 
 button {
-  background-color: #26a49c;
+  /* background-color: #26a49c; */
+  background: linear-gradient(45deg, #242d32, #137dbb);
   color: #fff;
   padding: 10px;
   border: none;

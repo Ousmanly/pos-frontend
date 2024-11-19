@@ -166,7 +166,8 @@
     padding: 20px;
   }
   .text-success-t{
-    color: #26a49c;
+    /* color: #26a49c; */
+    color: #137dbb;
   }
   </style>
     

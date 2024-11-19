@@ -21,7 +21,7 @@
           </h2>
           <Loader v-if="isLoading"/>
           <form class="ms-auto">
-              <p class="text-success-t bold">{{ $t("reception.search") }}</p>
+              <span class="text-success-t bold">{{ $t("reception.search") }}</span>
               <input
                 type="date"
                 class="form-control me-2"
@@ -142,7 +142,7 @@ onMounted(async () => {
   try {
     isLoading.value= true
     await store.loadDataFromReceptionApi();
-    await new Promise((resolve)=> setTimeout(resolve, 1000))
+    // await new Promise((resolve)=> setTimeout(resolve, 1000))
   } catch (error) {
     console.log(error);
   }finally{
@@ -157,9 +157,10 @@ onMounted(async () => {
   };
 </script>
      
-  <style scoped>
+<style scoped>
     .text-success-t{
-    color: #26a49c;
+    /* color: #26a49c; */
+    color: #137dbb;
   }
 
 .modal-overlay {

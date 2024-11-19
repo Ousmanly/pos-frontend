@@ -5,7 +5,7 @@
       class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"
     >
       <div class="mb-3">
-        <label for="name" class="form-label">{{ $t("supplier.form.name") }} :</label>
+        <label for="name" class="form-label">{{ $t("supplier.form.name") }} </label>
         <input
           type="text"
           class="form-control"
@@ -16,7 +16,7 @@
         <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
       </div>
       <div class="mb-3">
-        <label for="phone" class="form-label">{{ $t("supplier.form.phone") }}  :</label>
+        <label for="phone" class="form-label">{{ $t("supplier.form.phone") }}  </label>
         <input
           type="text"
           class="form-control"
