@@ -86,10 +86,11 @@
               $t("sale.labels.price")
             }}</label>
             <input
-              type="number"
+              type="text"
               min="0"
               class="form-control"
               v-model="detail.price"
+              @input="validatePrice(index)"
             />
           </div>
           <div class="mb-3 flex-fill">
@@ -111,6 +112,9 @@
             ></i>
           </button>
         </div>
+        <div v-if="errors.price" class="text-danger text-fist">
+        {{ errors.price }}
+      </div>
       </div>
 
       <button type="button" class="btn btn-am mb-3" @click="addProduct">
@@ -161,6 +165,7 @@ const errors = reactive({
   name: "",
   phone: "",
   sale_at: "",
+  price: "",
 });
 const saleDetails = ref([{ id_product: "", price: null, sale_quantity: 1 }]);
 
@@ -179,10 +184,32 @@ const validatePhone = () => {
     errors.phone = "";
   }
 };
+const validatePrice = (index) => {
+  const price = saleDetails.value[index].price;
+  const priceRegex = /^[0-9]+(\.[0-9]+)?$/;
+  
+  if (!priceRegex.test(price)) {
+    errors.price = "Price must be a decimal number";
+  } else {
+    errors.price = "";
+  }
+};
+
 
 const addSale = async () => {
-  validatePhone();
 
+  let priceErrorFound = false;
+  saleDetails.value.forEach((detail, index) => {
+    const price = detail.price;
+    const priceRegex = /^[0-9]+(\.[0-9]+)?$/;
+    if (!priceRegex.test(price)) {
+      priceErrorFound = true;
+    }
+  });
+  if (priceErrorFound) {
+    return;
+  }
+  validatePhone();
   if (errors.phone) {
     return;
   }

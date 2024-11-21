@@ -109,7 +109,7 @@
           <div class="d-flex justify-content-between">
             <div class="total-amount text-end">
             <strong>{{ $t("sale.modal.totalAmount") }}: </strong>
-            {{ calculateTotalAmount(selectedSale.sale_details) }} MRU 
+            {{ calculateTotalAmount(selectedSale.sale_details) }}
           </div>
           <button class="btn btn-danger text-white font-wb" @click="closeModal">
           {{ $t("sale.modal.closeButton") }}
@@ -146,14 +146,30 @@ const openModal = (sale) => {
   isModalVisible.value = true;
 };
 
-const closeModal = () => {
+const closeModal = () => { 
   isModalVisible.value = false;
 };
+// const calculateTotalAmount = (details) => {
+//   return details.reduce((total, detail) => {
+//     return total + parseFloat(detail.amount);
+//   }, 0);
+// };
 const calculateTotalAmount = (details) => {
-  return details.reduce((total, detail) => {
-    return total + parseInt(detail.amount);
+  const totalAmount = details.reduce((total, detail) => {
+    return total + parseFloat(detail.amount);
   }, 0);
+
+  // Formatage du montant total en utilisant Intl.NumberFormat
+  const formatter = new Intl.NumberFormat('fr-MU', {  // Utilisation de 'fr-MU' pour la Mauritanie
+    style: 'currency',
+    currency: 'MRU',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  return formatter.format(totalAmount);
 };
+
 onMounted(async () => {
   try {
     isLoading.value= true

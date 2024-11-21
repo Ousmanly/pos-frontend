@@ -8,8 +8,10 @@ export const usePosStore = defineStore("pos", {
     suppliers: [],
     nextIdSup: 1,
     users: [],
+    usersActif: [],
     nextIdUser: 1,
     products: [],
+    productsActif: [],
     nextIdProd: 1,
     receptions: [],
     nextIdRecep: 1,
@@ -25,9 +27,14 @@ export const usePosStore = defineStore("pos", {
     user: {},
     searchQuery: "",
   }),
-
+  getters: {
+    // Getter pour calculer le CA total
+   
+  },
   actions: {
-    
+    totalSalesAmount() {
+      return this.sales.reduce((total, sale) => total + (sale.amount || 0), 0);
+    },
     getFilteredSales() {
       return this.sales.filter(sale =>
         sale.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -140,6 +147,7 @@ export const usePosStore = defineStore("pos", {
       try {
         const resp = await axios.get("http://localhost:3005/api/users");
         this.users = resp.data;
+        this.usersActif = resp.data.filter(user => user.status === true);
       } catch (error) {
         this.users= [];
       }
@@ -148,6 +156,7 @@ export const usePosStore = defineStore("pos", {
       try {
         const resp = await axios.get("http://localhost:3005/api/products");
         this.products = resp.data;
+        this.productsActif = resp.data.filter(product => product.status === true);
       } catch (error) {
         this.products= [];
       }
