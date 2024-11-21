@@ -15,6 +15,7 @@
             v-model="sale_at"
             id="sale"
             required
+            :max="maxDate"
           />
         </div>
         <div class="mb-3 flex-fill">
@@ -23,7 +24,6 @@
           }}</label>
           <input
             type="email"
-            value="NE"
             class="form-control"
             v-model="email"
             id="email"
@@ -71,7 +71,7 @@
             <label for="product" class="form-label">{{
               $t("sale.labels.product")
             }}</label>
-            <select class="form-select" v-model="detail.id_product" required>
+            <select class="form-select" v-model="detail.id_product" @change="updatePrice(index)" required>
               <option
                 v-for="product in activeProducts"
                 :key="product.id"
@@ -153,7 +153,7 @@ onMounted(async () => {
   await store.loadDataFromProductApi();
 });
 const activeProducts = computed(() =>
-  store.products.filter((product) => product.status)
+  store.products.filter((product) => product.status && product.stock>0)
 );
 
 const sale_at = ref("");
@@ -189,12 +189,25 @@ const validatePrice = (index) => {
   const priceRegex = /^[0-9]+(\.[0-9]+)?$/;
   
   if (!priceRegex.test(price)) {
-    errors.price = "Price must be a decimal number";
+    errors.price = "Price must be a positif decimal number";
   } else {
     errors.price = "";
   }
 };
 
+const maxDate = computed(() => {
+  const today = new Date();
+  return today.toISOString().split('T')[0];
+})
+
+const updatePrice = (index) => {
+  const product = activeProducts.value.find(
+    (product) => product.id === saleDetails.value[index].id_product
+  );
+  if (product) {
+    saleDetails.value[index].price = product.sale_price;
+  }
+};
 
 const addSale = async () => {
 

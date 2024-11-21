@@ -149,8 +149,11 @@
         }
     },
     "product": {
+        "criticalP": "Produit critique",
+        "ca": "Chiffre D'affaire",
         "search":"Chercher produit",
         "addProduct": "Ajouter un produit",
+        "id": "Id",
         "name": "Nom",
         "stock": "Stock",
         "salePrice": "Prix de vente",

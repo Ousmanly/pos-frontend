@@ -4,7 +4,7 @@
       <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
           <label for="recepted" class="form-label">Recepted at:</label>
-          <input type="date" class="form-control" v-model="recepted_at" id="recepted" required />
+          <input type="date" class="form-control" v-model="recepted_at" id="recepted" required :max="maxDate" />
           <div v-if="errors.recepted_at" class="text-danger mb-3">{{ errors.recepted_at }}</div>
         </div>
         <div class="mb-3 flex-fill">
@@ -29,7 +29,7 @@
           </div>
           <div class="mb-3 flex-fill">
             <label for="price" class="form-label">Price:</label>
-            <input type="number" min="0" class="form-control" v-model="detail.price" id="price" required />
+            <input type="text" min="0" class="form-control" v-model="detail.price" id="price" @input="validatePrice(detail)"  required />
          </div>
           <div class="mb-3 flex-fill">
             <label for="quantity" class="form-label">Quantity:</label>
@@ -42,6 +42,9 @@
               ></i>
             </button>  
         </div>
+        <div v-if="errors.price" class="text-danger text-first">
+        {{ errors.price }}
+      </div>
       </div>
 
       <button type="button" class="btn btn-am mb-3" @click="addProduct">
@@ -90,19 +93,39 @@ const activeProducts = computed(() => store.products.filter(product => product.s
   const quantity = ref();
   const errors = reactive({
     receptionDetails:"",
-    recepted_at:""
+    recepted_at:"",
+    price
     });
     const receptionDetails = ref([{ id_product: "", price: null, quantity: 1 }]);
 
   const addProduct = () => {
     receptionDetails.value.push({ id_product: "", price: null, quantity: 1 });
   };
+  const maxDate = computed(() => {
+  const today = new Date();
+  return today.toISOString().split('T')[0]; // Ex : "2024-11-21"
+})
 
   const removeProduct = (index) => {
     receptionDetails.value.splice(index, 1);
   };
+  const validatePrice = (detail) => {
+  const priceRegex = /^[0-9]+(\.[0-9]+)?$/;  
+  if (!priceRegex.test(detail.price)) {
+    errors.price = "Price must be a positive decimal number";  
+  } else {
+    errors.price = ""; 
+  }
+};
 const addReception = async () => {
   try {
+
+    const isValidPrices = receptionDetails.value.every(detail => /^[0-9]+(\.[0-9]+)?$/.test(detail.price));
+    if (!isValidPrices) {
+      toast.error("Please enter valid prices for all products");
+      return;
+    }
+
     const newReception = {
       id_supplier: selectedSupplier.value,
       recepted_at: recepted_at.value,

@@ -94,7 +94,7 @@
             <tbody>
               <tr v-for="detail in selectedReception.reception_details" :key="detail.id">
                 <td>{{ detail.product_name }}</td>
-                <td>{{ detail.price }}</td>
+                <td>{{ formatPrice(detail.price) }}</td>
                 <td>{{ detail.quantity }}</td>
               </tr>
             </tbody>
@@ -155,6 +155,16 @@ onMounted(async () => {
       store.destroyReception(id);
     }
   };
+
+  const formatPrice = (price) => {
+  if (price !== null && price !== undefined) {
+    return parseFloat(price).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+  return "0.00"; 
+};
 </script>
      
 <style scoped>

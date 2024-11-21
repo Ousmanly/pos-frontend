@@ -54,7 +54,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background-color: black;
+  background-color: #137dbb;
   animation: bounce 1.4s infinite ease-in-out;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
@@ -90,7 +90,7 @@
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   /* color: #fff; */
-  color: black;
+  color: #137dbb;
   text-transform: uppercase;
   letter-spacing: 2px;
   animation: fadeIn 2s ease-in-out;

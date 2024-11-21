@@ -32,7 +32,7 @@
           <div class="card1 card text-dark mb-3 text-center shadow cp-card">
             <div class="card-body">
               <h3 class="card-title">{{ cp.length }}</h3>
-              <p class="card-text">Critical Product</p>
+              <p class="card-text">{{ $t("product.criticalP") }}</p>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
           <div class="card1 card text-dark mb-3 text-center shadow ca-card">
             <div class="card-body">
               <h3 class="card-title">{{ chiffreAffaires }}</h3>
-              <p class="card-text">Chiffre D'affaire</p>
+              <p class="card-text">{{ $t("product.ca") }}</p>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@
       <div class="card shadow mt-5 table-width" v-if="trying == 'ADMIN'">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
           <h2 class="m-0 font-weight-bold text-success-t bold">
-            Critical product
+            {{ $t("product.criticalP") }}
           </h2>
         </div>
         <div class="card-body ">
@@ -71,10 +71,10 @@
             >
             <thead>
                     <tr>
-                      <th>id</th>
-                      <th>Name</th>
-                      <th>Stock</th>
-                      <th>Seuil</th>
+                      <th>{{ $t("product.id") }}</th>
+                      <th>{{ $t("product.name") }}</th>
+                      <th>{{ $t("product.stock") }}</th>
+                      <th>{{ $t("product.seuil") }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -160,7 +160,7 @@ const createChart = () => {
         t('months.Dec'),
       ],
       datasets: [
-        {
+        { 
           label: t('home.sale'),
           data: saleMonthlyData.value, 
           borderColor: "rgba(15, 90, 95, 1)",

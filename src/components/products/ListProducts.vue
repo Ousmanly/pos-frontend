@@ -68,11 +68,11 @@
           </tr>
           <tr>
             <th>{{ $t("product.salePrice") }}</th>
-            <td>{{ selectedProduct.sale_price }}</td>
+            <td>{{ formatPrice(selectedProduct.sale_price) }}</td>
           </tr>
           <tr>
             <th>{{ $t("product.purchasePrice") }}</th>
-            <td>{{ selectedProduct.purchase_price }}</td>
+            <td>{{ formatPrice(selectedProduct.purchase_price) }}</td>
           </tr>
           <tr>
             <th>{{ $t("product.seuil") }}</th>
@@ -161,6 +161,16 @@ const toggleStatus = async (product) => {
     // toast.error("Failed to update status");
     console.error(error);
   }
+};
+
+const formatPrice = (price) => {
+  if (price !== null && price !== undefined) {
+    return parseFloat(price).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+  return "0.00"; 
 };
 </script>
      

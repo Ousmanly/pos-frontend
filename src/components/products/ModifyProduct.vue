@@ -22,6 +22,8 @@
             class="form-control"
             v-model="updated_at"
             id="update"
+            :min="maxDate" 
+            :max="maxDate" 
             required
           />
           <div v-if="errors.updated_at" class="text-danger mb-3">{{ errors.updated_at }}</div>
@@ -29,22 +31,30 @@
         <div class="mb-3">
           <label for="sale" class="form-label">{{ $t("product.salePrice") }} :</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             v-model="sale_price"
             id="sale"
+            @input="validateSalePrice"
             required
           />
+          <div v-if="errors.sale_price" class="text-danger text-first">
+            {{ errors.sale_price }}
+          </div>
         </div>
         <div class="mb-3">
           <label for="purchase" class="form-label">{{ $t("product.purchasePrice") }}:</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             v-model="purchase_price"
             id="purchase"
+            @input="validatePurchasePrice"
             required
           />
+          <div v-if="errors.purchase_price" class="text-danger text-first">
+            {{ errors.purchase_price }}
+          </div>
         </div>
         <div class="mb-3">
           <label for="seuil" class="form-label">{{ $t("product.seuil") }} :</label>
@@ -79,7 +89,7 @@
 
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, computed, reactive } from "vue";
 
 
 const store = usePosStore();
@@ -98,6 +108,8 @@ const id = Number(route.params.id);
 const errors = reactive({
   name: "",
   updated_at: "",
+  sale_price: "",
+  purchase_price: "",
 });
 import { getCurrentInstance } from 'vue';
 import { usePosStore } from "@/stores/pos";
@@ -106,13 +118,14 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const toast = useToast()
-
-
+const maxDate = computed(() => {
+  const today = new Date();
+  return today.toISOString().split('T')[0];
+});
 onMounted(() => {
   const product = store.products.find((product) => product.id === id);
   if (product) {
     name.value = product.name,
-    // updated_at.value= product.updated_at
     updated_at.value = product.updated_at 
       ? new Date(product.updated_at).toISOString().split("T")[0] 
       : "";
@@ -123,8 +136,28 @@ onMounted(() => {
     originalName.value = product.name
   }
 });
+const validateSalePrice = () => {
+  const salePriceRegex = /^[0-9]+(\.[0-9]+)?$/;  
+  if (!salePriceRegex.test(sale_price.value)) {
+    errors.sale_price = "Price must be a positive decimal number";  
+  } else {
+    errors.sale_price = ""; 
+  }
+};
 
+const validatePurchasePrice = () => {
+  const purchasePriceRegex = /^[0-9]+(\.[0-9]+)?$/;  
+  if (!purchasePriceRegex.test(purchase_price.value)) {
+    errors.purchase_price = "Price must be a positive decimal number";  
+  } else {
+    errors.purchase_price = ""; 
+  }
+};
 const handleUpdateProduct = async() => {
+  if (errors.sale_price || errors.purchase_price) {
+    toast.error("Price is invalide");
+    return;  
+  }
   try{
     
   const updatedProduct = {

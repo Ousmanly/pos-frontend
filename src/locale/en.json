@@ -153,8 +153,11 @@
         }
     },
     "product": {
+        "criticalP":"Critical Product",
+        "ca": "Revenue",
         "search":"Search product",
         "addProduct": "Add product",
+        "id": "Id",
         "name": "Name",
         "stock": "Stock",
         "salePrice": "Sale price",

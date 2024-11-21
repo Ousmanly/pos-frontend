@@ -19,13 +19,17 @@
         <div class="mb-3 flex-fill">
           <label for="sale" class="form-label">{{ $t("product.salePrice") }} :</label>
           <input
-            type="number"
+            type="text"
             min="0"
             class="form-control"
             v-model="sale_price"
             id="sale"
+            @input="validateSalePrice"
             required
           />
+          <div v-if="errors.sale_price" class="text-danger text-end">
+            {{ errors.sale_price }}
+          </div>
         </div>
       </div>
 
@@ -33,10 +37,11 @@
         <div class="mb-3 flex-fill">
           <label for="purchase" class="form-label">{{ $t("product.purchasePrice") }} :</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             v-model="purchase_price"
             id="purchase"
+            @input="validatePurchasePrice"
             required
           />
         </div>
@@ -51,7 +56,9 @@
           />
         </div>
       </div>
-
+      <div v-if="errors.purchase_price" class="text-danger text-first">
+        {{ errors.purchase_price }}
+      </div>
       <div class="mb-4">
         <label for="code_bare" class="form-label">{{ $t("product.barcode") }} :</label>
         <input
@@ -101,8 +108,34 @@ const code_bare = ref("");
 const errors = reactive({
   name: "",
   code_bare: "",
+  sale_price: "",
+  purchase_price: "",
 });
+
+const validateSalePrice = () => {
+  const salePriceRegex = /^[0-9]+(\.[0-9]+)?$/;  
+  if (!salePriceRegex.test(sale_price.value)) {
+    errors.sale_price = "Price must be a positive decimal number";  
+  } else {
+    errors.sale_price = ""; 
+  }
+};
+
+const validatePurchasePrice = () => {
+  const purchasePriceRegex = /^[0-9]+(\.[0-9]+)?$/;  
+  if (!purchasePriceRegex.test(purchase_price.value)) {
+    errors.purchase_price = "Price must be a positive decimal number";  
+  } else {
+    errors.purchase_price = ""; 
+  }
+};
+
 const addProduct = async () => {
+
+  if (errors.sale_price || errors.purchase_price) {
+    toast.error("Price is invalide");
+    return;  
+  }
   try {
     const newProduct = {
       name: name.value,
