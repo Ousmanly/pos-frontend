@@ -11,6 +11,7 @@
           class="form-control"
           v-model="name"
           id="name"
+          @input="validateCustomerName"
           required
         />
         <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
@@ -67,10 +68,23 @@ const validatePhone = () => {
     errors.phone = "";
   }
 };
+
+const validateCustomerName = () => {
+  const nameRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+  if (!nameRegex.test(name.value)) {
+    errors.name = "Name must not have a number.";
+  }else if (!name.value.trim()) {
+    errors.name = "Name must not have only espaces.";
+  }
+  else {
+    errors.name = "";
+  }
+};
+
 const addSupplier = async () => {
   validatePhone();
-  
-  if (errors.phone) {
+  validateCustomerName()
+  if (errors.phone || errors.name) {
     return; 
   }
   try {

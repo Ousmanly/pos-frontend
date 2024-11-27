@@ -43,6 +43,7 @@
             class="form-control"
             v-model="customer"
             id="customer"
+            @input="validateCustomerName"
             required
           />
         </div>
@@ -180,8 +181,22 @@ const validatePhone = () => {
   const phoneRegex = /^[0-9\s]*$/;
   if (!phoneRegex.test(phone.value)) {
     errors.phone = "Phone must be a number ";
+  }else if(phone.value.length > 20) {
+    errors.phone = "Phone cannot be most 20 chracteres long";
   } else {
     errors.phone = "";
+  }
+};
+
+const validateCustomerName = () => {
+  const nameRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+  if (!nameRegex.test(customer.value)) {
+    errors.name = "Name must not have a number.";
+  }else if (!customer.value.trim()) {
+    errors.name = "Name must not have only espaces.";
+  }
+  else {
+    errors.name = "";
   }
 };
 const validatePrice = (index) => {
@@ -223,7 +238,8 @@ const addSale = async () => {
     return;
   }
   validatePhone();
-  if (errors.phone) {
+  validateCustomerName();
+  if (errors.phone || errors.name) {
     return;
   }
   try {
@@ -256,9 +272,16 @@ const addSale = async () => {
           errors.name = err.msg;
         } 
       });
-    }else {
-          toast.error("Stock insuffisant");
-        }
+    }
+    
+    if (error.response.data.error && error.response.data.error.includes('Not enough stock')) {
+        const productId = error.response.data.error.split('product ID ')[1];
+        const product = activeProducts.value.find(p => p.id === parseInt(productId));
+        const productName = product ? product.name : "Inconnu";
+        toast.error(t("stockInsufisant")+`${productName}`);
+      } else {
+        toast.error(t("sale.messages.error"));
+      }
   }
 };
 </script>

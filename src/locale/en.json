@@ -233,6 +233,6 @@
       "Oct": "Oct",
       "Nov": "Nov",
       "Dec": "Dec"
-    }
-
+    },
+    "stockInsufisant": "Not enough stock for the product : "
 }

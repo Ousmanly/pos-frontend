@@ -12,6 +12,7 @@
             class="form-control"
             v-model="name"
             id="name"
+            @input="validateProductName"
             required
           />
           <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
@@ -130,11 +131,26 @@ const validatePurchasePrice = () => {
   }
 };
 
+const validateProductName = () => {
+  const nameRegex =  /^(?!^\d+$)(?!^\s+$)(?!^\s)[A-Za-zÀ-ÿ0-9\s]+$/;
+  if (!nameRegex.test(name.value)) {
+    errors.name = "Name must not have only numbers or espaces and cannot start with an espace.";
+  }
+  else {
+    errors.name = "";
+  }
+};
+
 const addProduct = async () => {
 
   if (errors.sale_price || errors.purchase_price) {
     toast.error("Price is invalide");
     return;  
+  }
+  
+validateProductName()
+ if (errors.name) {
+    return;
   }
   try {
     const newProduct = {

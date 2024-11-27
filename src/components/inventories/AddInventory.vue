@@ -11,6 +11,7 @@
           class="form-control"
           v-model="remarque"
           id="recepted"
+          @input="validateRemarque"
           required
         />
         <div v-if="errors.remarque" class="text-danger">
@@ -85,7 +86,20 @@ const quantity = ref(0);
 const errors = reactive({
   remarque: "",
 });
+
+const validateRemarque = () => {
+  const nameRegex = /^(?!^\s*$)(?!^\d+$).+$/;
+  if (!remarque.value.trim() || !nameRegex.test(remarque.value)) {
+    errors.remarque = "Remarque cannot be only numbers or espaces and can't start with espace.";
+  } else {
+    errors.remarque = "";
+  }
+};
 const addInventory = async () => {
+  validateRemarque()
+  if (errors.remarque) {
+    return
+  }
   try {
     const newInventory = {
       remarque: remarque.value,
