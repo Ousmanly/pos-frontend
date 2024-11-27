@@ -3,10 +3,32 @@
     <div class="page-background container bg-color">
     
       <div class="card shadow mb-4 clr">
-    <div class="card-header py-3">
+    <!-- <div class="card-header py-3">
         <h2 class="m-0 font-weight-bold text-success-t bold">{{ $t("mouvement.title") }}</h2>
+        <form class="d-flex ms-auto">
+              <input
+                type="text"
+                class="form-control me-2"
+                v-model="store.searchQuery"
+                :placeholder="$t('movement.search')"
+              />
+            </form>
         <Loader v-if="isLoading"/>
-    </div>
+    </div> -->
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+          <h2 class="m-0 font-weight-bold text-success-t bold">
+            {{ $t("mouvement.title") }}
+          </h2>
+          <Loader v-if="isLoading"/>
+          <form class="d-flex ms-auto">
+              <input
+                type="date"
+                class="form-control me-2"
+                v-model="store.searchQuery"
+                :placeholder="$t('movement.search')"
+              />
+            </form>
+        </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -20,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="mouvement in store.mouvements" :key="mouvement.id">
+                  <tr v-for="mouvement in store.getFilteredMovement()" :key="mouvement.id">
                     <td>{{ mouvement.id }}</td>
                     <td>{{ mouvement.quantity }}</td>
                     <td>{{ mouvement.product_name }}</td>

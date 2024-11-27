@@ -21,7 +21,7 @@
         <div class="form-group d-flex gap-3">
           <div class="mb-3 flex-fill">
             <label for="product" class="form-label">Product Name:</label>
-          <select class="form-select" v-model="detail.id_product" id="product" required>
+          <select class="form-select" v-model="detail.id_product" id="product" @change="updatePrice(index)" required>
             <option v-for="product in activeProducts" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
@@ -103,7 +103,7 @@ const activeProducts = computed(() => store.products.filter(product => product.s
   };
   const maxDate = computed(() => {
   const today = new Date();
-  return today.toISOString().split('T')[0]; // Ex : "2024-11-21"
+  return today.toISOString().split('T')[0]; 
 })
 
   const removeProduct = (index) => {
@@ -115,6 +115,14 @@ const activeProducts = computed(() => store.products.filter(product => product.s
     errors.price = "Price must be a positive decimal number";  
   } else {
     errors.price = ""; 
+  }
+};
+const updatePrice = (index) => {
+  const product = activeProducts.value.find(
+    (product) => product.id === receptionDetails.value[index].id_product
+  );
+  if (product) {
+    receptionDetails.value[index].price = product.purchase_price;
   }
 };
 const addReception = async () => {

@@ -32,7 +32,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="inventory in store.inventories" :key="inventory.id">
+                    <tr v-for="inventory in store.getFilteredInventory()" :key="inventory.id">
                       <td>{{ inventory.id }}</td>
                       <td>{{ inventory.remarque }}</td>
                       <td>{{ inventory.product_name }}</td>

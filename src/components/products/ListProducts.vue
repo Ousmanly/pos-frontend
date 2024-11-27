@@ -18,7 +18,7 @@
               <input
                 type="text"
                 class="form-control me-2"
-                v-model="store.searchQuery"
+                v-model="store.searchProduct"
                 :placeholder="$t('product.search')"
               />
             </form>

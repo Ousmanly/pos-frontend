@@ -25,7 +25,7 @@
               <input
                 type="date"
                 class="form-control me-2"
-                v-model="store.searchQuery"
+                v-model="store.searchReception"
               />
             </form>
         </div>

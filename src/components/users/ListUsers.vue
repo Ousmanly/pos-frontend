@@ -24,7 +24,7 @@
               <input
                 type="text"
                 class="form-control me-2"
-                v-model="store.searchQuery"
+                v-model="store.searchUser"
                 :placeholder="$t('user.search')"
               />
             </form>

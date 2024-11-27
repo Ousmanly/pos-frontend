@@ -26,6 +26,11 @@ export const usePosStore = defineStore("pos", {
     role: "",
     user: {},
     searchQuery: "",
+    searchProduct: "",
+    searchUser: "",
+    searchSupplier: "",
+    searchReception: "",
+    searchSale: "",
   }),
   getters: {
     // Getter pour calculer le CA total
@@ -37,28 +42,53 @@ export const usePosStore = defineStore("pos", {
     },
     getFilteredSales() {
       return this.sales.filter(sale =>
-        sale.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+        sale.name.toLowerCase().includes(this.searchSale.toLowerCase())
+      )
+      .sort((a, b) => b.id - a.id) 
     },
+    // getFilteredReceptions() {
+    //   return this.receptions
+    //   .filter(reception =>
+    //     reception.recepted_at.toLowerCase().includes(this.searchQuery.toLowerCase())
+    //   );
+    // },
+
     getFilteredReceptions() {
-      return this.receptions.filter(reception =>
-        reception.recepted_at.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+      return this.receptions
+        .filter(reception =>
+          reception.recepted_at.includes(this.searchReception.toLowerCase())
+        )
+        .sort((a, b) => b.id - a.id) 
     },
+    
     getFilteredUsers() {
-      return this.users.filter(user =>
-        user.email.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+      return this.users
+      .filter(user =>
+        user.email.toLowerCase().includes(this.searchUser.toLowerCase())
+      )
+      .sort((a, b) => b.id - a.id) 
     },
     getFilteredSuppliers() {
       return this.suppliers.filter(supplier =>
-        supplier.phone.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+        supplier.phone.toLowerCase().includes(this.searchSupplier.toLowerCase())
+      )
+      .sort((a, b) => b.id - a.id) 
     },
     getFilteredProduct() {
       return this.products.filter(product =>
-        product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+        product.name.toLowerCase().includes(this.searchProduct.toLowerCase())
+      )
+      .sort((a, b) => b.id - a.id) 
+    },
+    getFilteredMovement() {
+      return this.mouvements.filter(mouvement =>
+        mouvement.mouvement_at.includes(this.searchQuery)
+      )
+      .sort((a, b) => b.id - a.id) 
+    },
+    getFilteredInventory() {
+      return this.inventories
+      .sort((a, b) => b.id - a.id) 
     },
     async login(email, password) {
       try {
