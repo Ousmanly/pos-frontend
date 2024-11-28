@@ -17,7 +17,7 @@
          </div>
          <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
     <div class="mb-3">
-          <label for="update" class="form-label">Update at :</label>
+          <label for="update" class="form-label">{{ $t("product.updatedAt") }}:</label>
           <input
             type="date"
             class="form-control"
@@ -77,6 +77,9 @@
             required
           />
         </div>
+        <div v-if="errors.code_bare" class="text-danger text-first">
+            {{ errors.code_bare }}
+          </div>
         <button class="clr btn text-white mt-3 mb-4 me-3"> {{ $t("product.confirm") }}</button>
         <RouterLink
           class="list text-decoration-none text-white me-5 fw-bold"
@@ -111,6 +114,7 @@ const errors = reactive({
   updated_at: "",
   sale_price: "",
   purchase_price: "",
+  code_bare: "",
 });
 import { getCurrentInstance } from 'vue';
 import { usePosStore } from "@/stores/pos";
@@ -166,8 +170,8 @@ const validateProductName = () => {
 };
 
 const handleUpdateProduct = async() => {
-  if (errors.sale_price || errors.purchase_price) {
-    toast.error("Price is invalide");
+  if (errors.sale_price || errors.purchase_price || errors.code_bare) {
+    // toast.error("Price is invalide");
     return;  
   }
   

@@ -75,8 +75,8 @@
             "close": "Close"
         },
         "form": {
-            "name": "Name:",
-            "phone": "Phone:",
+            "name": "Name",
+            "phone": "Phone",
             "add": "Add",
             "cancel": "Cancel",
             "successMessage": "Supplier has been added successfully",
@@ -146,6 +146,7 @@
         "price": "Price",
         "quantity": "Quantity",
         "close": "Close",
+        "select":"Select a product",
         "confirmDelete": "Are you sure you want to delete?",
         "button":{
             "add": "Add",
@@ -153,6 +154,7 @@
         }
     },
     "product": {
+        "title":"Product",
         "criticalP":"Critical Product",
         "ca": "Revenue",
         "search":"Search product",

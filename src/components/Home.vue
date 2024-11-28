@@ -40,8 +40,8 @@
         
       </div>
       
-      <div class="row justify-content-center mt-5">
-        <div class="col-md-3 custom-col  mt-5 me-4" v-if="trying == 'ADMIN'">
+      <div class="row justify-content-center mt-4 graph">
+        <div class="col-md-3 custom-col  mt-5 me-5" v-if="trying == 'ADMIN'">
           <div class="card1 card text-dark mb-3 text-center shadow ca-card">
             <div class="card-body">
               <h3 class="card-title">{{ chiffreAffaires }}</h3>
@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 chart">
           <canvas id="totalsChart"></canvas>
         </div>
       </div>
@@ -163,7 +163,7 @@ const createChart = () => {
         { 
           label: t('home.sale'),
           data: saleMonthlyData.value, 
-          borderColor: "rgba(15, 90, 95, 1)",
+          borderColor: "green",
           backgroundColor: "rgba(15, 90, 95, 0.1)",
 
           fill: true,
@@ -209,12 +209,23 @@ onMounted(() => {
   margin-top: 100px;
 }
 
-
+.container{
+  max-width: 1120px;;
+}
 .col-md-8 {
   max-width: 500px;  
   height: 250px;     
 }
 
+.chart{
+  margin-left: 40px;
+  /* width: 700px; */
+}
+
+.graph{
+  width: 100%;
+  margin: auto;
+}
 .bold{
   font-size: bold;
 }

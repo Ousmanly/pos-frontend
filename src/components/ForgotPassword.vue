@@ -8,7 +8,7 @@
         placeholder="Entrez votre email"
         required
       />
-      <button type="submit">Envoyer</button>
+      <button class="btn" type="submit">Envoyer</button>
     </form>
     <p v-if="message" class="message">{{ message }}</p>
   </div>
@@ -95,8 +95,8 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #1e8e85;
+.btn:active {
+  background: linear-gradient(45deg, #137dbb, #242d32);
 }
 
 .message {

@@ -57,6 +57,7 @@
           />
         </div>
       </div>
+                        
       <div v-if="errors.purchase_price" class="text-danger text-first">
         {{ errors.purchase_price }}
       </div>
@@ -73,10 +74,10 @@
           {{ errors.code_bare }}
         </div>
       </div>
-
+<!-- 
       <div v-if="errors.general" class="text-danger mb-3">
         {{ errors.general }}
-      </div>
+      </div> -->
 
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-dark me-2">{{ $t("product.add") }}</button>
@@ -144,7 +145,7 @@ const validateProductName = () => {
 const addProduct = async () => {
 
   if (errors.sale_price || errors.purchase_price) {
-    toast.error("Price is invalide");
+    // toast.error("Price is invalide");
     return;  
   }
   

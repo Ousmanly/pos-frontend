@@ -132,6 +132,11 @@ const router = createRouter({
           name: 'edituser',
           component: EditCurrentUser
         },
+        {
+          path: '/change-password',
+          name: 'change-password',
+          component:ChangePasswordVue
+        },
       ]
     },
     
@@ -154,11 +159,6 @@ const router = createRouter({
       path: '/reset-password',
       name: 'ResetPassword',
       component:ResetPassword
-    },
-    {
-      path: '/change-password',
-      name: 'change-password',
-      component:ChangePasswordVue
     },
     
   ]

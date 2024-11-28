@@ -3,14 +3,14 @@
       <form @submit.prevent="addReception" class="formulaire form shadow p-3 bg-body rounded">
       <div class="form-group d-flex gap-3">
         <div class="mb-3 flex-fill">
-          <label for="recepted" class="form-label">Recepted at:</label>
+          <label for="recepted" class="form-label">{{ $t("reception.receptedAt") }}:</label>
           <input type="date" class="form-control" v-model="recepted_at" id="recepted" required :max="maxDate" />
           <div v-if="errors.recepted_at" class="text-danger mb-3">{{ errors.recepted_at }}</div>
         </div>
         <div class="mb-3 flex-fill">
-          <label for="supplier" class="form-label">Supplier Name:</label>
+          <label for="supplier" class="form-label">{{ $t("reception.supplierName") }}:</label>
           <select class="form-select" v-model="selectedSupplier" id="supplier" required>
-            <option value="" disabled selected>Select a supplier</option>
+            <option value="" disabled selected>{{ $t("reception.select") }}</option>
             <option v-for="supplier in activeSuppliers" :key="supplier.id" :value="supplier.id">
               {{ supplier.name }}
             </option>
@@ -20,7 +20,7 @@
       <div v-for="(detail, index) in receptionDetails" :key="index" class="mb-3">
         <div class="form-group d-flex gap-3">
           <div class="mb-3 flex-fill">
-            <label for="product" class="form-label">Product Name:</label>
+            <label for="product" class="form-label">{{ $t("reception.product") }}:</label>
           <select class="form-select" v-model="detail.id_product" id="product" @change="updatePrice(index)" required>
             <option v-for="product in activeProducts" :key="product.id" :value="product.id">
               {{ product.name }}
@@ -28,11 +28,11 @@
           </select>
           </div>
           <div class="mb-3 flex-fill">
-            <label for="price" class="form-label">Price:</label>
+            <label for="price" class="form-label">{{ $t("reception.price") }}:</label>
             <input type="text" min="0" class="form-control" v-model="detail.price" id="price" @input="validatePrice(detail)"  required />
          </div>
           <div class="mb-3 flex-fill">
-            <label for="quantity" class="form-label">Quantity:</label>
+            <label for="quantity" class="form-label">{{ $t("reception.quantity") }}:</label>
             <input type="number" min="0" class="form-control mb-4" v-model="detail.quantity" id="quantity" required />
           </div>
             <button class="btn" @click="removeProduct(index)">

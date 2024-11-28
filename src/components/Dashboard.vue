@@ -18,50 +18,50 @@
           ></i>
         </button>
       </h4>
-      <ul class="nav flex-column mt-4">
-        <li class="nav-item">
+      <ul class="nav flex-column mt-4" >
+        <li class="nav-item" :title="$t('sidebar.dashboard')">
           <router-link to="/home" class="nav-link text-white " active-class="active-route">
             <i class="fas fa-tachometer-alt me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.dashboard") }} </span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="trying == 'ADMIN'">
+        <li class="nav-item" v-if="trying == 'ADMIN'" :title="$t('user.users')">
           <router-link to="/listuser" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-users me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.users") }}</span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="trying == 'ADMIN'">
+        <li class="nav-item" v-if="trying == 'ADMIN'" :title="$t('supplier.page.title')">
           <router-link to="/listsupplier" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-truck me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.suppliers") }}</span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="trying == 'ADMIN'">
+        <li class="nav-item" v-if="trying == 'ADMIN'" :title="$t('product.title')">
           <router-link to="/listproduct" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-box me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.products") }}</span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="trying == 'ADMIN'">
+        <li class="nav-item" v-if="trying == 'ADMIN'" :title="$t('reception.receptions')">
           <router-link to="/listreception" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-archive me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.receptions") }}</span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" :title="$t('sale.title')">
           <router-link to="/listsale" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-shopping-cart me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.sales") }}</span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="trying == 'ADMIN'">
+        <li class="nav-item" v-if="trying == 'ADMIN'" :title="$t('mouvement.title')">
           <router-link to="/mouvements" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-exchange-alt me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.movements") }}</span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="trying == 'ADMIN'">
+        <li class="nav-item" v-if="trying == 'ADMIN'" :title="$t('inventory.title')">
           <router-link to="/listinventories" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-th-list me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.inventories") }}</span>
@@ -213,7 +213,7 @@ const goToChangePassword = () => {
   cursor: pointer;
 }
 .sidebar {
-  width: 200px;
+  width: 210px;
   height: 100vh;
   position: fixed;
   top: 53px;
@@ -251,6 +251,7 @@ const goToChangePassword = () => {
   /* border-color: #26a49c; */
   border-color: #137dbb;
   border-radius: 8px;
+  padding-left: 5px;
 }
 
 .language-select option {
