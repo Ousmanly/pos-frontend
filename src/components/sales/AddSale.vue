@@ -270,6 +270,8 @@ const addSale = async () => {
           errors.sale_at = err.msg;
         } else if (err.path === "name") {
           errors.name = err.msg;
+        } else if (err.path === "phone") {
+          errors.phone = err.msg;
         } 
       });
     }

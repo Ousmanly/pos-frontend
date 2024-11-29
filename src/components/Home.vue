@@ -29,12 +29,14 @@
           </div>
         </div>
         <div class="col-md-3 custom-col" v-if="trying == 'ADMIN'">
-          <div class="card1 card text-dark mb-3 text-center shadow cp-card">
-            <div class="card-body">
-              <h3 class="card-title">{{ cp.length }}</h3>
-              <p class="card-text">{{ $t("product.criticalP") }}</p>
+          <a href="#table">
+            <div class="card1 card text-dark mb-3 text-center shadow cp-card">
+              <div class="card-body">
+                <h3 class="card-title">{{ cp.length }}</h3>
+                <p class="card-text">{{ $t("product.criticalP") }}</p>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
         
         
@@ -55,7 +57,7 @@
       </div>
       
 
-      <div class="card shadow mt-5 table-width" v-if="trying == 'ADMIN'">
+      <div class="card shadow mt-5 table-width" id="table" v-if="trying == 'ADMIN'">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
           <h2 class="m-0 font-weight-bold text-success-t bold">
             {{ $t("product.criticalP") }}
@@ -237,6 +239,7 @@ onMounted(() => {
   background-size: 80px 80px;
   background-blend-mode: multiply;
   max-width: 170px;
+  cursor: pointer;
 }
 
 .card1:hover {
@@ -285,6 +288,9 @@ border: 2px solid rgba(19, 125, 187, 0.35);
   font-size: 18px;
 }
 
+a{
+  text-decoration-line: none;
+}
 .ca-card {
   background-color: rgba(59, 217, 169, 0.01); 
   border: 3px solid rgba(59, 217, 169, 0.35);

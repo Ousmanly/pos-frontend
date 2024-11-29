@@ -264,6 +264,10 @@ export const usePosStore = defineStore("pos", {
     },
     async destroyUser(id) {
       try {
+        if (this.user.id === id ) {
+          toast.error("You can't delete your own profil.");
+          return;
+        }
         await axios.delete(`http://localhost:3005/api/users/${id}`);
         await this.loadDataFromUserApi();
         toast.success("User has been deleted")

@@ -260,7 +260,7 @@ const formatPrice = (price) => {
 }
 
 .user-card {
-  width: 300px;
+  width: 280px;
   max-width: 100%;
   background-color: #ffffff;
 }
