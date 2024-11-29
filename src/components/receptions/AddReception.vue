@@ -22,6 +22,7 @@
           <div class="mb-3 flex-fill">
             <label for="product" class="form-label">{{ $t("reception.product") }}:</label>
           <select class="form-select" v-model="detail.id_product" id="product" @change="updatePrice(index)" required>
+          <option value="" disabled selected>{{ $t("reception.selectP") }}</option>
             <option v-for="product in activeProducts" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
@@ -177,7 +178,7 @@ const addReception = async () => {
     background-color: #24272a;
   }
   .formulaire {
-    max-width: 700px;
+    max-width: 766px;
     margin: auto;
     margin-top: 16vh;
   }

@@ -37,7 +37,7 @@
                       <th>{{ $t("supplier.page.id") }}</th>
                       <th>{{ $t("supplier.page.name") }}</th>
                       <th>{{ $t("supplier.page.phone") }}</th>
-                      <th>{{ $t("supplier.page.user") }}</th>
+                      <th>{{ $t("product.createdBy") }}</th>
                       <th>{{ $t("supplier.page.status") }}</th>
                       <th class="text-center">{{ $t("supplier.page.actions") }}</th>
                     </tr>

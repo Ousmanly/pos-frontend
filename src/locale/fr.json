@@ -142,7 +142,8 @@
         "price": "Prix",
         "quantity": "Quantité",
         "close": "Fermer",
-        "select":"Sélectionner un produit",
+        "select":"Sélectionner un fournisseur",
+        "selectP":"Sélectionner un produit",
         "confirmDelete": "Êtes-vous sûr de vouloir supprimer?",
         "button":{
             "cancel": "Annuler",

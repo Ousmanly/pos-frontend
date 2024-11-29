@@ -146,7 +146,8 @@
         "price": "Price",
         "quantity": "Quantity",
         "close": "Close",
-        "select":"Select a product",
+        "select":"Select a supplier",
+        "selectP":"Select a product",
         "confirmDelete": "Are you sure you want to delete?",
         "button":{
             "add": "Add",
