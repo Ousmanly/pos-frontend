@@ -5,16 +5,17 @@
         <RouterLink
         class="list text-decoration-none text-white fw-bold"
         to="/addproduct"
+        v-if="trying == 'ADMIN'"
       >
         <button
-          class="clr btn text-white mb-4 fw-bold"
+          class="clr btn mb-4 text-white fw-bold"
           v-if="affichebtn"
           @click="maskBtn"
         >
         {{ $t("product.addProduct") }}
         </button>
       </RouterLink>
-          <form class="d-flex ms-auto">
+          <form class="d-flex ms-auto search">
               <input
                 type="text"
                 class="form-control me-2"
@@ -33,15 +34,16 @@
             <button class="btn btn-sm" @click="openModal(product)">
               <i class="fa-solid fa-eye" style="color: #26a49c; font-size: 19px"></i>
             </button>
-            <RouterLink :to="{ path: `/modifie-product/${product.id}` }">
+            <RouterLink :to="{ path: `/modifie-product/${product.id}` }" v-if="trying == 'ADMIN'">
               <button class="btn btn-sm">
                 <i class="fa-solid fa-pen-to-square" style="color: #ffb200; font-size: 19px"></i>
               </button>
             </RouterLink>
-            <button class="btn btn-sm" @click="destroyProduct(product.id)">
+            <button class="btn btn-sm" @click="destroyProduct(product.id)" v-if="trying == 'ADMIN'">
               <i class="fa-solid fa-trash" style="color: #e30d0d; font-size: 19px"></i>
             </button>
             <input
+              v-if="trying == 'ADMIN'"
               type="checkbox"
               :checked="product.status"
               @change="toggleStatus(product)"
@@ -119,7 +121,7 @@ const toast = useToast();
 const store = usePosStore();
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
-
+const trying = store.role
 let affichebtn = true;
 const maskBtn = () => {
   affichebtn = false;
@@ -252,6 +254,9 @@ const formatPrice = (price) => {
   padding: 20px;
 }
 
+.search{
+  margin-top: 40px;
+}
 
 .user-list {
   display: flex;

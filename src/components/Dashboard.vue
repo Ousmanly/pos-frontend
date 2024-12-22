@@ -37,7 +37,7 @@
             <span v-if="!isCollapsed">{{ $t("sidebar.suppliers") }}</span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="trying == 'ADMIN'" :title="$t('product.title')">
+        <li class="nav-item" :title="$t('product.title')">
           <router-link to="/listproduct" class="nav-link text-white" active-class="active-route">
             <i class="fas fa-box me-2"></i>
             <span v-if="!isCollapsed">{{ $t("sidebar.products") }}</span>
