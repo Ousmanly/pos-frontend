@@ -10,7 +10,7 @@
           v-if="affichebtn"
           @click="maskBtn"
         >
-          {{ $t("sale.title") }}
+          {{ $t("sale.addSaleButton") }}
         </button>
       </RouterLink>
 

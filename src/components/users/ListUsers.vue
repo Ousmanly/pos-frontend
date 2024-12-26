@@ -68,15 +68,16 @@
                         style="color: #26a49c; font-size: 19px"
                       ></i>
                     </button>
+                    <!-- :disabled="user.id === store.user.id" -->
                     <RouterLink :to="{ path: `/modifie-user/${user.id}` }">
-                      <button class="btn btn-sm" :disabled="user.id === store.user.id">
+                      <button class="btn btn-sm" v-if="user.id != store.user.id">
                         <i
                           class="fa-solid fa-pen-to-square"
                           style="color: #ffb200; font-size: 19px"
                         ></i>
                       </button>
                     </RouterLink>
-                    <button class="btn btn-sm" @click="destroyUser(user.id)"  :disabled="user.id === store.user.id">
+                    <button class="btn btn-sm" @click="destroyUser(user.id)"  v-if="user.id != store.user.id">
                       <i
                         class="fa-solid fa-trash"
                         style="color: #e30d0d; font-size: 19px"
